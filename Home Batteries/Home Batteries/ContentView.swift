@@ -11,7 +11,7 @@ import HomeKit
 
 struct ContentView: View {
     var body: some View {
-        GlobalView().environmentObject(HomeStore.shared)
+        GlobalView().environmentObject(HomeManger())
     }
 }
 

@@ -11,15 +11,15 @@ import SwiftUI
 
 struct GlobalView: View {
     
-    @EnvironmentObject var hs: HomeStore
+    @EnvironmentObject var hm: HomeManger
     
     @ViewBuilder
     var body: some View {
         NavigationView {
-            if hs.homes.count == 0 {
+            if hm.value.homes.count == 0 {
                 NoHomesView()
-            } else if hs.homes.count == 1 {
-                HomeView(home: hs.homes[0])
+            } else if hm.value.homes.count == 1 {
+                HomeView(home: Home(hm.value.homes[0]))
             } else {
                 HomesOverview()
                 .navigationBarTitle(Text("Homes"))
@@ -29,12 +29,12 @@ struct GlobalView: View {
 }
 
 struct HomesOverview: View {
-    @EnvironmentObject var hs: HomeStore
+    @EnvironmentObject var hm: HomeManger
     
     var body: some View {
-        List(self.hs.homes, id: \.home.name) { home in
-            NavigationLink(destination: HomeView(home: home)) {
-                home.home.isPrimary ? Text(home.home.name).bold() : Text(home.home.name)
+        List(self.hm.value.homes, id: \.name) { home in
+            NavigationLink(destination: HomeView(home: Home(home))) {
+                home.isPrimary ? Text(home.name).bold() : Text(home.name)
             }
         }
     }
@@ -48,6 +48,6 @@ struct NoHomesView: View {
 
 struct GlobalView_Previews: PreviewProvider {
     static var previews: some View {
-        GlobalView().environmentObject(HomeStore.shared)
+        GlobalView().environmentObject(HomeManger())
     }
 }

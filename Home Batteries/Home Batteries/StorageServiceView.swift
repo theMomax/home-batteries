@@ -12,10 +12,12 @@ import HomeKit
 
 struct EnergyStorageServiceView: View {
     
-    @Binding var batteryLevel: UInt8
-    @Binding var chargingState: UInt8
-    @Binding var statusLowBattery: UInt8
-    var energyCapacity: Binding<Float>?
+    static let supportedServices = ["00000003-0000-1000-8000-0036AC324978"]
+    
+    @Binding var batteryLevel: UInt8?
+    @Binding var chargingState: UInt8?
+    @Binding var statusLowBattery: UInt8?
+    var energyCapacity: Binding<Float?>?
     
     @ViewBuilder
     var body: some View {
@@ -25,10 +27,10 @@ struct EnergyStorageServiceView: View {
             .layoutPriority(0)
             
             VStack(alignment: .leading) {
-                Text(String(format: "%d %%", batteryLevel)).font(Font.system(.largeTitle))
+                Text(String(format: "%d %%", batteryLevel ?? 0)).font(Font.system(.largeTitle))
                 
                 if energyCapacity != nil {
-                    Text(String(format: "of %.1f kWh", energyCapacity!.wrappedValue)).font(Font.system(.footnote)).foregroundColor(.secondary)
+                    Text(String(format: "of %.1f kWh", energyCapacity!.wrappedValue ?? 0)).font(Font.system(.footnote)).foregroundColor(.secondary)
                 }
             }.padding(.horizontal).layoutPriority(1)
             Spacer().layoutPriority(0)

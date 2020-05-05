@@ -12,9 +12,9 @@ import SwiftUI
 
 struct Segment {
     let name: String?
-    @Binding var value: Float
+    @Binding var value: Float?
     
-    init(_ value: Binding<Float>, name: String? = nil) {
+    init(_ value: Binding<Float?>, name: String? = nil) {
         self._value = value
         self.name = name
     }
@@ -33,7 +33,7 @@ struct HorizontalBarDiagram: View {
     }
     
     static let positiveColors: [Color] = [.blue, .green, .purple]
-    static let negativeColors: [Color] = [.pink, .red, .yellow]
+    static let negativeColors: [Color] = [.red, .orange, .yellow]
     
     @ViewBuilder
     var body: some View {
@@ -45,7 +45,7 @@ struct HorizontalBarDiagram: View {
                         .foregroundColor(self.colorOf(i))
                             .frame(width: self.relativeWidthOf(i) * geometry.size.width - self.spacingCompensation(2))
                     }
-                }
+                }.frame(height: 8)
             }
             HStack {
                 ForEach(0..<segments.count, id: \.self) { i in
@@ -55,7 +55,7 @@ struct HorizontalBarDiagram: View {
                                 Text(self.segments[i].name!).foregroundColor(self.colorOf(i))
                                 
                                 HStack(spacing: 2) {
-                                    Text(String(format: "%.0f", self.segments[i].value))
+                                    Text(String(format: "%.0f", self.segments[i].value ?? 0.0))
                                     Text("W").foregroundColor(.secondary)
                                 }
                             }
@@ -74,11 +74,16 @@ struct HorizontalBarDiagram: View {
     }
     
     private func relativeWidthOf(_ segment: Int) -> CGFloat {
-        return CGFloat(abs(segments[segment].value) / segments.map({s in abs(s.value)}).reduce(0, +))
+        let total = segments.map({s in abs(s.value ?? 0.0)}).reduce(0, +)
+        if total == 0 {
+            return CGFloat(1/3)
+        } else {
+            return CGFloat(abs(segments[segment].value ?? 0.0) / total)
+        }
     }
     
     private func colorOf(_ segment: Int) -> Color {
-        return self.segments[segment].value >= 0 ? self.positiveColors[segment % self.positiveColors.count] : self.negativeColors[segment % self.negativeColors.count]
+        return (self.segments[segment].value ?? 0.0 ) >= 0 ? self.positiveColors[segment % self.positiveColors.count] : self.negativeColors[segment % self.negativeColors.count]
     }
     
 }

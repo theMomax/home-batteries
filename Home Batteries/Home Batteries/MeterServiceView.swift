@@ -12,23 +12,25 @@ import HomeKit
 
 struct ElectricityMeterServiceView: View {
     
-    var name: Binding<String>?
-    @Binding var currentPower: Float
-    var currentPowerL1: Binding<Float>?
-    var currentPowerL2: Binding<Float>?
-    var currentPowerL3: Binding<Float>?
+    static let supportedServices = ["00000002-0000-1000-8000-0036AC324978"]
+    
+    var name: Binding<String?>?
+    @Binding var currentPower: Float?
+    var currentPowerL1: Binding<Float?>?
+    var currentPowerL2: Binding<Float?>?
+    var currentPowerL3: Binding<Float?>?
     
     @ViewBuilder
     var body: some View {
         VStack {
             HStack(spacing: 2) {
-                Text(String(format: "%.0f", currentPower)).font(Font.system(.title))
+                Text(String(format: "%.0f", currentPower ?? "...")).font(Font.system(.title)).lineLimit(1)
                 Text("W").font(Font.system(.title)).foregroundColor(.secondary)
                 
                 Spacer()
                 
                 if self.name != nil {
-                    Text(self.name!.wrappedValue)
+                    Text(self.name!.wrappedValue ?? "...")
                 }
             }
             

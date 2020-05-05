@@ -16,10 +16,10 @@ struct HomeView: View {
     
     var body: some View {
         TabView {
-            FavouritesTab(home: self.home).tabItem {
+            HomeTab(home: self.home).tabItem {
                 VStack {
-                    Image(systemName: "star.fill").font(Font.system(.headline))
-                    Text("Favourites")
+                    Image(systemName: "house.fill").font(Font.system(.headline))
+                    Text("Home")
                 }
             }.tag(1)
             RoomsTab(home: self.home).tabItem {
@@ -29,16 +29,16 @@ struct HomeView: View {
                 }
             }.tag(2)
         }
-        .navigationBarTitle(Text(home.home.name))
+        .navigationBarTitle(Text(home.value.name))
     }
 }
 
-struct FavouritesTab: View {
+struct HomeTab: View {
     
     @ObservedObject var home: Home
     
     var body: some View {
-        Text("Favourites")
+        AccessoriesView(accessories: home.value.accessories)
     }
     
 }
@@ -56,21 +56,9 @@ struct RoomsTab: View {
     }
     
     private func allRooms() -> [HMRoom] {
-        var rooms = self.home.home.rooms
-        rooms.append(self.home.home.roomForEntireHome())
+        var rooms = self.home.value.rooms
+        rooms.append(self.home.value.roomForEntireHome())
         return rooms
     }
     
-}
-
-struct HomeView_Previews: PreviewProvider {
-    
-    @ViewBuilder
-    static var previews: some View {
-        if HomeStore.shared.homes.first != nil {
-            HomeView(home: HomeStore.shared.homes.first!)
-        } else {
-            NoHomesView()
-        }
-    }
 }

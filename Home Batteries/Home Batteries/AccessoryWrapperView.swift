@@ -28,7 +28,7 @@ struct AccessoryWrapperView<Content> : View where Content : View {
                 
             context().padding()
         }
-        .padding()
+        .padding(.init(arrayLiteral: .horizontal, .bottom))
     }
 }
 

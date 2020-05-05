@@ -12,21 +12,21 @@ import HomeKit
 
 struct AccessoriesView: View {
     
+    static let supportedServices = AccessoryOverviewView.supportedServices
+    
     let accessories: [HMAccessory]
     
     var body: some View {
-        VStack(alignment: .center, spacing: 20) {
-            ForEach(accessories, id: \.uniqueIdentifier) { accessory in
-                ZStack {
-                    Text(accessory.name)
-                }
-            }
+        ScrollView {
+            ForEach(homeBatteryAccessories() , id: \.uniqueIdentifier) { (accessory: HMAccessory) in
+                AccessoryOverviewView(accessory: Accessory(accessory))
+            }.padding(.top)
         }
     }
-}
-
-struct AccessoriesView_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+    
+    private func homeBatteryAccessories() -> [HMAccessory] {
+        return self.accessories.filter({ a in
+            a.services.contains(where: { service in AccessoriesView.supportedServices.contains(service.serviceType)} )
+        })
     }
 }

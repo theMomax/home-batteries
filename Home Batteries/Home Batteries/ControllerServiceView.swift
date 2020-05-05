@@ -12,7 +12,9 @@ import HomeKit
 
 struct ControllerServiceView: View {
     
-    @Binding var state: UInt8
+    static let supportedServices = ["00000001-0000-1000-8000-0036AC324978"]
+    
+    @Binding var state: UInt8?
     
     var body: some View {
         StateView(state: self.$state)
@@ -21,7 +23,7 @@ struct ControllerServiceView: View {
 
 struct StateView: View {
     
-    @Binding var state: UInt8
+    @Binding var state: UInt8?
     
     var body: some View {
         HStack {
@@ -32,7 +34,7 @@ struct StateView: View {
         .foregroundColor(StateView.color(state))
     }
     
-    static func label(_ state: UInt8) -> String {
+    static func label(_ state: UInt8?) -> String {
         switch state {
         case 0:
             return "ok"
@@ -43,7 +45,7 @@ struct StateView: View {
         }
     }
     
-    static func color(_ state: UInt8) -> Color {
+    static func color(_ state: UInt8?) -> Color {
         switch state {
         case 0:
             return .green

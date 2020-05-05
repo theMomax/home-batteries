@@ -10,15 +10,15 @@ import Foundation
 import SwiftUI
 
 struct BatteryDiagram: View {
-    @Binding var batteryLevel: UInt8
-    @Binding var chargingState: UInt8
-    @Binding var statusLowBattery: UInt8
+    @Binding var batteryLevel: UInt8?
+    @Binding var chargingState: UInt8?
+    @Binding var statusLowBattery: UInt8?
     
     @ViewBuilder
     var body: some View {
         ZStack() {
             BatteryBox()
-            BatteryFill(percentage: Float(batteryLevel) / 100.0).foregroundColor(chargingState == 1 ? .green : statusLowBattery == 1 ? .red : .primary)
+            BatteryFill(percentage: Float(batteryLevel ?? 0) / 100.0).foregroundColor(chargingState == 1 ? .green : statusLowBattery == 1 ? .red : .primary)
         }
         .aspectRatio(2.04, contentMode: .fit)
     }
