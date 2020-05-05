@@ -212,7 +212,7 @@ struct TotalStorageView: View {
         .first?.characteristics.filter({characteristic in
             characteristic.characteristicType == "00000005-0001-1000-8000-0036AC324978"
         }).first {
-            self.energyCapacity = ObservedObject.init(wrappedValue: Characteristic<Float>(c, updating: false))
+            self.energyCapacity = ObservedObject.init(wrappedValue: Characteristic<Float>(c, updating: true))
         } else {
             self.energyCapacity = nil
         }
@@ -225,6 +225,7 @@ struct TotalStorageView: View {
             self.batteryLevel.reload()
             self.chargingState.reload()
             self.statusLowBattery.reload()
+            self.energyCapacity?.wrappedValue.reload()
         }
     }
     
