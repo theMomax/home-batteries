@@ -43,13 +43,11 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
         HomeStore.shared.addAccessoryDelegate(self)
         
         self.characteristic.readValue(completionHandler: {err in
-            print("red value for \(self.characteristic.characteristicType)")
             if let error = err {
                 print(error)
                 exit(1)
             } else {
                 self.value = self.characteristic.value as! T?
-                print(self.value ?? "nil")
             }
         })
         
@@ -80,7 +78,6 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
     
     func accessory(_ accessory: HMAccessory, service: HMService, didUpdateValueFor characteristic: HMCharacteristic) {
         guard accessory == self.accessory && service == self.service && characteristic == self.characteristic else { return }
-        print("\(accessory.name) -> \(service.name) didupdate value for \(characteristic.characteristicType)")
         self.value = characteristic.value as! T?
     }
     

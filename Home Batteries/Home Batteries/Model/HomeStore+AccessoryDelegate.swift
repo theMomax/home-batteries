@@ -32,6 +32,13 @@ extension HomeStore: HMAccessoryDelegate {
     //  methods therefore simply passes along the call to all the items in the set,
     //  after first ensuring that the item is in fact an accessory delegate.
     
+    func accessoryDidUpdateName(_ accessory: HMAccessory) {
+        accessoryDelegates.forEach {
+            guard let delegate = $0 as? HMAccessoryDelegate else { return }
+            delegate.accessoryDidUpdateName?(accessory)
+        }
+    }
+    
     func accessory(_ accessory: HMAccessory, didUpdateNameFor service: HMService) {
         accessoryDelegates.forEach {
             guard let delegate = $0 as? HMAccessoryDelegate else { return }
