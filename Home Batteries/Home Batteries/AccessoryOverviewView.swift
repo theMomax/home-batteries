@@ -20,19 +20,33 @@ struct AccessoryOverviewView: View {
     @ViewBuilder
     var body: some View {
         AccessoryWrapperView {
-            VStack {
-                HStack {
-                    Text(self.accessory.value.name)
-                    if self.hasState() {
-                        TotalStateView(self.accessory)
+            if !self.accessory.value.isReachable {
+                ConnectingToAccessoryView(accessory: self.accessory)
+            } else {
+                VStack {
+                    HStack {
+                        Text(self.accessory.value.name)
+                        if self.hasState() {
+                            TotalStateView(self.accessory)
+                        }
                     }
+                    if self.hasEnergyStorage() {
+                        TotalStorageView(self.accessory).padding(.bottom)
+                    }
+                    self.metersView()
                 }
-                if self.hasEnergyStorage() {
-                    TotalStorageView(self.accessory)
-                }
-                ForEach(self.metersWithAllLines() + self.metersWithoutAllLines(), id: \.uniqueIdentifier) { service in
-                    MeterView(service).padding(.top)
-                }
+            }
+        }
+    }
+    
+    private func metersView() -> some View {
+        let meters = self.metersWithAllLines() + self.metersWithoutAllLines()
+        
+        return ForEach(0..<meters.count) { index in
+            if index == 0 {
+                MeterView(meters[index])
+            } else {
+                MeterView(meters[index]).padding(.top)
             }
         }
     }
@@ -201,6 +215,3 @@ struct TotalStorageView: View {
     }
     
 }
-
-
-

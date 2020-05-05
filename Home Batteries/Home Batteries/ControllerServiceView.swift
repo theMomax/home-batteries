@@ -66,8 +66,6 @@ struct ControllerServiceView_Previews: PreviewProvider {
                 ZStack {
                     Color(.systemBackground).edgesIgnoringSafeArea(.all)
                     
-                    
-                    
                     ScrollView {
                         AccessoryWrapperView {
                             ControllerServiceView(state: .constant(state))

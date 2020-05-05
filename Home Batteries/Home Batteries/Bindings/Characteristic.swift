@@ -45,7 +45,7 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
         self.characteristic.readValue(completionHandler: {err in
             if let error = err {
                 print(error)
-                exit(1)
+                self.value = nil
             } else {
                 self.value = self.characteristic.value as! T?
             }
@@ -56,7 +56,7 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
                 print("enabled notification for \(self.characteristic.characteristicType)")
                 if let error = err {
                     print(error)
-                    exit(1)
+                    self.value = nil
                 }
             })
         }
@@ -68,7 +68,7 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
                 print("disabled notification for \(self.characteristic.characteristicType)")
                 if let error = err {
                     print(error)
-                    exit(1)
+                    self.value = nil
                 }
             })
         }

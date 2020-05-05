@@ -17,7 +17,7 @@ struct GlobalView: View {
     var body: some View {
         NavigationView {
             if hm.value.homes.count == 0 {
-                NoHomesView()
+                ConnectingToHomeKitView()
             } else if hm.value.homes.count == 1 {
                 HomeView(home: Home(hm.value.homes[0]))
             } else {
@@ -25,6 +25,12 @@ struct GlobalView: View {
                 .navigationBarTitle(Text("Homes"))
             }
         }
+    }
+}
+
+struct NoHomesView: View {
+    var body: some View {
+        Text("No homes detected...")
     }
 }
 
@@ -37,28 +43,5 @@ struct HomesOverview: View {
                 home.isPrimary ? Text(home.name).bold() : Text(home.name)
             }
         }
-    }
-}
-
-struct NoHomesView: View {
-    var body: some View {
-        VStack {
-            Text("Connecting to HomeKit...").padding(.bottom)
-            ActivityIndicator(isAnimating: .constant(true), style: .large)
-        }
-    }
-}
-
-struct ActivityIndicator: UIViewRepresentable {
-
-    @Binding var isAnimating: Bool
-    let style: UIActivityIndicatorView.Style
-
-    func makeUIView(context: UIViewRepresentableContext<ActivityIndicator>) -> UIActivityIndicatorView {
-        return UIActivityIndicatorView(style: style)
-    }
-
-    func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<ActivityIndicator>) {
-        isAnimating ? uiView.startAnimating() : uiView.stopAnimating()
     }
 }

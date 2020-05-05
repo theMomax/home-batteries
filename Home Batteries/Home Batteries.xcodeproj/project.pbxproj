@@ -30,6 +30,7 @@
 		A576AEC2245DE4B500EDDFD9 /* StorageServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A576AEC1245DE4B500EDDFD9 /* StorageServiceView.swift */; };
 		A5B60BF924615F620038C92D /* AggregatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B60BF824615F620038C92D /* AggregatedValue.swift */; };
 		A5B9E36024587731005E5B4F /* HomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9E35B24587730005E5B4F /* HomeManager.swift */; };
+		A5BBC4A42461A6F900CC7399 /* ConnectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BBC4A32461A6F900CC7399 /* ConnectingView.swift */; };
 		A5C998822459F628002890E8 /* GlobalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C998812459F628002890E8 /* GlobalView.swift */; };
 		A5C998842459F65B002890E8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C998832459F65B002890E8 /* HomeView.swift */; };
 /* End PBXBuildFile section */
@@ -61,6 +62,7 @@
 		A576AEC1245DE4B500EDDFD9 /* StorageServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceView.swift; sourceTree = "<group>"; };
 		A5B60BF824615F620038C92D /* AggregatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggregatedValue.swift; sourceTree = "<group>"; };
 		A5B9E35B24587730005E5B4F /* HomeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeManager.swift; sourceTree = "<group>"; };
+		A5BBC4A32461A6F900CC7399 /* ConnectingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectingView.swift; sourceTree = "<group>"; };
 		A5C998812459F628002890E8 /* GlobalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalView.swift; sourceTree = "<group>"; };
 		A5C998832459F65B002890E8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,6 +127,7 @@
 				A52205D4245DD561005C7F1F /* HorizontalBarDiagram.swift */,
 				A5383105245E281200B49F67 /* BatteryDiagram.swift */,
 				A538310B245EE6A600B49F67 /* AccessoryOverviewView.swift */,
+				A5BBC4A32461A6F900CC7399 /* ConnectingView.swift */,
 			);
 			path = "Home Batteries";
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				A5642F97245F3ECC009D7024 /* Characteristic.swift in Sources */,
 				A545C7A5245868FA0096A547 /* SceneDelegate.swift in Sources */,
 				A545C7A7245868FA0096A547 /* ContentView.swift in Sources */,
+				A5BBC4A42461A6F900CC7399 /* ConnectingView.swift in Sources */,
 				A5B60BF924615F620038C92D /* AggregatedValue.swift in Sources */,
 				A549ADB2245C7E0400976D22 /* MeterServiceView.swift in Sources */,
 				A5691C5E24617523000999D3 /* HomeStore.swift in Sources */,
