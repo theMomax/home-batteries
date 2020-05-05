@@ -111,6 +111,9 @@ struct TotalStateView: View {
     @ViewBuilder
     var body: some View {
         ControllerServiceView(state: self.$totalState.value)
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            self.totalState.reload()
+        }
     }
     
 }
@@ -166,6 +169,12 @@ struct MeterView: View {
                                     currentPowerL2: self.currentPowerL2?.projectedValue.value,
                                     currentPowerL3: self.currentPowerL3?.projectedValue.value
         )
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            self.currentPower.reload()
+            self.currentPowerL1?.wrappedValue.reload()
+            self.currentPowerL2?.wrappedValue.reload()
+            self.currentPowerL3?.wrappedValue.reload()
+        }
     }
     
 }
@@ -203,7 +212,7 @@ struct TotalStorageView: View {
         .first?.characteristics.filter({characteristic in
             characteristic.characteristicType == "00000005-0001-1000-8000-0036AC324978"
         }).first {
-            self.energyCapacity = ObservedObject.init(wrappedValue: Characteristic<Float>(c, updating: true))
+            self.energyCapacity = ObservedObject.init(wrappedValue: Characteristic<Float>(c, updating: false))
         } else {
             self.energyCapacity = nil
         }
@@ -212,6 +221,11 @@ struct TotalStorageView: View {
     @ViewBuilder
     var body: some View {
         EnergyStorageServiceView(batteryLevel: self.$batteryLevel.value, chargingState: self.$chargingState.value, statusLowBattery: self.$statusLowBattery.value, energyCapacity: self.energyCapacity?.projectedValue.value)
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            self.batteryLevel.reload()
+            self.chargingState.reload()
+            self.statusLowBattery.reload()
+        }
     }
     
 }

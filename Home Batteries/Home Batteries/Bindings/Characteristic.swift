@@ -42,14 +42,7 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
         
         HomeStore.shared.addAccessoryDelegate(self)
         
-        self.characteristic.readValue(completionHandler: {err in
-            if let error = err {
-                print(error)
-                self.value = nil
-            } else {
-                self.value = self.characteristic.value as! T?
-            }
-        })
+        self.reload()
         
         if subscribe {
             self.characteristic.enableNotification(true, completionHandler: {err in
@@ -74,6 +67,17 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
         }
         
         HomeStore.shared.removeAccessoryDelegate(self)
+    }
+    
+    func reload() {
+        self.characteristic.readValue(completionHandler: {err in
+            if let error = err {
+                print(error)
+                self.value = nil
+            } else {
+                self.value = self.characteristic.value as! T?
+            }
+        })
     }
     
     func accessory(_ accessory: HMAccessory, service: HMService, didUpdateValueFor characteristic: HMCharacteristic) {
