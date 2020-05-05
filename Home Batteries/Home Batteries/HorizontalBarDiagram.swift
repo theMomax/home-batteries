@@ -74,9 +74,9 @@ struct HorizontalBarDiagram: View {
     }
     
     private func relativeWidthOf(_ segment: Int) -> CGFloat {
-        let total = segments.map({s in abs(s.value ?? 0.0)}).reduce(0, +)
+        let total = segments.map({s in abs(s.value ?? 0.0)}).reduce(0.0, +)
         if total == 0 {
-            return CGFloat(1/3)
+            return CGFloat(1.0/3.0)
         } else {
             return CGFloat(abs(segments[segment].value ?? 0.0) / total)
         }
@@ -142,6 +142,11 @@ struct HorizontalBarDiagram_Previews: PreviewProvider {
                 Segment(.constant(-1009), name: "L1"),
                 Segment(.constant(203.0), name: "L2"),
                 Segment(.constant(259), name: "L3")
+            ]).padding()
+            HorizontalBarDiagram([
+                Segment(.constant(0), name: "L1"),
+                Segment(.constant(0), name: "L2"),
+                Segment(.constant(0), name: "L3")
             ]).padding()
         }
     }
