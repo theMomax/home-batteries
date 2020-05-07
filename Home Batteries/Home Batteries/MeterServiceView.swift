@@ -24,13 +24,13 @@ struct ElectricityMeterServiceView: View {
     var body: some View {
         VStack {
             HStack(spacing: 2) {
-                Text(String(format: "%.0f", currentPower ?? "...")).font(Font.system(.title)).lineLimit(1)
+                Text(String(format: "%.0f", currentPower ?? 0.0)).font(Font.system(.title)).lineLimit(1)
                 Text("W").font(Font.system(.title)).foregroundColor(.secondary)
                 
                 Spacer()
                 
                 if self.name != nil {
-                    Text(self.name!.wrappedValue ?? "...")
+                    Text(self.name!.wrappedValue ?? "?")
                 }
             }
             

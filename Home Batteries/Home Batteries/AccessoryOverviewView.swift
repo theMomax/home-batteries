@@ -125,9 +125,9 @@ struct MeterView: View {
     let service: HMService
     
     @ObservedObject var currentPower: Characteristic<Float>
-    let currentPowerL1: ObservedObject<Characteristic<Float>>?
-    let currentPowerL2: ObservedObject<Characteristic<Float>>?
-    let currentPowerL3: ObservedObject<Characteristic<Float>>?
+    @ObservedObject var currentPowerL1: Characteristic<Float>
+    @ObservedObject var currentPowerL2: Characteristic<Float>
+    @ObservedObject var currentPowerL3: Characteristic<Float>
        
     init(_ service: HMService) {
         self.service = service
@@ -139,25 +139,25 @@ struct MeterView: View {
         if let c = self.service.characteristics.filter({characteristic in
            characteristic.characteristicType == "00000002-0001-1000-8000-0036AC324978"
         }).first {
-            self.currentPowerL1 = ObservedObject.init(wrappedValue: Characteristic<Float>(c, updating: true))
+            self.currentPowerL1 = Characteristic<Float>(c, updating: true)
         } else {
-            self.currentPowerL1 = nil
+            self.currentPowerL1 = Characteristic<Float>()
         }
         
         if let c = self.service.characteristics.filter({characteristic in
            characteristic.characteristicType == "00000003-0001-1000-8000-0036AC324978"
         }).first {
-            self.currentPowerL2 = ObservedObject.init(wrappedValue: Characteristic<Float>(c, updating: true))
+            self.currentPowerL2 = Characteristic<Float>(c, updating: true)
         } else {
-            self.currentPowerL2 = nil
+            self.currentPowerL2 = Characteristic<Float>()
         }
         
         if let c = self.service.characteristics.filter({characteristic in
            characteristic.characteristicType == "00000004-0001-1000-8000-0036AC324978"
         }).first {
-            self.currentPowerL3 = ObservedObject.init(wrappedValue: Characteristic<Float>(c, updating: true))
+            self.currentPowerL3 = Characteristic<Float>(c, updating: true)
         } else {
-            self.currentPowerL3 = nil
+            self.currentPowerL3 = Characteristic<Float>()
         }
     }
     
@@ -165,15 +165,15 @@ struct MeterView: View {
     var body: some View {
         ElectricityMeterServiceView(name: .constant(service.name),
                                     currentPower: self.$currentPower.value,
-                                    currentPowerL1: self.currentPowerL1?.projectedValue.value,
-                                    currentPowerL2: self.currentPowerL2?.projectedValue.value,
-                                    currentPowerL3: self.currentPowerL3?.projectedValue.value
+                                    currentPowerL1: self.currentPowerL1.present ? self.$currentPowerL1.value : nil,
+                                    currentPowerL2: self.currentPowerL2.present ? self.$currentPowerL2.value : nil,
+                                    currentPowerL3: self.currentPowerL3.present ? self.$currentPowerL3.value : nil
         )
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             self.currentPower.reload()
-            self.currentPowerL1?.wrappedValue.reload()
-            self.currentPowerL2?.wrappedValue.reload()
-            self.currentPowerL3?.wrappedValue.reload()
+            self.currentPowerL1.reload()
+            self.currentPowerL2.reload()
+            self.currentPowerL3.reload()
         }
     }
     
@@ -188,7 +188,7 @@ struct TotalStorageView: View {
     @ObservedObject var batteryLevel: Characteristic<UInt8>
     @ObservedObject var chargingState: Characteristic<UInt8>
     @ObservedObject var statusLowBattery: Characteristic<UInt8>
-    let energyCapacity: ObservedObject<Characteristic<Float>>?
+    @ObservedObject var energyCapacity: Characteristic<Float>
        
     init(_ accessory: Accessory) {
         self.accessory = accessory
@@ -212,20 +212,20 @@ struct TotalStorageView: View {
         .first?.characteristics.filter({characteristic in
             characteristic.characteristicType == "00000005-0001-1000-8000-0036AC324978"
         }).first {
-            self.energyCapacity = ObservedObject.init(wrappedValue: Characteristic<Float>(c, updating: true))
+            self.energyCapacity = Characteristic<Float>(c)
         } else {
-            self.energyCapacity = nil
+            self.energyCapacity = Characteristic<Float>()
         }
     }
     
     @ViewBuilder
     var body: some View {
-        EnergyStorageServiceView(batteryLevel: self.$batteryLevel.value, chargingState: self.$chargingState.value, statusLowBattery: self.$statusLowBattery.value, energyCapacity: self.energyCapacity?.projectedValue.value)
+        EnergyStorageServiceView(batteryLevel: self.$batteryLevel.value, chargingState: self.$chargingState.value, statusLowBattery: self.$statusLowBattery.value, energyCapacity: self.energyCapacity.present ? self.$energyCapacity.value : nil)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             self.batteryLevel.reload()
             self.chargingState.reload()
             self.statusLowBattery.reload()
-            self.energyCapacity?.wrappedValue.reload()
+            self.energyCapacity.reload()
         }
     }
     

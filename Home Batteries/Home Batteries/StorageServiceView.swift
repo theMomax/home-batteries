@@ -30,7 +30,7 @@ struct EnergyStorageServiceView: View {
                 Text(String(format: "%d %%", batteryLevel ?? 0)).font(Font.system(.largeTitle))
                 
                 if energyCapacity != nil {
-                    Text(String(format: "of %.1f kWh", energyCapacity!.wrappedValue ?? 0)).font(Font.system(.footnote)).foregroundColor(.secondary)
+                    Text(String(format: "of %.1f kWh", energyCapacity!.wrappedValue ?? 0.0)).font(Font.system(.footnote)).foregroundColor(.secondary)
                 }
             }.padding(.horizontal).layoutPriority(1)
             Spacer().layoutPriority(0)
