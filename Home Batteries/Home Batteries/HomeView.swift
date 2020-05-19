@@ -12,52 +12,112 @@ import HomeKit
 
 struct HomeView: View {
     
-    @ObservedObject var home: Home
+    @EnvironmentObject var hm: HomeManger
     
     var body: some View {
         TabView {
-            HomeTab(home: self.home).tabItem {
+            HomeTab().tabItem {
                 VStack {
                     Image(systemName: "house.fill").font(Font.system(.headline))
                     Text("Home")
                 }
             }.tag(1)
-            RoomsTab(home: self.home).tabItem {
+            RoomsTab().tabItem {
                 VStack {
                     Image(systemName: "square.grid.2x2").font(Font.system(.headline))
                     Text("Rooms")
                 }
             }.tag(2)
         }
-        .navigationBarTitle(Text(home.value.name))
     }
 }
 
 struct HomeTab: View {
     
-    @ObservedObject var home: Home
+    @EnvironmentObject var hm: HomeManger
+    
+    @State private var showActionSheet: Bool = false
     
     var body: some View {
-        AccessoriesView(accessories: home.value.accessories)
+        NavigationView {
+            AccessoriesView(home: self.hm.selected!, showRoomOnly: .constant(false))
+            
+            .navigationBarTitle(self.hm.selected!.value.name)
+                
+            .navigationBarItems(leading: Button(action: {
+                self.showActionSheet = true
+            }, label: {
+                ZStack {
+                    Image(systemName: "house").foregroundColor(.white).offset(x: 0.0, y: -1.5)
+                }
+                }).buttonStyle(CircleButtonStyle()))
+                
+            .actionSheet(isPresented: self.$showActionSheet) {
+                ActionSheet(title: Text("Selct Home"), buttons: self.homesToActionSheetButtons() + [.cancel({
+                    self.showActionSheet = false
+                })])
+            }
+        }
+    }
+    
+    private func homesToActionSheetButtons() -> [ActionSheet.Button] {
+        return self.hm.value.homes.map({h in
+            .default(Text(h.name), action: {
+                self.showActionSheet = false
+                self.hm.selected = Home(h)
+            })
+        })
     }
     
 }
 
+struct CircleButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label.padding(8).background(Circle().fill(Color.init(.sRGB, white: 0.5, opacity: 0.5)))
+
+    }
+}
+
 struct RoomsTab: View {
     
-    @ObservedObject var home: Home
+    @EnvironmentObject var hm: HomeManger
+    
+    @State private var showActionSheet: Bool = false
     
     var body: some View {
-        List(self.allRooms(), id: \.name) { room in
-            NavigationLink(destination: AccessoriesView(accessories: room.accessories).navigationBarTitle(room.name), label: {
-                Text(room.name)
-            })
+        NavigationView {
+            AccessoriesView(home: self.hm.selected!, showRoomOnly: .constant(true))
+            
+            .navigationBarTitle(self.hm.selected!.room!.name)
+                
+            .navigationBarItems(leading: Button(action: {
+                self.showActionSheet = true
+            }, label: {
+                ZStack {
+                    Image(systemName: "list.bullet").foregroundColor(.white)
+                }
+            }).buttonStyle(CircleButtonStyle()))
+                
+            .actionSheet(isPresented: self.$showActionSheet) {
+                ActionSheet(title: Text("Selct Room"), buttons: self.roomsToActionSheetButtons() + [.cancel({
+                    self.showActionSheet = false
+                })])
+            }
         }
     }
     
+    private func roomsToActionSheetButtons() -> [ActionSheet.Button] {
+        return allRooms().map({r in
+            .default(Text(r.name), action: {
+                self.showActionSheet = false
+                self.hm.selected!.updateRoom(r)
+            })
+        })
+    }
+    
     private func allRooms() -> [HMRoom] {
-        var rooms = self.home.value.rooms
-        rooms.append(self.home.value.roomForEntireHome())
+        var rooms = self.hm.selected!.value.rooms
+        rooms.append(self.hm.selected!.value.roomForEntireHome())
         return rooms
     }
     

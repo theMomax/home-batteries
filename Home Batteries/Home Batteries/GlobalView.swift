@@ -15,33 +15,18 @@ struct GlobalView: View {
     
     @ViewBuilder
     var body: some View {
-        NavigationView {
-            if hm.value.homes.count == 0 {
-                ConnectingToHomeKitView()
-            } else if hm.value.homes.count == 1 {
-                HomeView(home: Home(hm.value.homes[0]))
-            } else {
-                HomesOverview()
-                .navigationBarTitle(Text("Homes"))
-            }
+        if self.hm.value.homes.count == 0 {
+            ConnectingToHomeKitView()
+        } else {
+            HomeView()
         }
     }
+    
+    
 }
 
 struct NoHomesView: View {
     var body: some View {
         Text("No homes detected...")
-    }
-}
-
-struct HomesOverview: View {
-    @EnvironmentObject var hm: HomeManger
-    
-    var body: some View {
-        List(self.hm.value.homes, id: \.name) { home in
-            NavigationLink(destination: HomeView(home: Home(home))) {
-                home.isPrimary ? Text(home.name).bold() : Text(home.name)
-            }
-        }
     }
 }

@@ -8,7 +8,9 @@
 
 import Foundation
 import SwiftUI
+import HomeKit
 
+let TIMEOUT = DispatchTimeInterval.seconds(2)
 
 struct ConnectingToHomeKitView: View {
     
@@ -27,7 +29,7 @@ struct ConnectingToHomeKitView: View {
     }
     
     func timeout() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + TIMEOUT) {
             self.timeoutPassed = true
         }
     }
@@ -35,7 +37,7 @@ struct ConnectingToHomeKitView: View {
 
 struct ConnectingToAccessoryView: View {
     
-    @ObservedObject var accessory: Accessory
+    @Binding var accessory: HMAccessory
     
     @State var timeoutPassed: Bool = false
     
@@ -45,19 +47,19 @@ struct ConnectingToAccessoryView: View {
         return VStack(alignment: .center, spacing: 20) {
             if !self.timeoutPassed {
                 ActivityIndicator(isAnimating: .constant(true), style: .medium)
-                Text("Connecting to accessory \(accessory.value.name)...").foregroundColor(.secondary)
+                Text("Connecting to accessory \(accessory.name)...").foregroundColor(.secondary)
             } else {
                 Image(systemName: "exclamationmark.triangle")
                     .font(Font.system(.title))
                     .foregroundColor(.orange)
                     .padding(.top)
-                Text("Connecting to accessory \(accessory.value.name) failed!").foregroundColor(.secondary)
+                Text("Connecting to accessory \(accessory.name) failed!").foregroundColor(.secondary)
             }
         }
     }
     
     func timeout() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + TIMEOUT) {
             self.timeoutPassed = true
         }
     }

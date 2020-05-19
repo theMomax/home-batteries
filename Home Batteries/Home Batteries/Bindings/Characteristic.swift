@@ -66,6 +66,13 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
     }
     
     deinit {
+        print("deinit characteristic")
+        pause()
+        
+        HomeStore.shared.removeAccessoryDelegate(self)
+    }
+    
+    func pause() {
         if !self.present {
             return
         }
@@ -78,8 +85,6 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
                 }
             })
         }
-        
-        HomeStore.shared.removeAccessoryDelegate(self)
     }
     
     func reload() {
@@ -109,7 +114,7 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
     
     func accessory(_ accessory: HMAccessory, service: HMService, didUpdateValueFor characteristic: HMCharacteristic) {
         guard accessory == self.accessory && service == self.service && characteristic == self.characteristic else { return }
-        print("received update for value for characteristic \(self.characteristic!.characteristicType): \(self.characteristic!.value ?? "nil")")
+        // print("received update for value for characteristic \(self.characteristic!.characteristicType): \(self.characteristic!.value ?? "nil")")
         self.value = characteristic.value as! T?
     }
     

@@ -14,19 +14,41 @@ struct AccessoriesView: View {
     
     static let supportedServices = AccessoryOverviewView.supportedServices
     
-    let accessories: [HMAccessory]
+    @ObservedObject var home: Home
+    
+    @Binding var showRoomOnly: Bool
+    
     
     var body: some View {
+        self.content(accessories: Self.homeBatteryAccessories(home: self.home, room: self.showRoomOnly ? self.home.room! : nil).map(Accessory.init))
+    }
+    
+    @ViewBuilder
+    private func content(accessories: [Accessory]) -> some View {
         ScrollView {
-            ForEach(homeBatteryAccessories() , id: \.uniqueIdentifier) { (accessory: HMAccessory) in
-                AccessoryOverviewView(accessory: Accessory(accessory))
-            }.padding(.top)
+            if accessories.isEmpty {
+                AccessoryWrapperView(dropShadow: false) {
+                    Text("No supported accessories here...").foregroundColor(.secondary)
+                }
+            } else {
+                ForEach(accessories, id: \.value.uniqueIdentifier) { a in
+                    AccessoryOverviewView(accessory: a)
+                }.padding(.top)
+            }
         }
     }
     
-    private func homeBatteryAccessories() -> [HMAccessory] {
-        return self.accessories.filter({ a in
+    private static func homeBatteryAccessories(home: Home, room: HMRoom?) -> [HMAccessory] {
+        var accessories: [HMAccessory]
+        if let room = room {
+            accessories = (home.value.rooms.filter({ r in r.uniqueIdentifier == room.uniqueIdentifier }).first?.accessories) ?? []
+        } else {
+            accessories = home.value.accessories
+        }
+        
+        return accessories.filter({ a in
             a.services.contains(where: { service in AccessoriesView.supportedServices.contains(service.serviceType)} )
         })
     }
 }
+

@@ -13,8 +13,11 @@ class HomeManger: NSObject, ObservableObject, HMHomeManagerDelegate {
     
     @Published var value: HMHomeManager
     
+    @Published var selected: Home?
+    
     override init() {
         self.value = HomeStore.shared.homeManager
+        self.selected = nil
         super.init()
         
         self.value.delegate = self
@@ -27,6 +30,11 @@ class HomeManger: NSObject, ObservableObject, HMHomeManagerDelegate {
     func homeManagerDidUpdateHomes(_ manager: HMHomeManager) {
         guard manager == self.value else { return }
         self.value = manager
+        if let h = HomeStore.shared.homeManager.homes.filter({h in h.isPrimary}).first {
+            self.selected = Home(h)
+        } else {
+            self.selected = nil
+        }
     }
 
     func homeManagerDidUpdatePrimaryHome(_ manager: HMHomeManager) {

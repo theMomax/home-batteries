@@ -16,22 +16,21 @@ struct AccessoryOverviewView: View {
     
     @ObservedObject var accessory: Accessory
     
-   
     @ViewBuilder
     var body: some View {
         AccessoryWrapperView {
             if !self.accessory.value.isReachable {
-                ConnectingToAccessoryView(accessory: self.accessory)
+                ConnectingToAccessoryView(accessory: self.$accessory.value)
             } else {
                 VStack {
                     HStack {
                         Text(self.accessory.value.name)
                         if self.hasState() {
-                            TotalStateView(self.accessory)
+                            TotalStateView(self.$accessory.value)
                         }
                     }
                     if self.hasEnergyStorage() {
-                        TotalStorageView(self.accessory).padding(.bottom)
+                        TotalStorageView(self.$accessory.value).padding(.bottom)
                     }
                     self.metersView()
                 }
@@ -95,14 +94,14 @@ struct TotalStateView: View {
     
     static let supportedServices = ["00000001-0000-1000-8000-0036AC324978"]
     
-    @ObservedObject var accessory: Accessory
+    @Binding var accessory: HMAccessory
     
     @ObservedObject var totalState: Characteristic<UInt8>
        
-    init(_ accessory: Accessory) {
-        self.accessory = accessory
+    init(_ accessory: Binding<HMAccessory>) {
+        self._accessory = accessory
        
-        self.totalState = Characteristic<UInt8>(accessory.value.services.filter({service in TotalStateView.supportedServices.contains(service.serviceType)})
+        self.totalState = Characteristic<UInt8>(accessory.wrappedValue.services.filter({service in TotalStateView.supportedServices.contains(service.serviceType)})
        .first!.characteristics.filter({characteristic in
            characteristic.characteristicType == "00000077-0000-1000-8000-0026BB765291"
        }).first!, updating: true)
@@ -183,32 +182,32 @@ struct TotalStorageView: View {
     
     static let supportedServices = EnergyStorageServiceView.supportedServices
     
-    @ObservedObject var accessory: Accessory
+    @Binding var accessory: HMAccessory
     
     @ObservedObject var batteryLevel: Characteristic<UInt8>
     @ObservedObject var chargingState: Characteristic<UInt8>
     @ObservedObject var statusLowBattery: Characteristic<UInt8>
     @ObservedObject var energyCapacity: Characteristic<Float>
        
-    init(_ accessory: Accessory) {
-        self.accessory = accessory
+    init(_ accessory: Binding<HMAccessory>) {
+        self._accessory = accessory
         
-        self.batteryLevel = Characteristic<UInt8>(accessory.value.services.filter({service in TotalStorageView.supportedServices.contains(service.serviceType)})
+        self.batteryLevel = Characteristic<UInt8>(accessory.wrappedValue.services.filter({service in TotalStorageView.supportedServices.contains(service.serviceType)})
         .first!.characteristics.filter({characteristic in
             characteristic.characteristicType == "00000068-0000-1000-8000-0026BB765291"
         }).first!, updating: true)
         
-        self.chargingState = Characteristic<UInt8>(accessory.value.services.filter({service in TotalStorageView.supportedServices.contains(service.serviceType)})
+        self.chargingState = Characteristic<UInt8>(accessory.wrappedValue.services.filter({service in TotalStorageView.supportedServices.contains(service.serviceType)})
         .first!.characteristics.filter({characteristic in
             characteristic.characteristicType == "0000008F-0000-1000-8000-0026BB765291"
         }).first!, updating: true)
         
-        self.statusLowBattery = Characteristic<UInt8>(accessory.value.services.filter({service in TotalStorageView.supportedServices.contains(service.serviceType)})
+        self.statusLowBattery = Characteristic<UInt8>(accessory.wrappedValue.services.filter({service in TotalStorageView.supportedServices.contains(service.serviceType)})
         .first!.characteristics.filter({characteristic in
             characteristic.characteristicType == "00000079-0000-1000-8000-0026BB765291"
         }).first!, updating: true)
         
-        if let c = accessory.value.services.filter({service in TotalStorageView.supportedServices.contains(service.serviceType)})
+        if let c = accessory.wrappedValue.services.filter({service in TotalStorageView.supportedServices.contains(service.serviceType)})
         .first?.characteristics.filter({characteristic in
             characteristic.characteristicType == "00000005-0001-1000-8000-0036AC324978"
         }).first {
