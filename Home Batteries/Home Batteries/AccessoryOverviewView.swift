@@ -127,6 +127,7 @@ struct MeterView: View {
     @ObservedObject var currentPowerL1: Characteristic<Float>
     @ObservedObject var currentPowerL2: Characteristic<Float>
     @ObservedObject var currentPowerL3: Characteristic<Float>
+    @ObservedObject var meterType: Characteristic<UInt8>
        
     init(_ service: HMService) {
         self.service = service
@@ -158,6 +159,14 @@ struct MeterView: View {
         } else {
             self.currentPowerL3 = Characteristic<Float>()
         }
+        
+        if let c = self.service.characteristics.filter({characteristic in
+           characteristic.characteristicType == "00000006-0001-1000-8000-0036AC324978"
+        }).first {
+            self.meterType = Characteristic<UInt8>(c, updating: false)
+        } else {
+            self.meterType = Characteristic<UInt8>()
+        }
     }
     
     @ViewBuilder
@@ -166,7 +175,8 @@ struct MeterView: View {
                                     currentPower: self.$currentPower.value,
                                     currentPowerL1: self.currentPowerL1.present ? self.$currentPowerL1.value : nil,
                                     currentPowerL2: self.currentPowerL2.present ? self.$currentPowerL2.value : nil,
-                                    currentPowerL3: self.currentPowerL3.present ? self.$currentPowerL3.value : nil
+                                    currentPowerL3: self.currentPowerL3.present ? self.$currentPowerL3.value : nil,
+                                    type: self.meterType.present && self.meterType.value != nil ? EnergyMeterType(rawValue: self.meterType.value!) ?? .other : .other
         )
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             self.currentPower.reload()

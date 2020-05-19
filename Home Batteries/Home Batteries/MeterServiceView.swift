@@ -10,6 +10,14 @@ import Foundation
 import SwiftUI
 import HomeKit
 
+enum EnergyMeterType: UInt8 {
+    case other = 0
+    case production = 1
+    case consumption = 2
+    case storage = 3
+    case grid = 4
+}
+
 struct ElectricityMeterServiceView: View {
     
     static let supportedServices = ["00000002-0000-1000-8000-0036AC324978"]
@@ -19,6 +27,7 @@ struct ElectricityMeterServiceView: View {
     var currentPowerL1: Binding<Float?>?
     var currentPowerL2: Binding<Float?>?
     var currentPowerL3: Binding<Float?>?
+    let type: EnergyMeterType
     
     @ViewBuilder
     var body: some View {
@@ -39,7 +48,9 @@ struct ElectricityMeterServiceView: View {
                     Segment(currentPowerL1!, name: "L1"),
                     Segment(currentPowerL2!, name: "L2"),
                     Segment(currentPowerL3!, name: "L3")
-                ])
+                ],
+                positiveColors: self.type == EnergyMeterType.storage || self.type == EnergyMeterType.grid ? HorizontalBarDiagram.negativeColors : HorizontalBarDiagram.positiveColors,
+                negativeColors: self.type == EnergyMeterType.storage || self.type == EnergyMeterType.grid ? HorizontalBarDiagram.positiveColors : HorizontalBarDiagram.negativeColors)
             }
         }
     }
@@ -63,7 +74,8 @@ struct ElectricityMeterServiceView_Previews: PreviewProvider {
                                     currentPower: .constant(325.34),
                                     currentPowerL1: lines ? .constant(12.34) : nil,
                                     currentPowerL2: lines ? .constant(203.34) : nil,
-                                    currentPowerL3: lines ? .constant(104.34) : nil)
+                                    currentPowerL3: lines ? .constant(104.34) : nil,
+                                    type: .other)
                                     
                             }
                         }

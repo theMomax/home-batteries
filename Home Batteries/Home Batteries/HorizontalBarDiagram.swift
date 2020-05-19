@@ -25,15 +25,18 @@ struct HorizontalBarDiagram: View {
     let segments: [Segment]
     let positiveColors: [Color]
     let negativeColors: [Color]
+    let zeroColors: [Color]
     
-    init(_ segments: [Segment], positiveColors: [Color] = HorizontalBarDiagram.positiveColors, negativeColors: [Color] = HorizontalBarDiagram.negativeColors) {
+    init(_ segments: [Segment], positiveColors: [Color] = HorizontalBarDiagram.positiveColors, negativeColors: [Color] = HorizontalBarDiagram.negativeColors, zeroColors: [Color] = HorizontalBarDiagram.zeroColors) {
         self.segments = segments
         self.positiveColors = positiveColors
         self.negativeColors = negativeColors
+        self.zeroColors = zeroColors
     }
     
-    static let positiveColors: [Color] = [.blue, .green, .purple]
+    static let positiveColors: [Color] = [.purple, .blue, .green]
     static let negativeColors: [Color] = [.red, .orange, .yellow]
+    static let zeroColors: [Color] = [.init(white: 0.3), .init(white: 0.5), .init(white: 0.7)]
     
     @ViewBuilder
     var body: some View {
@@ -83,7 +86,13 @@ struct HorizontalBarDiagram: View {
     }
     
     private func colorOf(_ segment: Int) -> Color {
-        return (self.segments[segment].value ?? 0.0 ) >= 0 ? self.positiveColors[segment % self.positiveColors.count] : self.negativeColors[segment % self.negativeColors.count]
+        if self.segments[segment].value ?? 0.0  > 0 {
+            return self.positiveColors[segment % self.positiveColors.count]
+        } else if self.segments[segment].value ?? 0.0 < 0 {
+            return self.negativeColors[segment % self.negativeColors.count]
+        } else {
+            return self.zeroColors[segment % self.zeroColors.count]
+        }
     }
     
 }
