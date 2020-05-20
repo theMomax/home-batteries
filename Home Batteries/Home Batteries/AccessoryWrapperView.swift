@@ -26,11 +26,11 @@ struct AccessoryWrapperView<Content> : View where Content : View {
     var body: some View {
         ZStack(alignment: alignment) {
             if self.dropShadow {
-                RoundedRectangle(cornerRadius: 20)
+                RoundedRectangle(cornerRadius: 15)
                 .foregroundColor(Color(.systemBackground))
-                .shadow(color: .gray, radius: 5)
+                .shadow(color: Color.gray.opacity(0.3), radius: 10)
             } else {
-                RoundedRectangle(cornerRadius: 20)
+                RoundedRectangle(cornerRadius: 15)
                 .opacity(0)
             }
                 

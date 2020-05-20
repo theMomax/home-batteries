@@ -41,7 +41,7 @@ struct AccessoriesView: View {
     private static func homeBatteryAccessories(home: Home, room: HMRoom?) -> [HMAccessory] {
         var accessories: [HMAccessory]
         if let room = room {
-            accessories = (home.value.rooms.filter({ r in r.uniqueIdentifier == room.uniqueIdentifier }).first?.accessories) ?? []
+            accessories = room.accessories
         } else {
             accessories = home.value.accessories
         }
