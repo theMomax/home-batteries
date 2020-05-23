@@ -20,7 +20,7 @@ enum EnergyMeterType: UInt8 {
 
 struct ElectricityMeterServiceView: View {
     
-    static let supportedServices = ["00000002-0000-1000-8000-0036AC324978"]
+    static let supportedServices = [ElectricityMeterService.uuid]
     
     var name: Binding<String?>?
     @Binding var currentPower: Float?
@@ -68,7 +68,7 @@ struct ElectricityMeterServiceView_Previews: PreviewProvider {
                         
                         
                         ScrollView {
-                            AccessoryWrapperView {
+                            WrapperView {
                                 ElectricityMeterServiceView(
                                     name: name == nil ? nil : .constant(name!),
                                     currentPower: .constant(325.34),

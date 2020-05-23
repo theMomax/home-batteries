@@ -10,25 +10,32 @@ import Foundation
 import SwiftUI
 import HomeKit
 
-struct AccessoryWrapperView<Content> : View where Content : View {
+struct WrapperView<Content> : View where Content : View {
     
     private let context: () -> Content
     private let alignment: Alignment
-    private let dropShadow: Bool
+    private let boxed: Bool
     
-    @inlinable init(alignment: Alignment = .center, dropShadow: Bool = true, @ViewBuilder _ content: @escaping () -> Content) {
+    @Environment(\.colorScheme) var colorScheme
+    
+    @inlinable init(alignment: Alignment = .center, boxed: Bool = true, @ViewBuilder _ content: @escaping () -> Content) {
         self.context = content
         self.alignment = alignment
-        self.dropShadow = dropShadow
+        self.boxed = boxed
     }
 
     @ViewBuilder
     var body: some View {
         ZStack(alignment: alignment) {
-            if self.dropShadow {
-                RoundedRectangle(cornerRadius: 15)
-                .foregroundColor(Color(.systemBackground))
-                .shadow(color: Color.gray.opacity(0.3), radius: 10)
+            if self.boxed {
+                if colorScheme != .dark {
+                    RoundedRectangle(cornerRadius: 15)
+                    .foregroundColor(Color(.systemBackground))
+                    .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                } else {
+                    RoundedRectangle(cornerRadius: 15)
+                    .foregroundColor(.init(white: 0.1))
+                }
             } else {
                 RoundedRectangle(cornerRadius: 15)
                 .opacity(0)
@@ -51,13 +58,13 @@ struct AccessoryWrapperView_Previews: PreviewProvider {
                 
                 ScrollView {
                     VStack {
-                        AccessoryWrapperView() {
+                        WrapperView() {
                             Text("1")
                         }
-                        AccessoryWrapperView(alignment: .topLeading) {
+                        WrapperView(alignment: .topLeading) {
                             Text("2")
                         }
-                        AccessoryWrapperView() {
+                        WrapperView() {
                             Image(systemName: "pencil.slash").font(Font.system(.largeTitle))
                         }
                     }

@@ -27,7 +27,7 @@ struct AccessoriesView: View {
     private func content(accessories: [Accessory]) -> some View {
         ScrollView {
             if accessories.isEmpty {
-                AccessoryWrapperView(dropShadow: false) {
+                WrapperView(boxed: false) {
                     Text("No supported accessories here...").foregroundColor(.secondary)
                 }
             } else {

@@ -49,7 +49,7 @@ struct ConnectingToAccessoryView: View {
                 ActivityIndicator(isAnimating: .constant(true), style: .medium)
                 Text("Connecting to accessory \(accessory.name)...").foregroundColor(.secondary)
             } else {
-                Image(systemName: "exclamationmark.triangle")
+                Image(systemName: "exclamationmark.circle")
                     .font(Font.system(.title))
                     .foregroundColor(.orange)
                     .padding(.top)

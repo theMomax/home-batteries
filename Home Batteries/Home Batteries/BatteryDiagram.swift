@@ -108,20 +108,20 @@ struct BatteryDiagram_Previews: PreviewProvider {
         
     static var previews: some View {
         ScrollView {
-            AccessoryWrapperView {
+            WrapperView {
                 HStack {
                     BatteryDiagram(batteryLevel: .constant(UInt8(80)), chargingState: .constant(UInt8(1)), statusLowBattery: .constant(UInt8(0)))
                 }
             }
             
-            AccessoryWrapperView {
+            WrapperView {
                 HStack {
                     BatteryBox()
                     Image(systemName: "battery.100").font(Font.system(.largeTitle))
                 }
             }
             
-            AccessoryWrapperView {
+            WrapperView {
                 HStack {
                     BatteryDiagram(batteryLevel: .constant(UInt8(80)), chargingState: .constant(UInt8(1)), statusLowBattery: .constant(UInt8(0)))
                     Image(systemName: "battery.100").font(Font.system(.largeTitle))

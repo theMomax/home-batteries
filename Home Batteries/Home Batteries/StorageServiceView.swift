@@ -12,7 +12,7 @@ import HomeKit
 
 struct EnergyStorageServiceView: View {
     
-    static let supportedServices = ["00000003-0000-1000-8000-0036AC324978"]
+    static let supportedServices = [EnergyStorageService.uuid]
     
     @Binding var batteryLevel: UInt8?
     @Binding var chargingState: UInt8?
@@ -49,7 +49,7 @@ struct EnergyStorageServiceView_Previews: PreviewProvider {
                         Color(.systemBackground).edgesIgnoringSafeArea(.all)
 
                         ScrollView {
-                            AccessoryWrapperView {
+                            WrapperView {
                                 EnergyStorageServiceView(
                                     batteryLevel: .constant(UInt8(batteryLevel)),
                                     chargingState: .constant(UInt8(chargingState)),

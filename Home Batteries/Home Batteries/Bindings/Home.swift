@@ -174,16 +174,6 @@ class Home: NSObject, ObservableObject, HMHomeDelegate {
         self.value = home
     }
     
-    func home(_ home: HMHome, didUpdateNameFor trigger: HMTrigger) {
-        guard home == self.value else { return }
-        self.value = home
-    }
-    
-    func home(_ home: HMHome, didUpdate trigger: HMTrigger) {
-        guard home == self.value else { return }
-        self.value = home
-    }
-    
     func home(_ home: HMHome, didUnblockAccessory accessory: HMAccessory) {
         guard home == self.value else { return }
         self.value = home

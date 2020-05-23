@@ -12,7 +12,7 @@ import HomeKit
 
 struct ControllerServiceView: View {
     
-    static let supportedServices = ["00000001-0000-1000-8000-0036AC324978"]
+    static let supportedServices = [ControllerService.self]
     
     @Binding var state: UInt8?
     
@@ -67,7 +67,7 @@ struct ControllerServiceView_Previews: PreviewProvider {
                     Color(.systemBackground).edgesIgnoringSafeArea(.all)
                     
                     ScrollView {
-                        AccessoryWrapperView {
+                        WrapperView {
                             ControllerServiceView(state: .constant(state))
                         }
                     }

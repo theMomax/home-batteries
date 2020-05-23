@@ -12,13 +12,13 @@ import HomeKit
 
 struct AccessoryOverviewView: View {
     
-    static let supportedServices = ["00000001-0000-1000-8000-0036AC324978", "00000002-0000-1000-8000-0036AC324978", "00000003-0000-1000-8000-0036AC324978"]
+    static let supportedServices = [ControllerService.uuid, ElectricityMeterService.uuid, EnergyStorageService.uuid]
     
     @ObservedObject var accessory: Accessory
     
     @ViewBuilder
     var body: some View {
-        AccessoryWrapperView {
+        WrapperView {
             if !self.accessory.value.isReachable {
                 ConnectingToAccessoryView(accessory: self.$accessory.value)
             } else {
@@ -62,13 +62,13 @@ struct AccessoryOverviewView: View {
         return self.accessory.value.services.filter({service in
             MeterView.supportedServices.contains(service.serviceType)
             && service.characteristics.contains(where: { characteristic in
-                characteristic.characteristicType == "00000002-0001-1000-8000-0036AC324978"
+                characteristic.characteristicType == CurrentPowerL1.uuid
             })
             && service.characteristics.contains(where: { characteristic in
-                characteristic.characteristicType == "00000003-0001-1000-8000-0036AC324978"
+                characteristic.characteristicType == CurrentPowerL2.uuid
             })
             && service.characteristics.contains(where: { characteristic in
-                characteristic.characteristicType == "00000004-0001-1000-8000-0036AC324978"
+                characteristic.characteristicType == CurrentPowerL3.uuid
             })
         })
     }
@@ -77,13 +77,13 @@ struct AccessoryOverviewView: View {
         return self.accessory.value.services.filter({service in
             MeterView.supportedServices.contains(service.serviceType)
             && (!service.characteristics.contains(where: { characteristic in
-                characteristic.characteristicType == "00000002-0001-1000-8000-0036AC324978"
+                characteristic.characteristicType == CurrentPowerL1.uuid
             })
             || !service.characteristics.contains(where: { characteristic in
-                characteristic.characteristicType == "00000003-0001-1000-8000-0036AC324978"
+                characteristic.characteristicType == CurrentPowerL2.uuid
             })
             || !service.characteristics.contains(where: { characteristic in
-                characteristic.characteristicType == "00000004-0001-1000-8000-0036AC324978"
+                characteristic.characteristicType == CurrentPowerL3.uuid
             }))
         })
     }
@@ -92,7 +92,7 @@ struct AccessoryOverviewView: View {
 
 struct TotalStateView: View {
     
-    static let supportedServices = ["00000001-0000-1000-8000-0036AC324978"]
+    static let supportedServices = [ControllerService.uuid]
     
     @Binding var accessory: HMAccessory
     
@@ -103,7 +103,7 @@ struct TotalStateView: View {
        
         self.totalState = Characteristic<UInt8>(accessory.wrappedValue.services.filter({service in TotalStateView.supportedServices.contains(service.serviceType)})
        .first!.characteristics.filter({characteristic in
-           characteristic.characteristicType == "00000077-0000-1000-8000-0026BB765291"
+        characteristic.characteristicType == StatusFault.uuid
        }).first!, updating: true)
     }
     
@@ -133,11 +133,11 @@ struct MeterView: View {
         self.service = service
 
         self.currentPower = Characteristic<Float>(self.service.characteristics.filter({characteristic in
-           characteristic.characteristicType == "00000001-0001-1000-8000-0036AC324978"
+            characteristic.characteristicType == CurrentPower.uuid
         }).first!, updating: true)
         
         if let c = self.service.characteristics.filter({characteristic in
-           characteristic.characteristicType == "00000002-0001-1000-8000-0036AC324978"
+            characteristic.characteristicType == CurrentPowerL1.uuid
         }).first {
             self.currentPowerL1 = Characteristic<Float>(c, updating: true)
         } else {
@@ -145,7 +145,7 @@ struct MeterView: View {
         }
         
         if let c = self.service.characteristics.filter({characteristic in
-           characteristic.characteristicType == "00000003-0001-1000-8000-0036AC324978"
+            characteristic.characteristicType == CurrentPowerL2.uuid
         }).first {
             self.currentPowerL2 = Characteristic<Float>(c, updating: true)
         } else {
@@ -153,7 +153,7 @@ struct MeterView: View {
         }
         
         if let c = self.service.characteristics.filter({characteristic in
-           characteristic.characteristicType == "00000004-0001-1000-8000-0036AC324978"
+            characteristic.characteristicType == CurrentPowerL3.uuid
         }).first {
             self.currentPowerL3 = Characteristic<Float>(c, updating: true)
         } else {
@@ -161,7 +161,7 @@ struct MeterView: View {
         }
         
         if let c = self.service.characteristics.filter({characteristic in
-           characteristic.characteristicType == "00000006-0001-1000-8000-0036AC324978"
+            characteristic.characteristicType == ElectricityMeterType.uuid
         }).first {
             self.meterType = Characteristic<UInt8>(c, updating: false)
         } else {

@@ -24,10 +24,16 @@ struct HomeView: View {
             }.tag(1)
             RoomsTab().tabItem {
                 VStack {
-                    Image(systemName: "square.grid.2x2").font(Font.system(.headline))
+                    Image(systemName: "rectangle.3.offgrid.fill").font(Font.system(.headline))
                     Text("Rooms")
                 }
             }.tag(2)
+            AutomationTab().tabItem {
+                VStack {
+                    Image(systemName: "alarm.fill").font(Font.system(.headline))
+                    Text("Automation")
+                }
+            }.tag(3)
         }
     }
 }
@@ -121,4 +127,17 @@ struct RoomsTab: View {
         return rooms
     }
     
+}
+
+struct AutomationTab: View {
+
+    @EnvironmentObject var hm: HomeManger
+
+    var body: some View {
+        NavigationView {
+            AutomationsView(home: hm.selected!)
+            
+            .navigationBarTitle("Automation")
+        }
+    }
 }

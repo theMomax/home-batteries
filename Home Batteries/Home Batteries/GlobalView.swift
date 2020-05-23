@@ -24,9 +24,3 @@ struct GlobalView: View {
     
     
 }
-
-struct NoHomesView: View {
-    var body: some View {
-        Text("No homes detected...")
-    }
-}

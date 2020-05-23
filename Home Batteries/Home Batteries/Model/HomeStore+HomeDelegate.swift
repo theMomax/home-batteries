@@ -85,6 +85,42 @@ extension HomeStore: HMHomeDelegate {
             guard let delegate = $0 as? HMHomeDelegate else { return }
             delegate.home?(home, didEncounterError: error, for: accessory)
         }
-   }
+    }
+    
+    func home(_ home: HMHome, didUpdate homeHubState: HMHomeHubState) {
+        homeDelegates.forEach {
+            guard let delegate = $0 as? HMHomeDelegate else { return }
+            delegate.home?(home, didUpdate: homeHubState)
+        }
+    }
+    
+    func home(_ home: HMHome, didAdd trigger: HMTrigger) {
+        homeDelegates.forEach {
+            guard let delegate = $0 as? HMHomeDelegate else { return }
+            delegate.home?(home, didAdd: trigger)
+        }
+    }
+    
+    func home(_ home: HMHome, didRemove trigger: HMTrigger) {
+        homeDelegates.forEach {
+            guard let delegate = $0 as? HMHomeDelegate else { return }
+            delegate.home?(home, didRemove: trigger)
+        }
+    }
+    
+    func home(_ home: HMHome, didUpdateNameFor trigger: HMTrigger) {
+        homeDelegates.forEach {
+            guard let delegate = $0 as? HMHomeDelegate else { return }
+            delegate.home?(home, didUpdateNameFor: trigger)
+        }
+    }
+    
+    func home(_ home: HMHome, didUpdate trigger: HMTrigger) {
+        homeDelegates.forEach {
+            guard let delegate = $0 as? HMHomeDelegate else { return }
+            delegate.home?(home, didUpdate: trigger)
+        }
+    }
+
 }
 
