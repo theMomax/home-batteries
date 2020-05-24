@@ -12,8 +12,9 @@ protocol KnownCharacteristic: KnownHomeKitEntity {
     var characteristic: HMCharacteristic { get }
     
     init(_ characteristic: HMCharacteristic)
+    
+    static func unit() -> String?
 }
-
 
 extension KnownCharacteristic {
     static func any(_ characteristic: HMCharacteristic) -> KnownCharacteristic? {
@@ -45,11 +46,15 @@ extension KnownCharacteristic {
 }
 
 extension KnownCharacteristic {
+    func description() -> String {
+        return Self.description(characteristic)
+    }
+    
     static func description(_ characteristic: HMCharacteristic) -> String {
         return (CurrentPower.any(characteristic)?.name ?? "Value") + " of " + serviceDescription(characteristic)
     }
     
-    static func multiple(of characteristic: HMCharacteristic, in accessory: HMAccessory) -> Bool {
+    private static func multiple(of characteristic: HMCharacteristic, in accessory: HMAccessory) -> Bool {
         return accessory.services.filter({ (service: HMService) in service.characteristics.contains(where: { (c: HMCharacteristic) in c.characteristicType == characteristic.characteristicType }) }).count > 1
     }
     
@@ -74,7 +79,41 @@ extension KnownCharacteristic {
     }
 }
 
-class CurrentPower: KnownCharacteristic {
+extension KnownCharacteristic {
+    static func unit() -> String? {
+        return nil
+    }
+}
+
+extension KnownCharacteristic {
+    func unit() -> String {
+        return Self.unit() ?? characteristic.metadata?.units ?? ""
+    }
+    
+    static func unit(_ characteristic: HMCharacteristic) -> String {
+        return CurrentPower.any(characteristic)?.unit() ?? ""
+    }
+}
+
+class Power {
+    static func unit() -> String? {
+        return "W"
+    }
+}
+
+class Energy {
+    static func unit() -> String? {
+        return "kWh"
+    }
+}
+
+class Percentage {
+    static func unit() -> String? {
+        return "%"
+    }
+}
+
+class CurrentPower: Power, KnownCharacteristic {
     static var uuid: String = "00000001-0001-1000-8000-0036AC324978"
     static let entityType: String = "Power"
     
@@ -86,7 +125,7 @@ class CurrentPower: KnownCharacteristic {
     
 }
 
-class CurrentPowerL1: KnownCharacteristic {
+class CurrentPowerL1: Power, KnownCharacteristic {
     static var uuid: String = "00000002-0001-1000-8000-0036AC324978"
     static let entityType: String = "Power L1"
     
@@ -98,7 +137,7 @@ class CurrentPowerL1: KnownCharacteristic {
     
 }
 
-class CurrentPowerL2: KnownCharacteristic {
+class CurrentPowerL2: Power, KnownCharacteristic {
     static var uuid: String = "00000003-0001-1000-8000-0036AC324978"
     static let entityType: String = "Power L2"
     
@@ -110,7 +149,7 @@ class CurrentPowerL2: KnownCharacteristic {
     
 }
 
-class CurrentPowerL3: KnownCharacteristic {
+class CurrentPowerL3: Power, KnownCharacteristic {
     static var uuid: String = "00000004-0001-1000-8000-0036AC324978"
     static let entityType: String = "Power L3"
     
@@ -122,7 +161,7 @@ class CurrentPowerL3: KnownCharacteristic {
     
 }
 
-class EnergyCapacity: KnownCharacteristic {
+class EnergyCapacity: Energy, KnownCharacteristic {
     static var uuid: String = "00000005-0001-1000-8000-0036AC324978"
     static let entityType: String = "Capacity"
     
@@ -175,7 +214,7 @@ class Name: KnownCharacteristic {
     }
 }
 
-class BatteryLevel: KnownCharacteristic {
+class BatteryLevel: Percentage, KnownCharacteristic {
     static var uuid: String = "00000068-0000-1000-8000-0026BB765291"
     static let entityType: String = "Battery Level"
     

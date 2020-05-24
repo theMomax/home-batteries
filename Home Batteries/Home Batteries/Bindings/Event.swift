@@ -37,7 +37,15 @@ class Event<T: HMEvent>: NSObject, ObservableObject, HMHomeDelegate {
     }
 }
 
-class CharacteristicEvent<T: HMCharacteristicEvent<NSCopying>>: Event<T>, HMAccessoryDelegate {
+protocol AnyCharacterisiticEvent {
+    var characteristic: HMCharacteristic { get }
+}
+
+extension HMCharacteristicEvent: AnyCharacterisiticEvent {}
+
+extension HMCharacteristicThresholdRangeEvent: AnyCharacterisiticEvent {}
+
+class CharacteristicEvent<T>: Event<T>, HMAccessoryDelegate where T: AnyCharacterisiticEvent, T: HMEvent {
 
     
     func accessoryDidUpdateName(_ accessory: HMAccessory) {

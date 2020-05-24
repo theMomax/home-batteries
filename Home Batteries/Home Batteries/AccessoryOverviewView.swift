@@ -18,7 +18,7 @@ struct AccessoryOverviewView: View {
     
     @ViewBuilder
     var body: some View {
-        WrapperView {
+        WrapperView(edges: .init(arrayLiteral: .top, .horizontal)) {
             if !self.accessory.value.isReachable {
                 ConnectingToAccessoryView(accessory: self.$accessory.value)
             } else {

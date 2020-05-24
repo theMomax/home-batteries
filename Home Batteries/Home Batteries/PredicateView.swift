@@ -13,11 +13,63 @@ struct PredicateOverviewView: View {
     
     @ObservedObject var trigger: Trigger<HMEventTrigger>
     
+    @ViewBuilder
     var body: some View {
-        HStack {
-            Image(systemName: "questionmark").font(.title)
-            Text(Self.description(self.trigger.value.predicate!)).fixedSize(horizontal: false, vertical: true).foregroundColor(.primary)
-            Spacer()
+        if self.trigger.value.predicate == nil {
+            EmptyView()
+        } else {
+            self.visalization(self.trigger.value.predicate!, isTopLevel: true)
+        }
+    }
+    
+    @ViewBuilder
+    func visalization(_ predicate: NSPredicate, isTopLevel: Bool = false) -> some View {
+        if predicate is NSCompoundPredicate && (predicate as! NSCompoundPredicate).compoundPredicateType == .and && !Self.isComponentValuePredicate(predicate) {
+            ForEach((predicate as! NSCompoundPredicate).subpredicates.map({sp in sp as! NSPredicate}), id: \.predicateFormat) { sp in
+                WrapperView(edges: .init()) {
+                    HStack {
+                        if Self.isComponentValuePredicate(sp ) {
+                            Image(systemName: "skew").font(.title).foregroundColor(.accentColor)
+                        } else {
+                            Image(systemName: "questionmark").font(.title)
+                        }
+                        Text(Self.description(sp)).fixedSize(horizontal: false, vertical: true).foregroundColor(.primary)
+                        Spacer()
+                    }
+                }
+                .contextMenu {
+                    Button(action: {
+                        self.trigger.value.updatePredicate(Self.removeSubpredicate(sp, from: predicate as! NSCompoundPredicate), completionHandler: { err in
+                            if let e = err {
+                                print(e)
+                            } else {
+                                self.trigger.home(didUpdate: self.trigger.value)
+                            }
+                        })
+                    }, label: DeteteContextMenuLabelView.init)
+                }
+                .padding(.init(arrayLiteral: .top, .horizontal))
+            }
+        } else {
+            WrapperView(edges: .init()) {
+                HStack {
+                    Image(systemName: "questionmark").font(.title)
+                    Text(Self.description(predicate)).fixedSize(horizontal: false, vertical: true).foregroundColor(.primary)
+                    Spacer()
+                }
+            }
+            .contextMenu {
+                Button(action: {
+                    self.trigger.value.updatePredicate(nil, completionHandler: { err in
+                        if let e = err {
+                            print(e)
+                        } else {
+                            self.trigger.home(didUpdate: self.trigger.value)
+                        }
+                    })
+                }, label: DeteteContextMenuLabelView.init)
+            }
+            .padding(.init(arrayLiteral: .top, .horizontal))
         }
     }
     
@@ -29,7 +81,13 @@ struct PredicateOverviewView: View {
         if d.hasSuffix(")") {
             d = String(d.dropLast())
         }
-        return d + "."
+        return d
+    }
+    
+    private static func removeSubpredicate(_ remove: NSPredicate, from predicate: NSCompoundPredicate) -> NSCompoundPredicate {
+        var newSubpredicates = predicate.subpredicates
+        newSubpredicates.removeAll(where: { sp in (sp as! NSPredicate) == remove})
+        return NSCompoundPredicate(type: predicate.compoundPredicateType, subpredicates: newSubpredicates.map({sp in sp as! NSPredicate}))
     }
     
     private static func predicateDescription(_ predicate: NSPredicate) -> String {
@@ -39,20 +97,36 @@ struct PredicateOverviewView: View {
         case let p as NSCompoundPredicate:
             // custom case: characteristic is equal to <Characteristic Description> and characteristicValue <Some Comparison> to <Some Value>
             // in this case we just say: <Characteristic Description> <Some Comparison> to <Some Value>
+            if Self.isComponentValuePredicate(p) {
+                let lhs = p.subpredicates[0] as! NSComparisonPredicate
+                let rhs = p.subpredicates[1] as! NSComparisonPredicate
+                let characteristic = lhs.rightExpression.constantValue as! HMCharacteristic
+                return predicateDescription(NSComparisonPredicate(leftExpression: lhs.rightExpression, rightExpression: rhs.rightExpression, modifier: rhs.comparisonPredicateModifier, type: rhs.predicateOperatorType, options: rhs.options)) + CurrentPower.unit(characteristic)
+            }
+            
+            return "(" +
+                (p.compoundPredicateType == .not ?
+                    compoundTypeDescription(.not) + " " + predicateDescription(p.subpredicates[0] as! NSPredicate) :
+                    p.subpredicates.map({sp in predicateDescription(sp as! NSPredicate)}).joined(separator: " " + compoundTypeDescription(p.compoundPredicateType) + " ")
+                ) + ")"
+        default:
+            return "unknown"
+        }
+    }
+    
+    private static func isComponentValuePredicate(_ predicate: NSPredicate) -> Bool {
+        if let p = predicate as? NSCompoundPredicate {
             if p.subpredicates.count == 2 && p.compoundPredicateType == .and && p.subpredicates[0] is NSComparisonPredicate &&  p.subpredicates[1] is NSComparisonPredicate {
                 let lhs = p.subpredicates[0] as! NSComparisonPredicate
                 let rhs = p.subpredicates[1] as! NSComparisonPredicate
                 if lhs.comparisonPredicateModifier == .direct && lhs.predicateOperatorType == .equalTo && lhs.leftExpression.expressionType == .keyPath && lhs.leftExpression.keyPath == "characteristic" {
                     if rhs.leftExpression.expressionType == .keyPath && rhs.leftExpression.keyPath == "characteristicValue" {
-                        return predicateDescription(NSComparisonPredicate(leftExpression: lhs.rightExpression, rightExpression: rhs.rightExpression, modifier: rhs.comparisonPredicateModifier, type: rhs.predicateOperatorType, options: rhs.options))
+                        return true
                     }
                 }
             }
-            
-            return "(" + p.subpredicates.map({sp in predicateDescription(sp as! NSPredicate)}).joined(separator: " " + compoundTypeDescription(p.compoundPredicateType) + " ") + ")"
-        default:
-            return "unknown"
         }
+        return false
     }
     
     private static func compoundTypeDescription(_ type: NSCompoundPredicate.LogicalType) -> String {

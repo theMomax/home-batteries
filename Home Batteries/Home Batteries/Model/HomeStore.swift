@@ -23,13 +23,13 @@ class HomeStore: NSObject {
     var accessoryDelegates = Set<NSObject>()
 }
 
-// Actions performed by a given client that change HomeKit state don't generate
+//  Actions performed by a given client that change HomeKit state don't generate
 //  delegate callbacks in the same client. These convenience methods each
 //  perform a particular update and make the corresponding delegate call.
 extension HomeStore {
     
     /// Updates the name of a service and informs all accessory delegates.
-    func updateService(_ service: HMService, name: String) {
+    func update(_ service: HMService, name: String) {
         service.updateName(name) { error in
             if let error = error {
                 print(error)
@@ -40,7 +40,7 @@ extension HomeStore {
     }
     
     /// Moves an accessory to a given room and informs all the home delegates.
-    func move(_ accessory: HMAccessory, in home: HMHome, to room: HMRoom) {
+    func update(_ accessory: HMAccessory, in home: HMHome, to room: HMRoom) {
         home.assignAccessory(accessory, to: room) { error in
             if let error = error {
                 print(error)
@@ -51,7 +51,7 @@ extension HomeStore {
     }
     
     /// Removes an accessory from a home and informs all the home delegates.
-    func remove(_ accessory: HMAccessory, from home: HMHome) {
+    func update(_ accessory: HMAccessory, from home: HMHome) {
         home.removeAccessory(accessory) { error in
             if let error = error {
                 print(error)

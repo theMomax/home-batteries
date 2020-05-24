@@ -15,13 +15,17 @@ struct WrapperView<Content> : View where Content : View {
     private let context: () -> Content
     private let alignment: Alignment
     private let boxed: Bool
+    private let edges: Edge.Set
+    private let padding: CGFloat?
     
     @Environment(\.colorScheme) var colorScheme
     
-    @inlinable init(alignment: Alignment = .center, boxed: Bool = true, @ViewBuilder _ content: @escaping () -> Content) {
+    @inlinable init(edges: Edge.Set = .all, padding: CGFloat? = nil, alignment: Alignment = .center, boxed: Bool = true, @ViewBuilder _ content: @escaping () -> Content) {
         self.context = content
         self.alignment = alignment
         self.boxed = boxed
+        self.padding = padding
+        self.edges = edges
     }
 
     @ViewBuilder
@@ -43,7 +47,7 @@ struct WrapperView<Content> : View where Content : View {
                 
             context().padding()
         }
-        .padding(.init(arrayLiteral: .horizontal, .bottom))
+        .padding(self.edges, self.padding)
     }
 }
 

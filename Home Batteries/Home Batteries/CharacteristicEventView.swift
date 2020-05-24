@@ -9,25 +9,6 @@
 import SwiftUI
 import HomeKit
 
-struct CharacteristicEventDetailView: View {
-    
-    @ObservedObject var event: CharacteristicEvent<HMCharacteristicEvent<NSCopying>>
-    
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    let isEndTrigger: Bool = false
-    
-    var body: some View {
-        ScrollView {
-            HStack {
-                Text(CharacteristicEventOverviewView.eventDescription(self.event.value)).font(.headline).bold().fixedSize(horizontal: false, vertical: true)
-                Spacer()
-            }
-        }
-        .padding(.init(arrayLiteral: .horizontal, .bottom))
-        .navigationBarTitle(isEndTrigger ? "Until:" : "When:")
-    }
-}
 
 struct CharacteristicEventOverviewView: View {
     
@@ -35,16 +16,53 @@ struct CharacteristicEventOverviewView: View {
     
     var body: some View {
         HStack {
-            NavigationLink(destination: CharacteristicEventDetailView(event: self.event)) {
-                Image(systemName: "skew").font(.title).foregroundColor(.accentColor)
-                Text(Self.eventDescription(self.event.value)).fixedSize(horizontal: false, vertical: true).foregroundColor(.primary)
-                Spacer()
-                Image(systemName: "chevron.right").foregroundColor(.secondary).font(Font.system(.footnote))
-            }
+            Image(systemName: "skew").font(.title).foregroundColor(.accentColor)
+            Text(self.eventDescription()).fixedSize(horizontal: false, vertical: true).foregroundColor(.primary)
+            Spacer()
         }
     }
     
-    static func eventDescription(_ event: HMCharacteristicEvent<NSCopying>) -> String {
-        return CurrentPower.description(event.characteristic) + " changes"
+    private func eventDescription() -> String {
+        let characteristic = CurrentPower.description(self.event.value.characteristic)
+        if self.event.value.triggerValue == nil {
+            return characteristic + " changes"
+        }
+        switch self.event.value.triggerValue! {
+        case let v as CustomStringConvertible:
+            return characteristic + " is " + v.description + CurrentPower.unit(self.event.value.characteristic)
+        default:
+            return characteristic + " is some value"
+        }
+    }
+}
+
+struct CharacteristicThresholdRangeEventOverviewView: View {
+
+    @ObservedObject var event: CharacteristicEvent<HMCharacteristicThresholdRangeEvent>
+
+    var body: some View {
+        HStack {
+            Image(systemName: "skew").font(.title).foregroundColor(.accentColor)
+            Text(self.eventDescription()).fixedSize(horizontal: false, vertical: true).foregroundColor(.primary)
+            Spacer()
+        }
+    }
+
+    private func eventDescription() -> String {
+        var d = CurrentPower.description(self.event.value.characteristic)
+
+        if let min = self.event.value.thresholdRange.minValue {
+            d += " is greater than or equal to " + min.description + CurrentPower.unit(self.event.value.characteristic)
+        }
+        
+        if self.event.value.thresholdRange.minValue == nil && self.event.value.thresholdRange.maxValue == nil {
+            d += " and"
+        }
+        
+        if let max = self.event.value.thresholdRange.maxValue {
+            d += " is less than or equal to " + max.description + CurrentPower.unit(self.event.value.characteristic)
+        }
+        
+        return d
     }
 }

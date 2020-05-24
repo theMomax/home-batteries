@@ -36,6 +36,10 @@ class Trigger<T: HMTrigger>: NSObject, ObservableObject, HMHomeDelegate {
         self.value = trigger as! T
     }
     
+    func home(didUpdate trigger: HMTrigger) {
+        HomeStore.shared.home(self.home, didUpdate: trigger)
+    }
+    
     func home(_ home: HMHome, didUpdate trigger: HMTrigger) {
         guard home == self.home && self.value == trigger else { return }
         self.value = trigger as! T

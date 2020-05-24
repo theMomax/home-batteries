@@ -164,9 +164,17 @@ class Home: NSObject, ObservableObject, HMHomeDelegate {
         self.value = home
     }
     
+    func home(didAdd trigger: HMTrigger) {
+        HomeStore.shared.home(self.value, didAdd: trigger)
+    }
+    
     func home(_ home: HMHome, didAdd trigger: HMTrigger) {
         guard home == self.value else { return }
         self.value = home
+    }
+    
+    func home(didRemove trigger: HMTrigger) {
+        HomeStore.shared.home(self.value, didRemove: trigger)
     }
     
     func home(_ home: HMHome, didRemove trigger: HMTrigger) {

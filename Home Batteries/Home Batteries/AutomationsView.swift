@@ -23,7 +23,30 @@ struct AutomationsView: View {
             
             ForEach(self.home.value.triggers, id: \.uniqueIdentifier) { trigger in
                 TriggerOverviewView(trigger: Trigger(trigger, in: self.home.value))
+                .contextMenu {
+                    Button(action: {
+                        self.home.value.removeTrigger(trigger, completionHandler: { err in
+                            if let e = err {
+                                print(e)
+                            } else {
+                                self.home.home(didRemove: trigger)
+                            }
+                        })
+                    }, label: DeteteContextMenuLabelView.init)
+                }
+                .padding(.init(arrayLiteral: .top, .horizontal))
             }
+        }
+    }
+}
+
+struct DeteteContextMenuLabelView: View {
+    var body: some View {
+        HStack {
+            // styling context menues doesn't work with swiftui to date, so the foregroundColor does not have any effect yet
+            Text("Delete").foregroundColor(.red)
+            Spacer()
+            Image(systemName: "trash").foregroundColor(.red)
         }
     }
 }
@@ -34,7 +57,7 @@ struct TriggerOverviewView: View {
     
     @ViewBuilder
     var body: some View {
-        WrapperView {
+        WrapperView(edges: .init()) {
             HStack {
                 if self.trigger.value is HMEventTrigger {
                     NavigationLink(destination: TriggerDetailView(trigger: Trigger(self.trigger.value as! HMEventTrigger, in: self.trigger.home))) {
@@ -71,9 +94,21 @@ struct TriggerDetailView: View {
                         Spacer()
                     }.padding(.init(arrayLiteral: .horizontal, .top))
                     ForEach(self.trigger.value.events, id: \.uniqueIdentifier) { (event: HMEvent) in
-                        WrapperView {
+                        WrapperView(edges: .init()) {
                             self.overview(event)
                         }
+                        .contextMenu {
+                            Button(action: {
+                                self.trigger.value.updateEvents(self.trigger.value.events.filter({ e in e != event}), completionHandler: { err in
+                                    if let e = err {
+                                        print(e)
+                                    } else {
+                                        self.trigger.home(didUpdate: self.trigger.value)
+                                    }
+                                })
+                            }, label: DeteteContextMenuLabelView.init)
+                        }
+                        .padding(.init(arrayLiteral: .top, .horizontal))
                     }
                 }
             }
@@ -83,9 +118,7 @@ struct TriggerDetailView: View {
                         Text("And:").bold().font(.system(size: 24))
                         Spacer()
                     }.padding(.init(arrayLiteral: .horizontal, .top))
-                    WrapperView {
-                        PredicateOverviewView(trigger: self.trigger)
-                    }
+                    PredicateOverviewView(trigger: self.trigger)
                 }
             }
             if self.trigger.value.actionSets.count > 0 {
@@ -95,13 +128,25 @@ struct TriggerDetailView: View {
                         Spacer()
                     }.padding(.init(arrayLiteral: .horizontal, .top))
                     ForEach(self.trigger.value.actionSets, id: \.uniqueIdentifier) { (actionset: HMActionSet) in
-                        WrapperView {
+                        WrapperView(edges: .init()) {
                             HStack {
                                 Image(systemName: "gear").font(.title)
                                 Text(actionset.name)
                                 Spacer()
                             }
                         }
+                        .contextMenu {
+                            Button(action: {
+                                self.trigger.value.removeActionSet(actionset, completionHandler: { err in
+                                    if let e = err {
+                                        print(e)
+                                    } else {
+                                        self.trigger.home(didUpdate: self.trigger.value)
+                                    }
+                                })
+                            }, label: DeteteContextMenuLabelView.init)
+                        }
+                        .padding(.init(arrayLiteral: .top, .horizontal))
                     }
                 }
             }
@@ -112,13 +157,25 @@ struct TriggerDetailView: View {
                         Spacer()
                     }.padding(.init(arrayLiteral: .horizontal, .top))
                     ForEach(self.trigger.value.endEvents, id: \.uniqueIdentifier) { (event: HMEvent) in
-                        WrapperView {
+                        WrapperView(edges: .init()) {
                             self.overview(event)
                         }
+                        .contextMenu {
+                            Button(action: {
+                                self.trigger.value.updateEvents(self.trigger.value.events.filter({ e in e != event}), completionHandler: { err in
+                                    if let e = err {
+                                        print(e)
+                                    } else {
+                                        self.trigger.home(didUpdate: self.trigger.value)
+                                    }
+                                })
+                            }, label: DeteteContextMenuLabelView.init)
+                        }
+                        .padding(.init(arrayLiteral: .top, .horizontal))
                     }
                 }
             }
-            EmptyView().padding()
+            HStack{EmptyView()}.padding()
         }
         .navigationBarTitle(self.trigger.value.name)
     }
