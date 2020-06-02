@@ -29,9 +29,9 @@ struct PredicateOverviewView: View {
                 WrapperView(edges: .init()) {
                     HStack {
                         if Self.isComponentValuePredicate(sp ) {
-                            Image(systemName: "skew").font(.title).foregroundColor(.accentColor)
+                            Image(systemName: "skew").font(.headline).foregroundColor(.accentColor)
                         } else {
-                            Image(systemName: "questionmark").font(.title)
+                            Image(systemName: "questionmark").font(.headline)
                         }
                         Text(Self.description(sp)).fixedSize(horizontal: false, vertical: true).foregroundColor(.primary)
                         Spacer()
@@ -43,7 +43,9 @@ struct PredicateOverviewView: View {
                             if let e = err {
                                 print(e)
                             } else {
-                                self.trigger.home(didUpdate: self.trigger.value)
+                                withAnimation {
+                                    self.trigger.home(didUpdate: self.trigger.value)
+                                }
                             }
                         })
                     }, label: DeteteContextMenuLabelView.init)
@@ -53,7 +55,7 @@ struct PredicateOverviewView: View {
         } else {
             WrapperView(edges: .init()) {
                 HStack {
-                    Image(systemName: "questionmark").font(.title)
+                    Image(systemName: "questionmark").font(.headline)
                     Text(Self.description(predicate)).fixedSize(horizontal: false, vertical: true).foregroundColor(.primary)
                     Spacer()
                 }
@@ -64,7 +66,9 @@ struct PredicateOverviewView: View {
                         if let e = err {
                             print(e)
                         } else {
-                            self.trigger.home(didUpdate: self.trigger.value)
+                            withAnimation {
+                                self.trigger.home(didUpdate: self.trigger.value)
+                            }
                         }
                     })
                 }, label: DeteteContextMenuLabelView.init)

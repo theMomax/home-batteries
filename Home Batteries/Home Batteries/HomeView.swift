@@ -78,8 +78,15 @@ struct HomeTab: View {
 }
 
 struct CircleButtonStyle: ButtonStyle {
+    
+    let color: Color
+    
+    init(color: Color = .init(.sRGB, white: 0.5, opacity: 0.5)) {
+        self.color = color
+    }
+    
     func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label.padding(8).background(Circle().fill(Color.init(.sRGB, white: 0.5, opacity: 0.5)))
+        configuration.label.padding(8).background(Circle().fill(self.color))
 
     }
 }

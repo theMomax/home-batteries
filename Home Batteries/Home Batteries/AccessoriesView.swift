@@ -33,7 +33,7 @@ struct AccessoriesView: View {
             } else {
                 ForEach(accessories, id: \.value.uniqueIdentifier) { a in
                     AccessoryOverviewView(accessory: a)
-                }.padding(.top)
+                }.padding(.vertical)
             }
         }
     }

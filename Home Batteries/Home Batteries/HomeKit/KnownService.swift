@@ -8,6 +8,12 @@
 
 import HomeKit
 
+extension HMService {
+    func known() -> KnownService? {
+        return ControllerService.any(self)
+    }
+}
+
 protocol KnownHomeKitEntity {
     static var uuid: String { get }
     static var entityType: String { get }
@@ -46,6 +52,10 @@ extension KnownService {
 }
 
 extension KnownService {
+    static func name(_ service: HMService) -> String {
+        return service.name
+    }
+    
     var name: String {
         get {
             return self.service.name

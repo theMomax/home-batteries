@@ -16,7 +16,7 @@ struct CharacteristicEventOverviewView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "skew").font(.title).foregroundColor(.accentColor)
+            Image(systemName: "skew").font(.headline).foregroundColor(.accentColor)
             Text(self.eventDescription()).fixedSize(horizontal: false, vertical: true).foregroundColor(.primary)
             Spacer()
         }
@@ -27,12 +27,7 @@ struct CharacteristicEventOverviewView: View {
         if self.event.value.triggerValue == nil {
             return characteristic + " changes"
         }
-        switch self.event.value.triggerValue! {
-        case let v as CustomStringConvertible:
-            return characteristic + " is " + v.description + CurrentPower.unit(self.event.value.characteristic)
-        default:
-            return characteristic + " is some value"
-        }
+        return characteristic + " is " + CurrentPower.format(self.event.value.triggerValue, as: self.event.value.characteristic) + CurrentPower.unit(self.event.value.characteristic)
     }
 }
 
@@ -42,7 +37,7 @@ struct CharacteristicThresholdRangeEventOverviewView: View {
 
     var body: some View {
         HStack {
-            Image(systemName: "skew").font(.title).foregroundColor(.accentColor)
+            Image(systemName: "skew").font(.headline).foregroundColor(.accentColor)
             Text(self.eventDescription()).fixedSize(horizontal: false, vertical: true).foregroundColor(.primary)
             Spacer()
         }
@@ -55,7 +50,7 @@ struct CharacteristicThresholdRangeEventOverviewView: View {
             d += " is greater than or equal to " + min.description + CurrentPower.unit(self.event.value.characteristic)
         }
         
-        if self.event.value.thresholdRange.minValue == nil && self.event.value.thresholdRange.maxValue == nil {
+        if self.event.value.thresholdRange.minValue != nil && self.event.value.thresholdRange.maxValue != nil {
             d += " and"
         }
         

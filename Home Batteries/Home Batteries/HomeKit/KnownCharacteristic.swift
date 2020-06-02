@@ -8,12 +8,22 @@
 
 import HomeKit
 
+extension HMCharacteristic {
+    func known() -> KnownCharacteristic? {
+        return CurrentPower.any(self)
+    }
+}
+
 protocol KnownCharacteristic: KnownHomeKitEntity {
     var characteristic: HMCharacteristic { get }
     
     init(_ characteristic: HMCharacteristic)
     
     static func unit() -> String?
+    
+    static func format(of value: Any) -> String?
+    
+    func isValid(value: Any?) -> Bool?
 }
 
 extension KnownCharacteristic {
@@ -39,6 +49,8 @@ extension KnownCharacteristic {
             return ChargingState(characteristic)
         case StatusLowBattery.uuid:
             return StatusLowBattery(characteristic)
+        case StatusFault.uuid:
+            return StatusFault(characteristic)
         default:
             return nil
         }
@@ -46,12 +58,18 @@ extension KnownCharacteristic {
 }
 
 extension KnownCharacteristic {
-    func description() -> String {
+    static func name(_ characteristic: HMCharacteristic) -> String {
+        return (CurrentPower.any(characteristic)?.name ?? characteristic.localizedDescription)
+    }
+}
+
+extension KnownCharacteristic {
+    var description: String {
         return Self.description(characteristic)
     }
     
     static func description(_ characteristic: HMCharacteristic) -> String {
-        return (CurrentPower.any(characteristic)?.name ?? "Value") + " of " + serviceDescription(characteristic)
+        return Self.name(characteristic) + " of " + serviceDescription(characteristic)
     }
     
     private static func multiple(of characteristic: HMCharacteristic, in accessory: HMAccessory) -> Bool {
@@ -95,6 +113,133 @@ extension KnownCharacteristic {
     }
 }
 
+extension KnownCharacteristic {
+    private static func genericFormat(of value: Any) -> String? {
+        switch value {
+        case let c as CustomStringConvertible:
+            return c.description
+        default:
+            return nil
+        }
+    }
+    
+    static func format(of value: Any) -> String? {
+        return Self.genericFormat(of: value)
+    }
+}
+
+extension KnownCharacteristic {
+    
+    func format(_ value: Any?) -> String {
+        return Self.format(value)
+    }
+    
+    static func format(_ value: Any?) -> String {
+        if let v = value {
+            return Self.format(of: v) ?? "unknown"
+        } else {
+            return "unset"
+        }
+    }
+    
+    static func format(_ value: Any?, as characteristic: HMCharacteristic) -> String {
+        if let c = CurrentPower.any(characteristic) {
+            return c.format(value)
+        } else {
+            if let v = value {
+                return Self.genericFormat(of: v) ?? "unknown"
+            } else {
+                return "unset"
+            }
+        }
+    }
+}
+
+extension KnownCharacteristic {
+    var isContinuous: Bool? {
+        if let m = self.characteristic.metadata {
+            if let f = m.format {
+                switch f {
+                case HMCharacteristicMetadataFormatInt,
+                     HMCharacteristicMetadataFormatFloat:
+                    return true
+                default:
+                    return m.validValues == nil || m.validValues!.count >= 10
+                }
+            } else {
+                return m.validValues == nil
+            }
+        } else {
+            return nil
+        }
+    }
+    
+    static func isContinuous(_ characteristic: HMCharacteristic) -> Bool? {
+        return CurrentPower.any(characteristic)?.isContinuous
+    }
+}
+
+extension KnownCharacteristic {
+    func isValid(value: Any?) -> Bool? {
+        if let v = value {
+            if let m = self.characteristic.metadata {
+                if let f = m.format {
+                    switch f {
+                    case HMCharacteristicMetadataFormatInt,
+                         HMCharacteristicMetadataFormatFloat:
+                        if let n = v as? NSNumber {
+                            return (m.maximumValue == nil || m.maximumValue!.floatValue >= n.floatValue) && (m.minimumValue == nil || m.minimumValue!.floatValue <= n.floatValue)
+                        } else if let s = v as? String {
+                            if let f = Float(s) {
+                                return (m.maximumValue == nil || m.maximumValue!.floatValue >= f) && (m.minimumValue == nil || m.minimumValue!.floatValue <= f)
+                            } else {
+                                return false
+                            }
+                        } else {
+                            return false
+                        }
+                    case HMCharacteristicMetadataFormatString:
+                        return nil
+                    default:
+                        if let n = v as? NSNumber {
+                            return m.validValues?.contains(n)
+                        } else if let s = v as? String {
+                            if let f = Float(s) {
+                                return (m.validValues == nil || m.validValues!.contains(NSNumber(value: f))) && ((m.maximumValue == nil || m.maximumValue!.floatValue >= f) && (m.minimumValue == nil || m.minimumValue!.floatValue <= f))
+                            } else {
+                                return false
+                            }
+                        } else {
+                            return false
+                        }
+                    }
+                } else {
+                    switch v {
+                    case let n as NSNumber:
+                        return m.validValues?.contains(n)
+                    default:
+                        return nil
+                    }
+                }
+            } else {
+                return nil
+            }
+        } else {
+            return false
+        }
+    }
+}
+
+extension KnownCharacteristic {
+    func isValid(_ value: Any?) -> Bool {
+        return isValid(value: value) ?? false
+    }
+    
+    static func isValid(_ value: Any?, for characteristic: HMCharacteristic) -> Bool {
+        return CurrentPower.any(characteristic)?.isValid(value) ?? false
+    }
+}
+
 class Power {
     static func unit() -> String? {
         return "W"
@@ -114,7 +259,7 @@ class Percentage {
 }
 
 class CurrentPower: Power, KnownCharacteristic {
-    static var uuid: String = "00000001-0001-1000-8000-0036AC324978"
+    static let uuid: String = "00000001-0001-1000-8000-0036AC324978"
     static let entityType: String = "Power"
     
     var characteristic: HMCharacteristic
@@ -126,7 +271,7 @@ class CurrentPower: Power, KnownCharacteristic {
 }
 
 class CurrentPowerL1: Power, KnownCharacteristic {
-    static var uuid: String = "00000002-0001-1000-8000-0036AC324978"
+    static let uuid: String = "00000002-0001-1000-8000-0036AC324978"
     static let entityType: String = "Power L1"
     
     var characteristic: HMCharacteristic
@@ -138,7 +283,7 @@ class CurrentPowerL1: Power, KnownCharacteristic {
 }
 
 class CurrentPowerL2: Power, KnownCharacteristic {
-    static var uuid: String = "00000003-0001-1000-8000-0036AC324978"
+    static let uuid: String = "00000003-0001-1000-8000-0036AC324978"
     static let entityType: String = "Power L2"
     
     var characteristic: HMCharacteristic
@@ -150,7 +295,7 @@ class CurrentPowerL2: Power, KnownCharacteristic {
 }
 
 class CurrentPowerL3: Power, KnownCharacteristic {
-    static var uuid: String = "00000004-0001-1000-8000-0036AC324978"
+    static let uuid: String = "00000004-0001-1000-8000-0036AC324978"
     static let entityType: String = "Power L3"
     
     var characteristic: HMCharacteristic
@@ -162,7 +307,7 @@ class CurrentPowerL3: Power, KnownCharacteristic {
 }
 
 class EnergyCapacity: Energy, KnownCharacteristic {
-    static var uuid: String = "00000005-0001-1000-8000-0036AC324978"
+    static let uuid: String = "00000005-0001-1000-8000-0036AC324978"
     static let entityType: String = "Capacity"
     
     var characteristic: HMCharacteristic
@@ -174,7 +319,7 @@ class EnergyCapacity: Energy, KnownCharacteristic {
 }
 
 class ElectricityMeterType: KnownCharacteristic {
-    static var uuid: String = "00000006-0001-1000-8000-0036AC324978"
+    static let uuid: String = "00000006-0001-1000-8000-0036AC324978"
     static let entityType: String = "Meter Type"
     
     var characteristic: HMCharacteristic
@@ -183,11 +328,26 @@ class ElectricityMeterType: KnownCharacteristic {
         self.characteristic = characteristic
     }
     
+    static func format(of value: Any) -> String? {
+        switch value {
+        case 1 as UInt8:
+            return "production"
+        case 2 as UInt8:
+            return "consumption"
+        case 3 as UInt8:
+            return "storage"
+        case 4 as UInt8:
+            return "grid"
+        default:
+            return nil
+        }
+    }
+    
 }
 
 class StatusFault: KnownCharacteristic {
-    static var uuid: String = "00000077-0000-1000-8000-0026BB765291"
-    static let entityType: String = "Fault"
+    static let uuid: String = "00000077-0000-1000-8000-0026BB765291"
+    static let entityType: String = "Status Fault"
     
     var characteristic: HMCharacteristic
     
@@ -195,10 +355,20 @@ class StatusFault: KnownCharacteristic {
         self.characteristic = characteristic
     }
     
+    static func format(of value: Any) -> String? {
+        switch value {
+        case 0 as UInt8:
+            return "no fault"
+        case 1 as UInt8:
+            return "general fault"
+        default:
+            return nil
+        }
+    }
 }
 
 class Name: KnownCharacteristic {
-    static var uuid: String = "00000023-0000-1000-8000-0026BB765291"
+    static let uuid: String = "00000023-0000-1000-8000-0026BB765291"
     static let entityType: String = "Name"
     
     var characteristic: HMCharacteristic
@@ -215,7 +385,7 @@ class Name: KnownCharacteristic {
 }
 
 class BatteryLevel: Percentage, KnownCharacteristic {
-    static var uuid: String = "00000068-0000-1000-8000-0026BB765291"
+    static let uuid: String = "00000068-0000-1000-8000-0026BB765291"
     static let entityType: String = "Battery Level"
     
     var characteristic: HMCharacteristic
@@ -227,8 +397,8 @@ class BatteryLevel: Percentage, KnownCharacteristic {
 }
 
 class ChargingState: KnownCharacteristic {
-    static var uuid: String = "0000008F-0000-1000-8000-0026BB765291"
-    static let entityType: String = "Charging"
+    static let uuid: String = "0000008F-0000-1000-8000-0026BB765291"
+    static let entityType: String = "Charging State"
     
     var characteristic: HMCharacteristic
     
@@ -236,10 +406,22 @@ class ChargingState: KnownCharacteristic {
         self.characteristic = characteristic
     }
     
+    static func format(of value: Any) -> String? {
+        switch value {
+        case 0 as UInt8:
+            return "not charging"
+        case 1 as UInt8:
+            return "charging"
+        case 2 as UInt8:
+            return "not chargeable"
+        default:
+            return nil
+        }
+    }
 }
 
 class StatusLowBattery: KnownCharacteristic {
-    static var uuid: String = "00000079-0000-1000-8000-0026BB765291"
+    static let uuid: String = "00000079-0000-1000-8000-0026BB765291"
     static let entityType: String = "Low Battery"
     
     var characteristic: HMCharacteristic
@@ -248,4 +430,14 @@ class StatusLowBattery: KnownCharacteristic {
         self.characteristic = characteristic
     }
     
+    static func format(of value: Any) -> String? {
+        switch value {
+        case 0 as UInt8:
+            return "normal"
+        case 1 as UInt8:
+            return "low"
+        default:
+            return nil
+        }
+    }
 }
