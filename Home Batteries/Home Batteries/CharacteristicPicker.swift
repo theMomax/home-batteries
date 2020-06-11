@@ -17,7 +17,7 @@ struct RoomPickerView: View {
     
     var body: some View {
         ScrollView {
-            ForEach(self.home.value.rooms, id: \.uniqueIdentifier) { room in
+            ForEach(self.home.value.rooms + [self.home.value.roomForEntireHome()], id: \.uniqueIdentifier) { room in
                 WrapperView(edges: .init(arrayLiteral: .top, .horizontal)) {
                     NavigationLink(destination: AccessoryPickerView(characteristic: self.$characteristic, room: room), label: {
                         Image(systemName: "rectangle.3.offgrid.fill").font(.headline).foregroundColor(.accentColor)

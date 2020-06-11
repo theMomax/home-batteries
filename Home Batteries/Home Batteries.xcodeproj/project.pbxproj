@@ -42,6 +42,7 @@
 		A5C998822459F628002890E8 /* GlobalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C998812459F628002890E8 /* GlobalView.swift */; };
 		A5C998842459F65B002890E8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C998832459F65B002890E8 /* HomeView.swift */; };
 		A5DB7E4A2475B1C100224B82 /* Trigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DB7E492475B1C100224B82 /* Trigger.swift */; };
+		A5F12AA6248FDCD4000FF456 /* EventViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F12AA5248FDCD4000FF456 /* EventViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		A5C998812459F628002890E8 /* GlobalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalView.swift; sourceTree = "<group>"; };
 		A5C998832459F65B002890E8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A5DB7E492475B1C100224B82 /* Trigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trigger.swift; sourceTree = "<group>"; };
+		A5F12AA5248FDCD4000FF456 /* EventViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 				A516DE5724784DA100F17C52 /* CharacteristicEventView.swift */,
 				A54C9F38247959170044F3DB /* PredicateView.swift */,
 				A585BE23247ED73F00AE75F7 /* CharacteristicPicker.swift */,
+				A5F12AA5248FDCD4000FF456 /* EventViews.swift */,
 			);
 			path = "Home Batteries";
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				A5B60BF924615F620038C92D /* AggregatedValue.swift in Sources */,
 				A549ADB2245C7E0400976D22 /* MeterServiceView.swift in Sources */,
 				A5691C5E24617523000999D3 /* HomeStore.swift in Sources */,
+				A5F12AA6248FDCD4000FF456 /* EventViews.swift in Sources */,
 				A5691C61246175ED000999D3 /* HomeStore+HomeDelegate.swift in Sources */,
 				A55DCAD7245C65C10013AB11 /* ControllerServiceView.swift in Sources */,
 				A5498DDE245C1DCC000A0D9B /* AccessoriesView.swift in Sources */,

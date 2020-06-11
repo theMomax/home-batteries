@@ -141,11 +141,12 @@ struct TriggerOverviewView: View {
                 if self.trigger.value is HMEventTrigger {
                     NavigationLink(destination: TriggerDetailView(trigger: Trigger(self.trigger.value as! HMEventTrigger, in: self.trigger.home))) {
                         Image(systemName: "flowchart.fill").font(.headline).foregroundColor(self.iconColor())
+                        
                         Text(self.trigger.value.name).foregroundColor(.primary)
                         Spacer()
                         Image(systemName: "chevron.right").foregroundColor(.secondary).font(Font.system(.footnote))
                     }
-                } else {
+                } else if self.trigger.value is HMTimerTrigger {
                     Image(systemName: "clock").font(Font.system(.title)).foregroundColor(self.iconColor())
                     Text(self.trigger.value.name).foregroundColor(.primary)
                     Spacer()
@@ -168,6 +169,10 @@ struct TriggerDetailView: View {
     
     @State private var showAddEventSheet: Bool = false
     
+    @State private var showAddPredicateSheet: Bool = false
+    
+    @State private var showAddEndEventSheet: Bool = false
+    
     var body: some View {
         ScrollView {
             Section {
@@ -183,6 +188,9 @@ struct TriggerDetailView: View {
                 }
             }.padding(.init(arrayLiteral: .top, .horizontal))
             Section {
+                RecurrenceView(trigger: self.trigger.value)
+            }.padding(.horizontal)
+            Section {
                 HStack {
                     Text("When:").bold().font(.system(size: 24))
                     Spacer()
@@ -195,8 +203,19 @@ struct TriggerDetailView: View {
                     }).buttonStyle(CircleButtonStyle(color: .accentColor))
                         
                     .sheet(isPresented: self.$showAddEventSheet) {
-                        NewEventView(trigger: self.trigger, isEnd: false, done: { _ in
-                            self.showAddEventSheet = false
+                        NewEventView(trigger: self.trigger, done: { event in
+                            if let ev = event {
+                                self.trigger.value.updateEvents(self.trigger.value.events + [ev], completionHandler: { err in
+                                    if let e = err {
+                                        print(e)
+                                    } else {
+                                        self.trigger.home(didUpdate: self.trigger.value)
+                                        self.showAddEventSheet = false
+                                    }
+                                })
+                            } else {
+                                self.showAddEventSheet = false
+                            }
                         }).environmentObject(self.home)
                     }
                     
@@ -227,6 +246,42 @@ struct TriggerDetailView: View {
                 HStack {
                     Text("And:").bold().font(.system(size: 24))
                     Spacer()
+                    Button(action: {
+                        self.showAddPredicateSheet = true
+                    }, label: {
+                        ZStack {
+                            Image(systemName: "plus").foregroundColor(.white)
+                        }
+                    }).buttonStyle(CircleButtonStyle(color: .accentColor))
+                        
+                    .sheet(isPresented: self.$showAddPredicateSheet) {
+                        NewPredicateView(trigger: self.trigger, done: { predicate in
+                            if let pr = predicate {
+                                var completePredicate: NSPredicate
+                                if let oldP = self.trigger.value.predicate {
+                                    if oldP is NSCompoundPredicate && (oldP as! NSCompoundPredicate).compoundPredicateType == .and && !PredicateOverviewView.isComponentValuePredicate(oldP) {
+                                        completePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: (oldP as! NSCompoundPredicate).subpredicates.map{e in e as! NSPredicate} + [pr])
+                                    } else {
+                                        completePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [oldP, pr])
+                                    }
+                                } else {
+                                    completePredicate = pr
+                                }
+                                
+                                self.trigger.value.updatePredicate(completePredicate, completionHandler: { err in
+                                    if let e = err {
+                                        print(e)
+                                    } else {
+                                        self.trigger.home(didUpdate: self.trigger.value)
+                                        self.showAddPredicateSheet = false
+                                    }
+                                })
+                            } else {
+                                self.showAddPredicateSheet = false
+                            }
+                        }).environmentObject(self.home)
+                    }
+                    
                 }.padding(.init(arrayLiteral: .top, .horizontal))
                 if self.trigger.value.predicate != nil {
                     PredicateOverviewView(trigger: self.trigger)
@@ -354,220 +409,53 @@ struct TriggerDetailView: View {
     }
 }
 
-// MARK: NewEventView
-struct NewEventView: View {
-    
-    enum CharacteristicEventType: String {
-        case equality = "is equal to"
-        case lessOrEqual = "is less than or equal to"
-        case greaterOrEqual = "is greater than or equal to"
-        case between = "is between"
-        
-        static func all() -> [CharacteristicEventType] {
-            return [.equality, .lessOrEqual, .greaterOrEqual, .between]
-        }
-    }
-    
-    @EnvironmentObject var home: Home
-    
-    @ObservedObject var trigger: Trigger<HMEventTrigger>
-    
-    let isEnd: Bool
-    
-    let done: (_ success: Bool) -> ()
-    
-    private var validConfiguration: Bool {
-        get {
-            if self.characteristic == nil {
-                return false
-            }
-            switch self.type {
-            case .equality:
-                if CurrentPower.isContinuous(self.characteristic!)! {
-                    return CurrentPower.isValid(self.firstBoundary, for: self.characteristic!)
-                } else {
-                    return CurrentPower.isValid(self.selection, for: self.characteristic!)
-                }
-            case .lessOrEqual, .greaterOrEqual:
-                return CurrentPower.isValid(self.firstBoundary, for: self.characteristic!)
-            case .between:
-                return CurrentPower.isValid(self.firstBoundary, for: self.characteristic!) && CurrentPower.isValid(self.secondBoundary, for: self.characteristic!) && Float(self.firstBoundary)! <= Float(self.secondBoundary)!
-            }
-        }
-    }
-    
-    @State private var characteristic: HMCharacteristic? = nil
-    
-    @State private var type: CharacteristicEventType = .equality
-    
-    @State private var selection: NSNumber = 0
-    
-    @State private var firstBoundary: String = ""
-    
-    @State private var secondBoundary: String = ""
+// MARK: RecurrenceView
+struct RecurrenceView: View {
+    let trigger: HMEventTrigger
     
     
     @ViewBuilder
     var body: some View {
-        NavigationView {
-            VStack {
-                WrapperView(edges: .top) {
-                    if self.characteristic == nil {
-                        NavigationLink(destination: RoomPickerView(characteristic: self.$characteristic).environmentObject(self.home), label: {
-                            HStack {
-                                Image(systemName: "skew").font(Font.system(.title)).foregroundColor(.accentColor)
-                                Text("Select a characteristic")
-                                Spacer()
-                                Image(systemName: "chevron.right").foregroundColor(.secondary).font(Font.system(.footnote))
-                            }
-                        })
-                    } else {
-                        HStack {
-                            Image(systemName: "skew").font(Font.system(.title)).foregroundColor(.accentColor)
-                            Text(CurrentPower.description(self.characteristic!))
-                            Spacer()
-                            Button(action: {
-                                self.characteristic = nil
-                                self.type = .equality
-                            }, label: {
-                                Image(systemName: "xmark.circle.fill").foregroundColor(.accentColor)
-                            })
-                        }
-                    }
-                    
-                }
-
-                if self.characteristic != nil {
-                    
-                    if CurrentPower.isContinuous(self.characteristic!) == nil {
-                        Text("Cannot interprete this characteristic. Please select a different characteristic or use a different app to create this trigger.").multilineTextAlignment(.center).lineLimit(nil).fixedSize(horizontal: false, vertical: true).foregroundColor(.secondary).padding(.vertical)
-                    } else if CurrentPower.isContinuous(self.characteristic!)! {
-                        Picker(selection: self.$type, label: EmptyView()) {
-                            ForEach(CharacteristicEventType.all(), id: \.rawValue) { t in
-                                Text(t.rawValue).tag(t)
-                            }
-                        }
-                        
-                        WrapperView(edges: .bottom) {
-                            HStack {
-                                TextField(self.type == .equality ? "value" : self.type == .lessOrEqual ? "upper bound" : "lower bound", text: self.$firstBoundary) {
-                                    UIApplication.shared.endEditing()
-                                }
-                                .keyboardType(.numbersAndPunctuation)
-                                Text(CurrentPower.unit(self.characteristic!))
-                            }
-                        }
-                        
-                        if self.type == .between {
-                            Text("and").padding(.bottom)
-                            
-                            WrapperView(edges: .bottom) {
-                                HStack {
-                                    TextField("upper bound", text: self.$secondBoundary) {
-                                        UIApplication.shared.endEditing()
-                                    }
-                                    .keyboardType(.numbersAndPunctuation)
-                                    Text(CurrentPower.unit(self.characteristic!))
-                                }
-                            }
-                        }
-                        
-                    } else {
-                        Text(CharacteristicEventType.equality.rawValue).padding(.top)
-                        
-                        Picker(selection: self.$selection, label: EmptyView()) {
-                            ForEach(self.characteristic!.metadata!.validValues!, id: \.description) { v in
-                                Text(CurrentPower.format(v, as: self.characteristic!)).tag(v)
-                            }
-                        }
-                    }
-                }
-                
-                Spacer().layoutPriority(4)
-            }.padding()
-            .navigationBarTitle("Add a trigger", displayMode: .inline)
-            .navigationBarItems(leading: Button(action: { self.done(false) }, label: {
-                Text("Cancel").foregroundColor(.red)
-            }), trailing: Button(action: {
-                var event: HMEvent
-                switch self.type {
-                case .equality:
-                    if CurrentPower.isContinuous(self.characteristic!)! {
-                        event =  HMCharacteristicEvent<NSCopying>(characteristic: self.characteristic!, triggerValue: NSNumber(value: Float(self.firstBoundary)!))
-                    } else {
-                        event =  HMCharacteristicEvent<NSCopying>(characteristic: self.characteristic!, triggerValue: self.selection)
-                    }
-                default:
-                    var range: HMNumberRange
-                    switch self.type {
-                    case .lessOrEqual:
-                        range = HMNumberRange(maxValue: NSNumber(value: Float(self.firstBoundary)!))
-                    case .greaterOrEqual:
-                        range = HMNumberRange(minValue: NSNumber(value: Float(self.firstBoundary)!))
-                    default:
-                        range = HMNumberRange(minValue: NSNumber(value: Float(self.firstBoundary)!), maxValue: NSNumber(value: Float(self.secondBoundary)!))
-                    }
-                    
-                    event = HMCharacteristicThresholdRangeEvent(characteristic: self.characteristic!, thresholdRange: range)
-                }
-                self.trigger.value.updateEvents(self.trigger.value.events + [event], completionHandler: { err in
-                    if let e = err {
-                        print(e)
-                    } else {
-                        self.trigger.home(didUpdate: self.trigger.value)
-                        self.done(true)
-                    }
-                })
-            }, label: {
-                Text("Done").foregroundColor(.accentColor)
-            })
-            .disabled(!self.validConfiguration))
-        }
-        .onTapGesture {
-            UIApplication.shared.endEditing()
+        if !self.isNormal() {
+            HStack {
+                Text(self.description()).multilineTextAlignment(.leading).foregroundColor(.secondary).font(.footnote)
+                Spacer()
+            }
         }
     }
-}
-
-// MARK: PresenceEventOverviewView
-struct PresenceEventOverviewView: View {
     
-    let event: HMPresenceEvent
-    
-    var body: some View {
-        HStack {
-            Image(systemName: "person").font(.headline).foregroundColor(.primary)
-            Text("???")
-            Spacer()
-        }
+    private func isNormal() -> Bool {
+        return !self.trigger.executeOnce && (self.trigger.recurrences == nil || self.isAllWeek())
     }
-}
-
-// MARK: LocationEventOverviewView
-struct LocationEventOverviewView: View {
     
-    let event: HMLocationEvent
-    
-    var body: some View {
-        HStack {
-            Image(systemName: "location").font(.headline).foregroundColor(.primary)
-            Text("???")
-            Spacer()
-        }
+    private func isAllWeek() -> Bool {
+        return self.trigger.recurrences != nil && self.trigger.recurrences!.count == Calendar.current.weekdaySymbols.count
     }
-}
-
-// MARK: TimeEventOverviewView
-struct TimeEventOverviewView: View {
     
-    let event: HMTimeEvent
-    
-    var body: some View {
-        HStack {
-            Image(systemName: "clock").font(.headline).foregroundColor(.primary)
-            Text("???")
-            Spacer()
+    func description() -> String {
+        var d = ""
+        if self.trigger.executeOnce {
+            d += "This automation is executed only once."
         }
+
+        if !self.isAllWeek() {
+            if self.trigger.executeOnce {
+                d += " It "
+            } else {
+                d += "This automation "
+            }
+            let days = self.trigger.recurrences!.filter({d in d.weekday != nil}).map({d in d.weekday! - 1}).sorted().map({ day in Calendar.current.shortWeekdaySymbols[day]})
+            
+            if days.count == 0 {
+                d += "is never triggered."
+            } else if days.count == 1 {
+                d += "is only triggered on " + days[0] + "."
+            } else {
+                d += "is only triggered on " + days[0..<days.count-1].joined(separator: ", ") + " and " + days[days.count-1] + "."
+            }
+        }
+
+        return d
     }
 }
 

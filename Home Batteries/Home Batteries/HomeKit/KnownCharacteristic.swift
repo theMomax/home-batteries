@@ -160,6 +160,8 @@ extension KnownCharacteristic {
         if let m = self.characteristic.metadata {
             if let f = m.format {
                 switch f {
+                case HMCharacteristicMetadataFormatString:
+                    return nil
                 case HMCharacteristicMetadataFormatInt,
                      HMCharacteristicMetadataFormatFloat:
                     return true
