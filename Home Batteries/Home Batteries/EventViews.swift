@@ -8,6 +8,7 @@
 
 import SwiftUI
 import HomeKit
+import CoreLocation
 
 
 // MARK: NewEventView
@@ -187,10 +188,48 @@ struct PresenceEventOverviewView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "person").font(.headline).foregroundColor(.primary)
-            Text("???")
+            Image(systemName: "house").font(.headline).foregroundColor(.primary)
+            Text(Self.description(self.event))
             Spacer()
         }
+    }
+    
+    static func description(_ event: HMPresenceEvent) -> String {
+        var d = ""
+        switch event.presenceUserType {
+        case .currentUser:
+            d += "You"
+            switch event.presenceEventType {
+            case .everyEntry:
+                d += " enter the house"
+            case .everyExit:
+                d += " leave the house"
+            case .firstEntry:
+                d += " enter the house and nobody else is at home"
+            case .lastExit:
+                d += " leave the house and nobody else is at home"
+            default:
+                d += " managed to create a weird trigger"
+            }
+            return d
+        case .homeUsers:
+            d += "Any resident"
+        default:
+            d += "A specific person"
+        }
+        switch event.presenceEventType {
+        case .everyEntry:
+            d += " enters the house"
+        case .everyExit:
+            d += " leaves the house"
+        case .firstEntry:
+            d += " enters the house and nobody else is at home"
+        case .lastExit:
+            d += " leaves the house and nobody else is at home"
+        default:
+            d += " managed to create a weird trigger"
+        }
+        return d
     }
 }
 
@@ -199,11 +238,34 @@ struct LocationEventOverviewView: View {
     
     let event: HMLocationEvent
     
+    @ObservedObject var lm: LocationManager = LocationManager()
+    
+    init(event: HMLocationEvent) {
+        self.event = event
+        
+        if CLLocationManager.authorizationStatus() == .notDetermined {
+            self.lm.value.requestWhenInUseAuthorization()
+        }
+    }
+    
     var body: some View {
         HStack {
             Image(systemName: "location").font(.headline).foregroundColor(.primary)
-            Text("???")
+            Text(Self.description(self.event))
             Spacer()
+        }
+    }
+    
+    static func description(_ event: HMLocationEvent) -> String {        
+        if let r = event.region {
+            switch r {
+            case r as CLCircularRegion:
+                return "You \(r.notifyOnEntry ? "arrive at" : "leave") " + r.identifier
+            default:
+                return "You \(r.notifyOnEntry ? "arrive at" : "leave") " + r.identifier
+            }
+        } else {
+            return "You arrive at or leave some location"
         }
     }
 }

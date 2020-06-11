@@ -16,6 +16,8 @@
 		A534805224586B10002BF820 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A534805124586B10002BF820 /* HomeKit.framework */; };
 		A5383106245E281200B49F67 /* BatteryDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5383105245E281200B49F67 /* BatteryDiagram.swift */; };
 		A538310C245EE6A600B49F67 /* AccessoryOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538310B245EE6A600B49F67 /* AccessoryOverviewView.swift */; };
+		A538ADED24924B7B00CED37C /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538ADEC24924B7B00CED37C /* LocationManager.swift */; };
+		A538ADEF249265BB00CED37C /* HomeKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538ADEE249265BB00CED37C /* HomeKitManager.swift */; };
 		A545C7A3245868FA0096A547 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545C7A2245868FA0096A547 /* AppDelegate.swift */; };
 		A545C7A5245868FA0096A547 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545C7A4245868FA0096A547 /* SceneDelegate.swift */; };
 		A545C7A7245868FA0096A547 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545C7A6245868FA0096A547 /* ContentView.swift */; };
@@ -56,6 +58,8 @@
 		A534805124586B10002BF820 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
 		A5383105245E281200B49F67 /* BatteryDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryDiagram.swift; sourceTree = "<group>"; };
 		A538310B245EE6A600B49F67 /* AccessoryOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryOverviewView.swift; sourceTree = "<group>"; };
+		A538ADEC24924B7B00CED37C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		A538ADEE249265BB00CED37C /* HomeKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKitManager.swift; sourceTree = "<group>"; };
 		A545C79F245868FA0096A547 /* Home Batteries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Home Batteries.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A545C7A2245868FA0096A547 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A545C7A4245868FA0096A547 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +121,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A538ADEB24924B6500CED37C /* EntitlementManagers */ = {
+			isa = PBXGroup;
+			children = (
+				A538ADEC24924B7B00CED37C /* LocationManager.swift */,
+				A538ADEE249265BB00CED37C /* HomeKitManager.swift */,
+			);
+			path = EntitlementManagers;
+			sourceTree = "<group>";
+		};
 		A545C796245868FA0096A547 = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +150,7 @@
 		A545C7A1245868FA0096A547 /* Home Batteries */ = {
 			isa = PBXGroup;
 			children = (
+				A538ADEB24924B6500CED37C /* EntitlementManagers */,
 				A516DE51247827B900F17C52 /* HomeKit */,
 				A5691C59246174F2000999D3 /* Model */,
 				A5B9E35A24587728005E5B4F /* Bindings */,
@@ -289,8 +303,10 @@
 				A516DE53247827D900F17C52 /* KnownCharacteristic.swift in Sources */,
 				A5C998842459F65B002890E8 /* HomeView.swift in Sources */,
 				A58BABF72486833600EFDD52 /* KnownAccessory.swift in Sources */,
+				A538ADED24924B7B00CED37C /* LocationManager.swift in Sources */,
 				A516DE5A24784F4D00F17C52 /* Event.swift in Sources */,
 				A545C7A3245868FA0096A547 /* AppDelegate.swift in Sources */,
+				A538ADEF249265BB00CED37C /* HomeKitManager.swift in Sources */,
 				A5642F97245F3ECC009D7024 /* Characteristic.swift in Sources */,
 				A545C7A5245868FA0096A547 /* SceneDelegate.swift in Sources */,
 				A545C7A7245868FA0096A547 /* ContentView.swift in Sources */,

@@ -16,14 +16,18 @@ struct ConnectingToHomeKitView: View {
     
     @State var timeoutPassed: Bool = false
     
+    @ObservedObject var hm: HomeKitManager = HomeKitManager()
+    
     var body: some View {
         timeout()
         return VStack(alignment: .center, spacing: 20) {
-            if !self.timeoutPassed {
+            if !hm.value.authorizationStatus.contains(.authorized) {
+                Text("This app requires access to your home data to display and edit home battery related accessories and automations.").foregroundColor(.secondary).multilineTextAlignment(.center).padding()
+            } else if !self.timeoutPassed {
                 ActivityIndicator(isAnimating: .constant(true), style: .large)
                 Text("Connecting to HomeKit...").foregroundColor(.secondary)
             } else {
-                Text("No homes detected!")
+                Text("You're homeless :(").foregroundColor(.secondary).multilineTextAlignment(.center).padding()
             }
         }
     }
