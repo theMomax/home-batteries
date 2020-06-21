@@ -44,7 +44,7 @@ struct AccessoryPickerView: View {
     
     var body: some View {
         ScrollView {
-            ForEach(self.room.accessories.filter({a in a.known() != nil}), id: \.uniqueIdentifier) { accessory in
+            ForEach(self.room.accessories.filter({a in a.known()}), id: \.uniqueIdentifier) { accessory in
                 WrapperView(edges: .init(arrayLiteral: .top, .horizontal)) {
                     NavigationLink(destination: ServicePickerView(characteristic: self.$characteristic, accessory: accessory), label: {
                         Image(systemName: "lightbulb").font(.headline).foregroundColor(.accentColor)

@@ -10,13 +10,17 @@
 import HomeKit
 import Combine
 
-protocol ValueBinding {
-    
-    associatedtype T
-    
-    var value: T? {get}
-    var published: Published<T?> {get}
-    var publisher: Published<T?>.Publisher {get}
+
+extension HMCharacteristic {
+    func observable<T>(_ updating: Bool = true) -> Characteristic<T> {
+        return Characteristic(self, updating: updating)
+    }
+}
+
+extension KnownCharacteristic {
+    func observable<T>(_ updating: Bool = true) -> Characteristic<T> {
+        return self.characteristic.observable(updating)
+    }
 }
 
 /// - Tag: Characteristic

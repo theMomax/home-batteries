@@ -14,6 +14,16 @@ extension HMService {
     }
 }
 
+extension Array where Element == HMCharacteristic {
+    func known() -> [KnownCharacteristic] {
+        return self.map({c in c.known()}).filter({c in c != nil}).map({c in c!})
+    }
+    
+    func typed<T : KnownCharacteristic>() -> [T] {
+        return self.map({c in c.known() as? T }).filter({c in c != nil}).map({c in c!})
+    }
+}
+
 protocol KnownHomeKitEntity {
     static var uuid: String { get }
     static var entityType: String { get }
@@ -71,6 +81,10 @@ class ControllerService: KnownService {
     
     var service: HMService
     
+    var statusFault: StatusFault {
+        return self.service.characteristics.typed().first!
+    }
+    
     required init(_ service: HMService) {
         self.service = service
     }
@@ -85,6 +99,25 @@ class ElectricityMeterService: KnownService {
     
     var service: HMService
     
+    var power: CurrentPower {
+        return self.service.characteristics.typed().first!
+    }
+    
+    var lines: (CurrentPowerL1, CurrentPowerL2, CurrentPowerL3)? {
+        if let l1 : CurrentPowerL1 = self.service.characteristics.typed().first {
+            if let l2 : CurrentPowerL2 = self.service.characteristics.typed().first {
+                if let l3 : CurrentPowerL3 = self.service.characteristics.typed().first {
+                    return (l1, l2, l3)
+                }
+            }
+        }
+        return nil
+    }
+    
+    var type: ElectricityMeterType? {
+        return self.service.characteristics.typed().first
+    }
+    
     required init(_ service: HMService) {
         self.service = service
     }
@@ -98,6 +131,22 @@ class EnergyStorageService: KnownService {
     static let optional: [KnownCharacteristic.Type] = [EnergyCapacity.self, Name.self]
     
     var service: HMService
+    
+    var batteryLevel: BatteryLevel {
+        return self.service.characteristics.typed().first!
+    }
+    
+    var chargingState: ChargingState {
+        return self.service.characteristics.typed().first!
+    }
+    
+    var statusLowBattery: StatusLowBattery {
+        return self.service.characteristics.typed().first!
+    }
+    
+    var energyCapacity: EnergyCapacity? {
+        return self.service.characteristics.typed().first
+    }
     
     required init(_ service: HMService) {
         self.service = service

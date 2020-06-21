@@ -9,35 +9,17 @@
 import HomeKit
 
 extension HMAccessory {
-    func known() -> KnownAccessory? {
-        let ka = AnyAccessory(self)
-        if ka.services.isEmpty {
-            return nil
-        } else {
-            return ka
-        }
+    func known() -> Bool {
+        return !self.services.known().isEmpty
     }
 }
 
-protocol KnownAccessory {
-    var accessory: HMAccessory { get }
+extension Array where Element == HMService {
+    func known() -> [KnownService] {
+        return self.map({s in s.known()}).filter({s in s != nil}).map({s in s!})
+    }
     
-    init(_ accessory: HMAccessory)
-}
-
-extension KnownAccessory {
-    var services: [HMService] {
-        get {
-            return self.accessory.services.filter({s in s.known() != nil})
-        }
+    func typed<T : KnownService>() -> [T] {
+        return self.map({s in s.known() as? T }).filter({s in s != nil}).map({s in s!})
     }
 }
-
-class AnyAccessory: KnownAccessory {
-    var accessory: HMAccessory
-    
-    required init(_ accessory: HMAccessory) {
-        self.accessory = accessory
-    }
-}
-

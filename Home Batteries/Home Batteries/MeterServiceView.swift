@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 import HomeKit
 
-enum EnergyMeterType: UInt8 {
+enum ElectricityMeterTypes: UInt8 {
     case other = 0
     case production = 1
     case consumption = 2
@@ -27,7 +27,7 @@ struct ElectricityMeterServiceView: View {
     var currentPowerL1: Binding<Float?>?
     var currentPowerL2: Binding<Float?>?
     var currentPowerL3: Binding<Float?>?
-    let type: EnergyMeterType
+    let type: ElectricityMeterTypes
     
     @ViewBuilder
     var body: some View {
@@ -49,8 +49,8 @@ struct ElectricityMeterServiceView: View {
                     Segment(currentPowerL2!, name: "L2"),
                     Segment(currentPowerL3!, name: "L3")
                 ],
-                positiveColors: self.type == EnergyMeterType.storage || self.type == EnergyMeterType.grid ? HorizontalBarDiagram.negativeColors : HorizontalBarDiagram.positiveColors,
-                negativeColors: self.type == EnergyMeterType.storage || self.type == EnergyMeterType.grid ? HorizontalBarDiagram.positiveColors : HorizontalBarDiagram.negativeColors)
+                positiveColors: self.type == ElectricityMeterTypes.storage || self.type == ElectricityMeterTypes.grid ? HorizontalBarDiagram.negativeColors : HorizontalBarDiagram.positiveColors,
+                negativeColors: self.type == ElectricityMeterTypes.storage || self.type == ElectricityMeterTypes.grid ? HorizontalBarDiagram.positiveColors : HorizontalBarDiagram.negativeColors)
             }
         }
     }

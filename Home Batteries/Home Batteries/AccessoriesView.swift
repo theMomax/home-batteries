@@ -12,7 +12,7 @@ import HomeKit
 
 struct AccessoriesView: View {
     
-    static let supportedServices = AccessoryOverviewView.supportedServices
+    static let supportedServices = AccessoryLiveView.supportedServices
     
     @ObservedObject var home: Home
     
@@ -32,7 +32,7 @@ struct AccessoriesView: View {
                 }
             } else {
                 ForEach(accessories, id: \.value.uniqueIdentifier) { a in
-                    AccessoryOverviewView(accessory: a)
+                    AccessoryLiveView(accessory: a)
                 }.padding(.vertical)
             }
         }
@@ -46,9 +46,7 @@ struct AccessoriesView: View {
             accessories = home.value.accessories
         }
         
-        return accessories.filter({ a in
-            a.services.contains(where: { service in AccessoriesView.supportedServices.contains(service.serviceType)} )
-        })
+        return accessories.filter({ a in a.known()})
     }
 }
 
