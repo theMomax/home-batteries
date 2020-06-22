@@ -10,9 +10,7 @@ import Foundation
 import SwiftUI
 import HomeKit
 
-struct AccessoryLiveView: View {
-    
-    static let supportedServices = [ControllerService.uuid, ElectricityMeterService.uuid, EnergyStorageService.uuid]
+struct HomeBatteryAccessoryLiveView: View {
     
     @ObservedObject var accessory: Accessory
     
@@ -115,7 +113,7 @@ struct MeterView: View {
             self.currentPowerL3 = Characteristic<Float>()
         }
         
-        self.meterType = service.type?.observable() ?? Characteristic<UInt8>()
+        self.meterType = service.type?.observable(updating: false) ?? Characteristic<UInt8>()
     }
     
     @ViewBuilder
@@ -155,7 +153,7 @@ struct TotalStorageView: View {
         
         self.statusLowBattery = service.statusLowBattery.observable()
         
-        self.energyCapacity = service.energyCapacity?.observable() ?? Characteristic<Float>()
+        self.energyCapacity = service.energyCapacity?.observable(updating: false) ?? Characteristic<Float>()
     }
     
     @ViewBuilder

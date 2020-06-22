@@ -32,28 +32,30 @@ struct WrapperView<Content> : View where Content : View {
 
     @ViewBuilder
     var body: some View {
-        ZStack(alignment: alignment) {
-            if self.boxed {
-                if colorScheme != .dark {
-                    RoundedRectangle(cornerRadius: 15)
-                    .foregroundColor(Color(.systemBackground))
-                    .shadow(color: Color.gray.opacity(0.3), radius: 10)
+//        GeometryReader { geo in
+            ZStack(alignment: self.alignment) {
+                if self.boxed {
+                    if self.colorScheme != .dark {
+                        RoundedRectangle(cornerRadius: 15)
+                        .foregroundColor(Color(.systemBackground))
+                        .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                    } else {
+                        RoundedRectangle(cornerRadius: 15)
+                        .foregroundColor(.init(white: 0.1))
+                    }
                 } else {
                     RoundedRectangle(cornerRadius: 15)
-                    .foregroundColor(.init(white: 0.1))
+                    .opacity(0)
                 }
-            } else {
-                RoundedRectangle(cornerRadius: 15)
-                .opacity(0)
+                    
+                if self.innerPadding == nil {
+                    self.context().padding()
+                } else {
+                    self.context().padding(self.innerPadding!)
+                }
             }
-                
-            if self.innerPadding == nil {
-                context().padding()
-            } else {
-                context().padding(self.innerPadding!)
-            }
-        }
-        .padding(self.edges, self.padding)
+            .padding(self.edges, self.padding)
+//        }
     }
 }
 
@@ -66,17 +68,15 @@ struct AccessoryWrapperView_Previews: PreviewProvider {
                 
                 
                 
-                ScrollView {
-                    VStack {
-                        WrapperView() {
-                            Text("1")
-                        }
-                        WrapperView(alignment: .topLeading) {
-                            Text("2")
-                        }
-                        WrapperView() {
-                            Image(systemName: "pencil.slash").font(Font.system(.largeTitle))
-                        }
+                VStack {
+                    WrapperView() {
+                        Text("1")
+                    }.frame(width: 100)
+                    WrapperView(alignment: .topLeading) {
+                        Text("2")
+                    }
+                    WrapperView() {
+                        Image(systemName: "pencil.slash").font(Font.system(.largeTitle))
                     }
                 }
             }

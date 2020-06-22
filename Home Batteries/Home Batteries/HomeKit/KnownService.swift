@@ -7,6 +7,7 @@
 //
 
 import HomeKit
+import SwiftUI
 
 extension HMService {
     func known() -> KnownService? {

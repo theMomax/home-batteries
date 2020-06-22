@@ -29,7 +29,7 @@ struct StateView: View {
         HStack {
             Spacer()
             Text(StateView.label(state).uppercased()).font(Font.system(.footnote))
-            Circle().scale(0.75).frame(maxWidth: 20.0)
+            Circle().frame(width: 15.0, height: 15.0)
         }
         .foregroundColor(StateView.color(state))
     }

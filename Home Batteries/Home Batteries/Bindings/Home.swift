@@ -17,11 +17,6 @@ class Home: NSObject, ObservableObject, HMHomeDelegate {
     
     @Published private(set) var room: HMRoom?
     
-    
-    private let filter: (HMAccessory) -> Bool = { a in
-        a.services.contains(where: { service in AccessoriesView.supportedServices.contains(service.serviceType)})
-    }
-    
     init(_ home: HMHome) {
         self.value = home
         self.room = home.rooms.first ?? home.roomForEntireHome()

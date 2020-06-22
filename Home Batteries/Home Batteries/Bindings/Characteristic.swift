@@ -12,15 +12,18 @@ import Combine
 
 
 extension HMCharacteristic {
-    func observable<T>(_ updating: Bool = true) -> Characteristic<T> {
+    func observable<T>(updating: Bool = true) -> Characteristic<T> {
         return Characteristic(self, updating: updating)
     }
+
 }
 
 extension KnownCharacteristic {
-    func observable<T>(_ updating: Bool = true) -> Characteristic<T> {
-        return self.characteristic.observable(updating)
+    func observable<T>(updating: Bool = true) -> Characteristic<T> {
+        return self.characteristic.observable(updating: updating)
     }
+    
+    
 }
 
 /// - Tag: Characteristic
@@ -38,15 +41,18 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
     
     let present: Bool
     
+    let callback: (T?) -> ()
+    
     /// Initializes this Characteristic based on the given HMCharacteristic and enables notifications for the
     /// underlying value if requested.
-    init(_ characteristic: HMCharacteristic, updating subscribe: Bool = false) {
+    init(_ characteristic: HMCharacteristic, updating subscribe: Bool = false, callback: @escaping (T?) -> () = { _ in}) {
         self.characteristic = characteristic
         self.service = self.characteristic!.service!
         self.accessory = self.service!.accessory!
         self.subscribe = subscribe
         self.value = nil
         self.present = true
+        self.callback = callback
         
         super.init()
         
@@ -65,6 +71,7 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
         self.subscribe = nil
         self.value = nil
         self.present = false
+        self.callback = { _ in}
         
         super.init()
     }
@@ -120,6 +127,7 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
         guard accessory == self.accessory && service == self.service && characteristic == self.characteristic else { return }
         // print("received update for value for characteristic \(self.characteristic!.characteristicType): \(self.characteristic!.value ?? "nil")")
         self.value = characteristic.value as! T?
+        self.callback(self.value)
     }
     
 }
