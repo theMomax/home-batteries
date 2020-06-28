@@ -191,8 +191,7 @@ struct TotalStorageQuickView: View {
     @ViewBuilder
     var body: some View {
         EnergyStorageServiceQuickView(batteryLevel: self.$batteryLevel.value, chargingState: self.$chargingState.value, statusLowBattery: self.$statusLowBattery.value)
-        .frame(height: 35)
-        .offset(x: -2, y: -2)
+        .frame(height: 25)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             self.batteryLevel.reload()
             self.chargingState.reload()

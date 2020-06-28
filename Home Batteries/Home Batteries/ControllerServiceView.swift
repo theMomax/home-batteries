@@ -27,8 +27,8 @@ struct StateView: View {
     
     var body: some View {
         HStack {
-            Spacer()
-            Text(StateView.label(state).uppercased()).font(Font.system(.footnote))
+            Spacer(minLength: 0)
+            Text(StateView.label(state).uppercased()).lineLimit(1).font(Font.system(.footnote)).layoutPriority(1)
             Circle().frame(width: 15.0, height: 15.0)
         }
         .foregroundColor(StateView.color(state))

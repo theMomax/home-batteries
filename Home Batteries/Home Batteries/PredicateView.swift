@@ -178,7 +178,7 @@ struct PredicateOverviewView: View {
         case .constantValue:
             switch e.constantValue! {
             case let v as NSDateComponents:
-                return String(v.hour) + ":" + String(v.minute)
+                return String(format: "%02d:%02d", v.hour, v.minute)
             case let v as HMCharacteristic:
                 return CurrentPower.description(v)
             case let v as CustomStringConvertible:

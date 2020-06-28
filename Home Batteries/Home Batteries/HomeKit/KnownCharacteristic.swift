@@ -27,33 +27,32 @@ protocol KnownCharacteristic: KnownHomeKitEntity {
 }
 
 extension KnownCharacteristic {
-    static func any(_ characteristic: HMCharacteristic) -> KnownCharacteristic? {
-        switch characteristic.characteristicType {
-        case CurrentPower.uuid:
-            return CurrentPower(characteristic)
-        case CurrentPowerL1.uuid:
-            return CurrentPowerL1(characteristic)
-        case CurrentPowerL2.uuid:
-            return CurrentPowerL2(characteristic)
-        case CurrentPowerL3.uuid:
-            return CurrentPowerL3(characteristic)
-        case EnergyCapacity.uuid:
-            return EnergyCapacity(characteristic)
-        case ElectricityMeterType.uuid:
-            return ElectricityMeterType(characteristic)
-        case Name.uuid:
-            return Name(characteristic)
-        case BatteryLevel.uuid:
-            return BatteryLevel(characteristic)
-        case ChargingState.uuid:
-            return ChargingState(characteristic)
-        case StatusLowBattery.uuid:
-            return StatusLowBattery(characteristic)
-        case StatusFault.uuid:
-            return StatusFault(characteristic)
-        default:
-            return nil
+    static func instance(_ characteristic: HMCharacteristic) -> KnownCharacteristic? {
+        if Self.uuid == characteristic.characteristicType {
+            return Self.init(characteristic)
         }
+        return nil
+    }
+}
+
+extension KnownCharacteristic {
+    static func any(_ characteristic: HMCharacteristic) -> KnownCharacteristic? {
+        return [
+            CurrentPower.instance,
+            KoogeekCurrentPower.instance,
+            CurrentPowerL1.instance,
+            CurrentPowerL2.instance,
+            CurrentPowerL3.instance,
+            EnergyCapacity.instance,
+            ElectricityMeterType.instance,
+            Name.instance,
+            BatteryLevel.instance,
+            ChargingState.instance,
+            StatusLowBattery.instance,
+            StatusFault.instance,
+            On.instance,
+            OutletInUse.instance
+            ].map( { i in i(characteristic)}).reduce(nil, {(a, b) in a ?? b})
     }
 }
 
@@ -138,7 +137,7 @@ extension KnownCharacteristic {
         if let v = value {
             return Self.format(of: v) ?? "unknown"
         } else {
-            return "unset"
+            return "unknown"
         }
     }
     
@@ -149,7 +148,7 @@ extension KnownCharacteristic {
             if let v = value {
                 return Self.genericFormat(of: v) ?? "unknown"
             } else {
-                return "unset"
+                return "unknown"
             }
         }
     }
@@ -242,6 +241,9 @@ extension KnownCharacteristic {
     }
 }
 
+// MARK: Implementations
+
+
 class Power {
     static func unit() -> String? {
         return "W"
@@ -270,6 +272,17 @@ class CurrentPower: Power, KnownCharacteristic {
         self.characteristic = characteristic
     }
     
+}
+
+class KoogeekCurrentPower: CurrentPower {
+    static let secondaryUUID: String = "4AAAF931-0DEC-11E5-B939-0800200C9A66"
+    
+    static func instance(_ characteristic: HMCharacteristic) -> KnownCharacteristic? {
+        if Self.secondaryUUID == characteristic.characteristicType {
+            return Self.init(characteristic)
+        }
+        return nil
+    }
 }
 
 class CurrentPowerL1: Power, KnownCharacteristic {
@@ -438,6 +451,50 @@ class StatusLowBattery: KnownCharacteristic {
             return "normal"
         case 1 as UInt8:
             return "low"
+        default:
+            return nil
+        }
+    }
+}
+
+class On: KnownCharacteristic {
+    static var uuid: String = "00000025-0000-1000-8000-0026BB765291"
+    static var entityType: String = "On"
+    
+    var characteristic: HMCharacteristic
+    
+    required init(_ characteristic: HMCharacteristic) {
+        self.characteristic = characteristic
+    }
+    
+    static func format(of value: Any) -> String? {
+        switch value {
+        case true as Bool:
+            return "on"
+        case false as Bool:
+            return "off"
+        default:
+            return nil
+        }
+    }
+}
+
+class OutletInUse: KnownCharacteristic {
+    static var uuid: String = "00000026-0000-1000-8000-0026BB765291"
+    static var entityType: String = "Outlet in Use"
+    
+    var characteristic: HMCharacteristic
+    
+    required init(_ characteristic: HMCharacteristic) {
+        self.characteristic = characteristic
+    }
+    
+    static func format(of value: Any) -> String? {
+        switch value {
+        case true as Bool:
+            return "plugged in"
+        case false as Bool:
+            return "not in use"
         default:
             return nil
         }

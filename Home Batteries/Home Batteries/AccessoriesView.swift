@@ -19,25 +19,27 @@ struct AccessoriesView: View {
     let padding: CGFloat = 20
     
     var body: some View {
-        self.content(accessories: Self.knownAccessories(home: self.home, room: self.showRoomOnly ? self.home.room! : nil).map(Accessory.init))
+        self.content(accessories: Self.knownAccessories(home: self.home, room: self.showRoomOnly ? self.home.room! : nil))
     }
     
     @ViewBuilder
-    private func content(accessories: [Accessory]) -> some View {
+    private func content(accessories: [HMAccessory]) -> some View {
         GeometryReader { (geo: GeometryProxy) in
             if accessories.isEmpty {
                 WrapperView(boxed: false) {
                     Text("No supported accessories here...").foregroundColor(.secondary)
                 }
+            } else if accessories.count == 1 {
+                accessories[0].view().frame(width: (geo.size.width - 3*self.padding)/2,height: (geo.size.width - 3*self.padding)/2 ).padding(self.padding)
             } else {
                 self.grid(accessories: accessories, geo: geo)
             }
         }
     }
     
-    private func grid(accessories: [Accessory], geo: GeometryProxy) -> some View {
-        WaterfallGrid(accessories, id: \.value.uniqueIdentifier) { a in
-            HomeBatteryAccessoryQickView(accessory: a).frame(height: (geo.size.width - 3*self.padding)/2 )
+    private func grid(accessories: [HMAccessory], geo: GeometryProxy) -> some View {
+        WaterfallGrid(accessories, id: \.uniqueIdentifier) { a in
+            a.view().frame(height: (geo.size.width - 3*self.padding)/2 )
         }
         .gridStyle(columns: 2, spacing: self.padding, padding: .init(top: self.padding, leading: self.padding, bottom: self.padding, trailing: self.padding), animation: nil)
     }

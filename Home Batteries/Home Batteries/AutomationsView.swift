@@ -41,6 +41,7 @@ struct AutomationsView: View {
                 }
                 .padding(.init(arrayLiteral: .top, .horizontal))
             }
+            HStack{EmptyView()}.padding(.bottom)
         }.environmentObject(self.home)
         
             

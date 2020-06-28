@@ -26,6 +26,7 @@ extension Array where Element == HMCharacteristic {
 }
 
 protocol KnownHomeKitEntity {
+    // uuid of primary entity of entityType
     static var uuid: String { get }
     static var entityType: String { get }
 }
@@ -48,17 +49,17 @@ protocol KnownService: KnownHomeKitEntity {
 }
 
 extension KnownService {
-    static func any(_ service: HMService) -> KnownService? {
-        switch service.serviceType {
-        case ControllerService.uuid:
-            return ControllerService(service)
-        case ElectricityMeterService.uuid:
-            return ElectricityMeterService(service)
-        case EnergyStorageService.uuid:
-            return EnergyStorageService(service)
-        default:
-            return nil
+    static func instance(_ service: HMService) -> KnownService? {
+        if Self.uuid == service.serviceType {
+            return Self.init(service)
         }
+        return nil
+    }
+}
+
+extension KnownService {
+    static func any(_ service: HMService) -> KnownService? {
+        return ControllerService.instance(service) ?? ElectricityMeterService.instance(service) ?? KoogeekElectricityMeterService.instance(service) ?? EnergyStorageService.instance(service) ?? OutletService.instance(service)
     }
 }
 
@@ -74,8 +75,10 @@ extension KnownService {
     }
 }
 
+// MARK: Implementations
+
 class ControllerService: KnownService {
-    static let uuid: String = "00000001-0000-1000-8000-0036AC324978"
+    internal static let uuid: String = "00000001-0000-1000-8000-0036AC324978"
     static let entityType: String = "Controller"
     static let required: [KnownCharacteristic.Type] = [StatusFault.self]
     static let optional: [KnownCharacteristic.Type] = [Name.self]
@@ -93,7 +96,7 @@ class ControllerService: KnownService {
 }
 
 class ElectricityMeterService: KnownService {
-    static let uuid: String = "00000002-0000-1000-8000-0036AC324978"
+    internal static let uuid: String = "00000002-0000-1000-8000-0036AC324978"
     static let entityType: String = "Meter"
     static let required: [KnownCharacteristic.Type] = [CurrentPower.self]
     static let optional: [KnownCharacteristic.Type] = [CurrentPowerL1.self, CurrentPowerL2.self, CurrentPowerL3.self, Name.self, ElectricityMeterType.self]
@@ -123,10 +126,22 @@ class ElectricityMeterService: KnownService {
         self.service = service
     }
     
+    
+}
+
+class KoogeekElectricityMeterService: ElectricityMeterService {
+    internal static let secondaryUUID: String = "4AAAF930-0DEC-11E5-B939-0800200C9A66"
+    
+    static func instance(_ service: HMService) -> KnownService? {
+        if Self.secondaryUUID == service.serviceType {
+            return Self.init(service)
+        }
+        return nil
+    }
 }
 
 class EnergyStorageService: KnownService {
-    static let uuid: String = "00000003-0000-1000-8000-0036AC324978"
+    internal static let uuid: String = "00000003-0000-1000-8000-0036AC324978"
     static let entityType: String = "Home Battery"
     static let required: [KnownCharacteristic.Type] = [BatteryLevel.self, ChargingState.self, StatusLowBattery.self]
     static let optional: [KnownCharacteristic.Type] = [EnergyCapacity.self, Name.self]
@@ -153,4 +168,25 @@ class EnergyStorageService: KnownService {
         self.service = service
     }
     
+}
+
+class OutletService: KnownService {
+    internal static let uuid: String = "00000047-0000-1000-8000-0026BB765291"
+    static let entityType: String = "Outlet"
+    static let required: [KnownCharacteristic.Type] = [On.self, OutletInUse.self]
+    static let optional: [KnownCharacteristic.Type] = [Name.self]
+    
+    var service: HMService
+    
+    var on: On {
+        return self.service.characteristics.typed().first!
+    }
+    
+    var outletInUse: OutletInUse {
+        return self.service.characteristics.typed().first!
+    }
+    
+    required init(_ service: HMService) {
+        self.service = service
+    }
 }
