@@ -326,7 +326,7 @@ struct TimeEventOverviewView: View {
     
     private static func description(absolute components: DateComponents?) -> String {
         if let dc = components {
-            return String((dc.hour! % 12) + 1) + ":" + String(dc.minute!) + " " + (dc.hour! > 12 ? "pm" : "am")
+            return String(format: "%02d:%02d", dc.hour! % 12, dc.minute!) + " " + (dc.hour! > 12 ? "pm" : "am")
         } else {
             return "unknown time"
         }
