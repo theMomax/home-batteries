@@ -29,10 +29,10 @@ struct OutletQuickView: View {
             if let o = self.on.value {
                 self.on.characteristic!.writeValue(!o, completionHandler: { err in
                     if err == nil {
-                        impactMed.impactOccurred()
                         self.on.value = !o
                     }
                 })
+                impactMed.impactOccurred()
             }
         }, label: {
             WrapperView(edges: .init()) {

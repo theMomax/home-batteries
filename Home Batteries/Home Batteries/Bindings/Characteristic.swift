@@ -13,7 +13,7 @@ import Combine
 
 extension HMCharacteristic {
     func observable<T>(updating: Bool = true) -> Characteristic<T> {
-        return Characteristic(self, updating: updating)
+        return Characteristic(self, updating: updating, initialized: Cache.shared.get(self.uniqueIdentifier))
     }
 
 }
@@ -22,8 +22,6 @@ extension KnownCharacteristic {
     func observable<T>(updating: Bool = true) -> Characteristic<T> {
         return self.characteristic.observable(updating: updating)
     }
-    
-    
 }
 
 /// - Tag: Characteristic
@@ -45,12 +43,12 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
     
     /// Initializes this Characteristic based on the given HMCharacteristic and enables notifications for the
     /// underlying value if requested.
-    init(_ characteristic: HMCharacteristic, updating subscribe: Bool = false, callback: @escaping (T?) -> () = { _ in}) {
+    init(_ characteristic: HMCharacteristic, updating subscribe: Bool = false, callback: @escaping (T?) -> () = { _ in}, initialized initialValue: T? = nil) {
         self.characteristic = characteristic
         self.service = self.characteristic!.service!
         self.accessory = self.service!.accessory!
         self.subscribe = subscribe
-        self.value = nil
+        self.value = initialValue
         self.present = true
         self.callback = callback
         
@@ -92,7 +90,6 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
                 print("disabled notification for \(self.characteristic!.characteristicType)")
                 if let error = err {
                     print("error disabling notification for \(self.characteristic!.characteristicType): \(error)")
-                    self.value = nil
                 }
             })
         }
@@ -102,14 +99,13 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
         if !self.present {
             return
         }
-        self.value = nil
         self.characteristic!.readValue(completionHandler: {err in
             if let error = err {
                 print("error reading value for \(self.characteristic!.characteristicType): \(error)")
-                self.value = nil
             } else {
                 print("red value for characteristic \(self.characteristic!.characteristicType): \(self.characteristic!.value ?? "nil")")
                 self.value = self.characteristic!.value as! T?
+                Cache.shared.set(self)
             }
         })
         if self.subscribe! && !self.characteristic!.isNotificationEnabled {
@@ -117,7 +113,6 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
                 print("enabled notification for \(self.characteristic!.characteristicType)")
                 if let error = err {
                     print("error enabling notification for \(self.characteristic!.characteristicType): \(error)")
-                    self.value = nil
                 }
             })
         }
@@ -128,7 +123,27 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
         // print("received update for value for characteristic \(self.characteristic!.characteristicType): \(self.characteristic!.value ?? "nil")")
         self.value = characteristic.value as! T?
         self.callback(self.value)
+        Cache.shared.set(self)
     }
     
 }
 
+private class Cache {
+    
+    static let shared = Cache()
+    
+    private var cache: [UUID: Any] = [:]
+    
+    init() {}
+    
+    func get<T>(_ uniqueIdentifier: UUID) -> T? {
+        return cache[uniqueIdentifier] as? T
+    }
+    
+    func set<T>(_ characteristic: Characteristic<T>) {
+        guard characteristic.present else { return }
+        if let v = characteristic.value {
+            cache[characteristic.characteristic!.uniqueIdentifier] = (v as Any)
+        }
+    }
+}
