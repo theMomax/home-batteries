@@ -8,49 +8,76 @@
 
 import HomeKit
 import SwiftUI
+import UIKit
 
 
 struct HomeBatteryAccessoryQickView: View {
     
     @ObservedObject var accessory: Accessory
     
+    @State private var showDetail: Bool = false
+    
+    private let impact = UIImpactFeedbackGenerator(style: .rigid)
+    
     @ViewBuilder
     var body: some View {
-        WrapperView(edges: .init()) {
-            VStack(spacing: 0) {
-                if !self.accessory.value.isReachable {
-                    ConnectingToAccessoryView(accessory: self.$accessory.value)
-                } else {
-                    VStack {
-                        HStack(alignment: .top) {
-                            if self.hasEnergyStorage() {
-                                TotalStorageQuickView(self.accessory.value.services.typed().first!)
-                            } else {
-                                self.iconView(self.accessory.value.services.typed())
+        Button(action: {
+            self.showDetail = true
+            self.impact.impactOccurred()
+        }, label: {
+            WrapperView(edges: .init()) {
+                VStack(spacing: 0) {
+                    if !self.accessory.value.isReachable {
+                        ConnectingToAccessoryView(accessory: self.$accessory.value)
+                    } else {
+                        VStack {
+                            HStack(alignment: .top) {
+                                if self.hasEnergyStorage() {
+                                    TotalStorageQuickView(self.accessory.value.services.typed().first!)
+                                } else {
+                                    self.iconView(self.accessory.value.services.typed())
+                                }
+                                Spacer()
+                                if self.hasState() {
+                                    TotalStateView(self.accessory.value.services.typed().first!)
+                                }
                             }
                             Spacer()
-                            if self.hasState() {
-                                TotalStateView(self.accessory.value.services.typed().first!)
+                            HStack(alignment: .center) {
+                                Spacer()
+                                self.metersView(self.accessory.value.services.typed())
                             }
-                        }
-                        Spacer()
-                        HStack(alignment: .center) {
                             Spacer()
-                            self.metersView(self.accessory.value.services.typed())
-                        }
-                        Spacer()
-                        HStack(alignment: .bottom) {
-                            Text(self.accessory.value.name).font(.footnote).bold().lineLimit(1)
-                            Spacer()
-                        }
-                        HStack {
-                            Text(self.accessory.value.room?.name ?? "Default Room").font(.footnote).bold().lineLimit(1).foregroundColor(.secondary)
-                            Spacer()
+                            HStack(alignment: .bottom) {
+                                Text(self.accessory.value.name).font(.footnote).bold().lineLimit(1)
+                                Spacer()
+                            }
+                            HStack {
+                                Text(self.accessory.value.room?.name ?? "Default Room").font(.footnote).bold().lineLimit(1).foregroundColor(.secondary)
+                                Spacer()
+                            }
                         }
                     }
                 }
-            }
-        }
+            }.foregroundColor(.primary)
+        })
+        .sheet(isPresented: self.$showDetail, content: {
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        self.showDetail = false
+                    }, label: {
+                    ZStack {
+                        Image(systemName: "plus").rotationEffect(Angle(degrees: 45)).foregroundColor(.gray).scaleEffect(1.2)
+                    }
+                    }).buttonStyle(CircleButtonStyle(color: .init(white: 0.95)))
+                }.padding(.bottom)
+                ScrollView {
+                    HomeBatteryAccessoryLiveView(accessory: self.accessory).padding(.bottom)
+                }
+            }.padding().edgesIgnoringSafeArea(.bottom)
+        })
     }
     
     @ViewBuilder

@@ -16,22 +16,20 @@ struct HomeBatteryAccessoryLiveView: View {
     
     @ViewBuilder
     var body: some View {
-        WrapperView(edges: .init(arrayLiteral: .top, .horizontal)) {
-            if !self.accessory.value.isReachable {
-                ConnectingToAccessoryView(accessory: self.$accessory.value)
-            } else {
-                VStack {
-                    HStack {
-                        Text(self.accessory.value.name)
-                        if self.hasState() {
-                            TotalStateView(self.accessory.value.services.typed().first!)
-                        }
+        if !self.accessory.value.isReachable {
+            ConnectingToAccessoryView(accessory: self.$accessory.value)
+        } else {
+            VStack {
+                HStack {
+                    Text(self.accessory.value.name)
+                    if self.hasState() {
+                        TotalStateView(self.accessory.value.services.typed().first!)
                     }
-                    if self.hasEnergyStorage() {
-                        TotalStorageView(self.accessory.value.services.typed().first!).padding(.bottom)
-                    }
-                    self.metersView()
                 }
+                if self.hasEnergyStorage() {
+                    TotalStorageView(self.accessory.value.services.typed().first!).padding(.bottom)
+                }
+                self.metersView()
             }
         }
     }
