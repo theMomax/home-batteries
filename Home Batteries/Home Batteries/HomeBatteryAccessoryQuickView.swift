@@ -65,13 +65,9 @@ struct HomeBatteryAccessoryQickView: View {
             VStack {
                 HStack {
                     Spacer()
-                    Button(action: {
+                    CloseButton(action: {
                         self.showDetail = false
-                    }, label: {
-                    ZStack {
-                        Image(systemName: "plus").rotationEffect(Angle(degrees: 45)).foregroundColor(.gray).scaleEffect(1.2)
-                    }
-                    }).buttonStyle(CircleButtonStyle(color: .init(white: 0.95)))
+                    })
                 }.padding()
                 ScrollView {
                     HomeBatteryAccessoryLiveView(accessory: self.accessory).padding(.init(arrayLiteral: .horizontal, .bottom)).padding(.init(arrayLiteral: .horizontal, .bottom))

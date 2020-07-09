@@ -91,6 +91,21 @@ struct CircleButtonStyle: ButtonStyle {
     }
 }
 
+struct CloseButton: View {
+    
+    let action: () -> ()
+    
+    @Environment(\.colorScheme) var colorScheme
+    
+    var body: some View {
+        Button(action: self.action, label: {
+        ZStack {
+            Image(systemName: "plus").rotationEffect(Angle(degrees: 45)).foregroundColor(.gray).scaleEffect(1.2)
+        }
+        }).buttonStyle(CircleButtonStyle(color: .init(white: self.colorScheme == .dark ? 0.05 : 0.95)))
+    }
+}
+
 struct RoomsTab: View {
     
     @EnvironmentObject var hm: HomeManger
