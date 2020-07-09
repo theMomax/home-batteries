@@ -46,6 +46,7 @@
 		A5BBC4A42461A6F900CC7399 /* ConnectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BBC4A32461A6F900CC7399 /* ConnectingView.swift */; };
 		A5C998822459F628002890E8 /* GlobalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C998812459F628002890E8 /* GlobalView.swift */; };
 		A5C998842459F65B002890E8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C998832459F65B002890E8 /* HomeView.swift */; };
+		A5D0A3A224B6F60200238B01 /* ActionSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D0A3A124B6F60200238B01 /* ActionSetView.swift */; };
 		A5DB7E4A2475B1C100224B82 /* Trigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DB7E492475B1C100224B82 /* Trigger.swift */; };
 		A5E2238D24A89AB000567529 /* OutletQuickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E2238C24A89AB000567529 /* OutletQuickView.swift */; };
 		A5E2238F24A89E3200567529 /* OutletServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E2238E24A89E3200567529 /* OutletServiceView.swift */; };
@@ -93,6 +94,7 @@
 		A5BBC4A32461A6F900CC7399 /* ConnectingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectingView.swift; sourceTree = "<group>"; };
 		A5C998812459F628002890E8 /* GlobalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalView.swift; sourceTree = "<group>"; };
 		A5C998832459F65B002890E8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A5D0A3A124B6F60200238B01 /* ActionSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSetView.swift; sourceTree = "<group>"; };
 		A5DB7E492475B1C100224B82 /* Trigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trigger.swift; sourceTree = "<group>"; };
 		A5E2238C24A89AB000567529 /* OutletQuickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutletQuickView.swift; sourceTree = "<group>"; };
 		A5E2238E24A89E3200567529 /* OutletServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutletServiceView.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				A550A39B249FA6DF00535E81 /* HomeBatteryAccessoryQuickView.swift */,
 				A5E2238C24A89AB000567529 /* OutletQuickView.swift */,
 				A5E2238E24A89E3200567529 /* OutletServiceView.swift */,
+				A5D0A3A124B6F60200238B01 /* ActionSetView.swift */,
 			);
 			path = "Home Batteries";
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				A5E2238D24A89AB000567529 /* OutletQuickView.swift in Sources */,
 				A5F12AA6248FDCD4000FF456 /* EventViews.swift in Sources */,
 				A5691C61246175ED000999D3 /* HomeStore+HomeDelegate.swift in Sources */,
+				A5D0A3A224B6F60200238B01 /* ActionSetView.swift in Sources */,
 				A55DCAD7245C65C10013AB11 /* ControllerServiceView.swift in Sources */,
 				A5498DDE245C1DCC000A0D9B /* AccessoriesView.swift in Sources */,
 				A550A39C249FA6DF00535E81 /* HomeBatteryAccessoryQuickView.swift in Sources */,

@@ -23,9 +23,12 @@ protocol KnownCharacteristic: KnownHomeKitEntity {
     
     static func format(of value: Any) -> String?
     
+    func updateDescription(_ value: Any?) -> String?
+    
     func isValid(value: Any?) -> Bool?
 }
 
+// MARK: instance
 extension KnownCharacteristic {
     static func instance(_ characteristic: HMCharacteristic) -> KnownCharacteristic? {
         if Self.uuid == characteristic.characteristicType {
@@ -35,6 +38,7 @@ extension KnownCharacteristic {
     }
 }
 
+// MARK: any
 extension KnownCharacteristic {
     static func any(_ characteristic: HMCharacteristic) -> KnownCharacteristic? {
         return [
@@ -56,12 +60,14 @@ extension KnownCharacteristic {
     }
 }
 
+// MARK: name
 extension KnownCharacteristic {
     static func name(_ characteristic: HMCharacteristic) -> String {
         return (CurrentPower.any(characteristic)?.name ?? characteristic.localizedDescription)
     }
 }
 
+// MARK: description
 extension KnownCharacteristic {
     var description: String {
         return Self.description(characteristic)
@@ -75,7 +81,7 @@ extension KnownCharacteristic {
         return accessory.services.filter({ (service: HMService) in service.characteristics.contains(where: { (c: HMCharacteristic) in c.characteristicType == characteristic.characteristicType }) }).count > 1
     }
     
-    private static func serviceDescription(_ characteristic: HMCharacteristic) -> String {
+    fileprivate static func serviceDescription(_ characteristic: HMCharacteristic) -> String {
         if characteristic.service == nil  {
             return "unknown origin"
         } else if characteristic.service!.accessory == nil {
@@ -87,7 +93,7 @@ extension KnownCharacteristic {
         }
     }
     
-    private static func accessoryDescription(_ characteristic: HMCharacteristic, ending final: Bool = false) -> String {
+    fileprivate static func accessoryDescription(_ characteristic: HMCharacteristic, ending final: Bool = false) -> String {
         if final {
             return characteristic.service!.accessory!.name
         } else {
@@ -96,6 +102,7 @@ extension KnownCharacteristic {
     }
 }
 
+// MARK: unit
 extension KnownCharacteristic {
     static func unit() -> String? {
         return nil
@@ -112,6 +119,8 @@ extension KnownCharacteristic {
     }
 }
 
+
+// MARK: format
 extension KnownCharacteristic {
     private static func genericFormat(of value: Any) -> String? {
         switch value {
@@ -154,6 +163,7 @@ extension KnownCharacteristic {
     }
 }
 
+// MARK: isContinuous
 extension KnownCharacteristic {
     var isContinuous: Bool? {
         if let m = self.characteristic.metadata {
@@ -180,6 +190,7 @@ extension KnownCharacteristic {
     }
 }
 
+// MARK: isValid
 extension KnownCharacteristic {
     func isValid(value: Any?) -> Bool? {
         if let v = value {
@@ -240,6 +251,20 @@ extension KnownCharacteristic {
         return CurrentPower.any(characteristic)?.isValid(value) ?? false
     }
 }
+
+// MARK: updateDescription
+extension KnownCharacteristic {
+    func updateDescription(_ value: Any?) -> String? {
+        return "\(self.description) is set to \(self.format(value))"
+    }
+}
+
+extension KnownCharacteristic {
+    func updateDescription(_ value: Any?) -> String {
+        return self.updateDescription(value) ?? "Unknown value is changed"
+    }
+}
+
 
 // MARK: Implementations
 
@@ -474,6 +499,14 @@ class On: KnownCharacteristic {
         case false as Bool:
             return "off"
         default:
+            return nil
+        }
+    }
+    
+    func updateDescription(_ value: Any?) -> String? {
+        if let on = value as? Bool {
+            return "\(Self.accessoryDescription(self.characteristic, ending: true)) is turned \(self.format(on))"
+        } else {
             return nil
         }
     }

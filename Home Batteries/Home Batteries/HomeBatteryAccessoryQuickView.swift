@@ -72,11 +72,11 @@ struct HomeBatteryAccessoryQickView: View {
                         Image(systemName: "plus").rotationEffect(Angle(degrees: 45)).foregroundColor(.gray).scaleEffect(1.2)
                     }
                     }).buttonStyle(CircleButtonStyle(color: .init(white: 0.95)))
-                }.padding(.bottom)
+                }.padding()
                 ScrollView {
-                    HomeBatteryAccessoryLiveView(accessory: self.accessory).padding(.bottom)
+                    HomeBatteryAccessoryLiveView(accessory: self.accessory).padding(.init(arrayLiteral: .horizontal, .bottom)).padding(.init(arrayLiteral: .horizontal, .bottom))
                 }
-            }.padding().edgesIgnoringSafeArea(.bottom)
+            }.edgesIgnoringSafeArea(.bottom)
         })
     }
     

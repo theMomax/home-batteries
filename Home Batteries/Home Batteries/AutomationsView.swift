@@ -295,13 +295,7 @@ struct TriggerDetailView: View {
                 }.padding(.init(arrayLiteral: .top, .horizontal))
                 if self.trigger.value.actionSets.count > 0 {
                     ForEach(self.trigger.value.actionSets, id: \.uniqueIdentifier) { (actionset: HMActionSet) in
-                        WrapperView(edges: .init()) {
-                            HStack {
-                                Image(systemName: "gear").font(.headline)
-                                Text(actionset.name)
-                                Spacer()
-                            }
-                        }
+                        ActionSetView(actionSet: actionset)
                         .contextMenu {
                             Button(action: {
                                 self.trigger.value.removeActionSet(actionset, completionHandler: { err in
@@ -315,7 +309,6 @@ struct TriggerDetailView: View {
                                 })
                             }, label: DeteteContextMenuLabelView.init)
                         }
-                        .padding(.init(arrayLiteral: .top, .horizontal))
                     }
                 }
             }
