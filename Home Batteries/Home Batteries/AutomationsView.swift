@@ -48,9 +48,7 @@ struct AutomationsView: View {
         .navigationBarItems(trailing: Button(action: {
             self.showAddSheet = true
         }, label: {
-            ZStack {
-                Image(systemName: "plus").foregroundColor(.white)
-            }
+            Image(systemName: "plus").foregroundColor(.white)
         }).buttonStyle(CircleButtonStyle(color: .accentColor)))
             
         .sheet(isPresented: self.$showAddSheet) {

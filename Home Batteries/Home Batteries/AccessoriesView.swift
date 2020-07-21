@@ -37,6 +37,22 @@ struct AccessoriesView: View {
         }
     }
     
+    static func addAccessoryButton(home: HMHome) -> some View {
+        Button(action: {
+            Self.openHomeAppAddAccessoryDialoge(home: home)
+        }, label: {
+            Image(systemName: "plus").foregroundColor(.white)
+        }).buttonStyle(CircleButtonStyle())
+    }
+    
+    private static func openHomeAppAddAccessoryDialoge(home: HMHome) {
+        home.addAndSetupAccessories(completionHandler: { err in
+            if let e = err {
+                print(e)
+            }
+        })
+    }
+    
     private func grid(accessories: [HMAccessory], geo: GeometryProxy) -> some View {
         WaterfallGrid(accessories, id: \.uniqueIdentifier) { a in
             a.view().frame(height: (geo.size.width - 3*self.padding)/2 )

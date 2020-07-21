@@ -56,7 +56,7 @@ struct HomeTab: View {
                 ZStack {
                     Image(systemName: "house").foregroundColor(.white).offset(x: 0.0, y: -1.5)
                 }
-                }).buttonStyle(CircleButtonStyle()))
+            }).buttonStyle(CircleButtonStyle()), trailing: AccessoriesView.addAccessoryButton(home: self.hm.selected!.value))
                 
             .actionSheet(isPresented: self.$showActionSheet) {
                 ActionSheet(title: Text("Selct Home"), buttons: self.homesToActionSheetButtons() + [.cancel({
@@ -102,7 +102,7 @@ struct CloseButton: View {
         ZStack {
             Image(systemName: "plus").rotationEffect(Angle(degrees: 45)).foregroundColor(.gray).scaleEffect(1.2)
         }
-        }).buttonStyle(CircleButtonStyle(color: .init(white: self.colorScheme == .dark ? 0.05 : 0.95)))
+        }).buttonStyle(CircleButtonStyle(color: .init(white: self.colorScheme == .dark ? 0.25 : 0.95)))
     }
 }
 
@@ -124,7 +124,7 @@ struct RoomsTab: View {
                 ZStack {
                     Image(systemName: "list.bullet").foregroundColor(.white)
                 }
-            }).buttonStyle(CircleButtonStyle()))
+            }).buttonStyle(CircleButtonStyle()), trailing: AccessoriesView.addAccessoryButton(home: self.hm.selected!.value))
                 
             .actionSheet(isPresented: self.$showActionSheet) {
                 ActionSheet(title: Text("Selct Room"), buttons: self.roomsToActionSheetButtons() + [.cancel({

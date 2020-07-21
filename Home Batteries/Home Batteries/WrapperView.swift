@@ -32,7 +32,6 @@ struct WrapperView<Content> : View where Content : View {
 
     @ViewBuilder
     var body: some View {
-//        GeometryReader { geo in
             ZStack(alignment: self.alignment) {
                 if self.boxed {
                     if self.colorScheme != .dark {
@@ -55,7 +54,6 @@ struct WrapperView<Content> : View where Content : View {
                 }
             }
             .padding(self.edges, self.padding)
-//        }
     }
 }
 

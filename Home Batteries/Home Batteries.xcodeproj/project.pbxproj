@@ -40,7 +40,6 @@
 		A585BE24247ED73F00AE75F7 /* CharacteristicPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A585BE23247ED73F00AE75F7 /* CharacteristicPicker.swift */; };
 		A58BABF72486833600EFDD52 /* KnownAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58BABF62486833600EFDD52 /* KnownAccessory.swift */; };
 		A5B60BF924615F620038C92D /* AggregatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B60BF824615F620038C92D /* AggregatedValue.swift */; };
-		A5B8BA8524A0AC66003EEE69 /* Grid in Frameworks */ = {isa = PBXBuildFile; productRef = A5B8BA8424A0AC66003EEE69 /* Grid */; };
 		A5B8BA8824A0AE95003EEE69 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = A5B8BA8724A0AE95003EEE69 /* WaterfallGrid */; };
 		A5B9E36024587731005E5B4F /* HomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9E35B24587730005E5B4F /* HomeManager.swift */; };
 		A5BBC4A42461A6F900CC7399 /* ConnectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BBC4A32461A6F900CC7399 /* ConnectingView.swift */; };
@@ -107,7 +106,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5B8BA8824A0AE95003EEE69 /* WaterfallGrid in Frameworks */,
-				A5B8BA8524A0AC66003EEE69 /* Grid in Frameworks */,
 				A534805224586B10002BF820 /* HomeKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,7 +245,6 @@
 			);
 			name = "Home Batteries";
 			packageProductDependencies = (
-				A5B8BA8424A0AC66003EEE69 /* Grid */,
 				A5B8BA8724A0AE95003EEE69 /* WaterfallGrid */,
 			);
 			productName = "Home Batteries";
@@ -279,7 +276,6 @@
 			);
 			mainGroup = A545C796245868FA0096A547;
 			packageReferences = (
-				A5B8BA8324A0AC66003EEE69 /* XCRemoteSwiftPackageReference "swiftui-grid" */,
 				A5B8BA8624A0AE95003EEE69 /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
 			);
 			productRefGroup = A545C7A0245868FA0096A547 /* Products */;
@@ -546,14 +542,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A5B8BA8324A0AC66003EEE69 /* XCRemoteSwiftPackageReference "swiftui-grid" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/spacenation/swiftui-grid";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.4;
-			};
-		};
 		A5B8BA8624A0AE95003EEE69 /* XCRemoteSwiftPackageReference "WaterfallGrid" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/paololeonardi/WaterfallGrid";
@@ -565,11 +553,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A5B8BA8424A0AC66003EEE69 /* Grid */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A5B8BA8324A0AC66003EEE69 /* XCRemoteSwiftPackageReference "swiftui-grid" */;
-			productName = Grid;
-		};
 		A5B8BA8724A0AE95003EEE69 /* WaterfallGrid */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A5B8BA8624A0AE95003EEE69 /* XCRemoteSwiftPackageReference "WaterfallGrid" */;
