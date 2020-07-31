@@ -41,8 +41,8 @@ struct AccessoriesView: View {
         Button(action: {
             Self.openHomeAppAddAccessoryDialoge(home: home)
         }, label: {
-            Image(systemName: "plus").foregroundColor(.white)
-        }).buttonStyle(CircleButtonStyle())
+            Image(systemName: "plus").foregroundColor(.gray)
+        }).secondaryCircleButtonStyle()
     }
     
     private static func openHomeAppAddAccessoryDialoge(home: HMHome) {

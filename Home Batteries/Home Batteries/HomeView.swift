@@ -54,9 +54,9 @@ struct HomeTab: View {
                 self.showActionSheet = true
             }, label: {
                 ZStack {
-                    Image(systemName: "house").foregroundColor(.white).offset(x: 0.0, y: -1.5)
+                    Image(systemName: "house").foregroundColor(.gray).offset(x: 0.0, y: -1.5)
                 }
-            }).buttonStyle(CircleButtonStyle()), trailing: AccessoriesView.addAccessoryButton(home: self.hm.selected!.value))
+            }).secondaryCircleButtonStyle(), trailing: AccessoriesView.addAccessoryButton(home: self.hm.selected!.value))
                 
             .actionSheet(isPresented: self.$showActionSheet) {
                 ActionSheet(title: Text("Selct Home"), buttons: self.homesToActionSheetButtons() + [.cancel({
@@ -91,6 +91,23 @@ struct CircleButtonStyle: ButtonStyle {
     }
 }
 
+struct SecondaryCircleButton<Button: View>: View {
+    
+    let button: Button
+    
+    @Environment(\.colorScheme) var colorScheme
+    
+    var body: some View {
+        self.button.buttonStyle(CircleButtonStyle(color: .init(white: self.colorScheme == .dark ? 0.25 : 0.95)))
+    }
+}
+
+extension View {
+    public func secondaryCircleButtonStyle() -> some View {
+        SecondaryCircleButton(button: self)
+    }
+}
+
 struct CloseButton: View {
     
     let action: () -> ()
@@ -99,10 +116,8 @@ struct CloseButton: View {
     
     var body: some View {
         Button(action: self.action, label: {
-        ZStack {
             Image(systemName: "plus").rotationEffect(Angle(degrees: 45)).foregroundColor(.gray).scaleEffect(1.2)
-        }
-        }).buttonStyle(CircleButtonStyle(color: .init(white: self.colorScheme == .dark ? 0.25 : 0.95)))
+        }).secondaryCircleButtonStyle()
     }
 }
 
@@ -122,9 +137,9 @@ struct RoomsTab: View {
                 self.showActionSheet = true
             }, label: {
                 ZStack {
-                    Image(systemName: "list.bullet").foregroundColor(.white)
+                    Image(systemName: "list.bullet").foregroundColor(.gray)
                 }
-            }).buttonStyle(CircleButtonStyle()), trailing: AccessoriesView.addAccessoryButton(home: self.hm.selected!.value))
+                }).secondaryCircleButtonStyle(), trailing: AccessoriesView.addAccessoryButton(home: self.hm.selected!.value))
                 
             .actionSheet(isPresented: self.$showActionSheet) {
                 ActionSheet(title: Text("Selct Room"), buttons: self.roomsToActionSheetButtons() + [.cancel({
