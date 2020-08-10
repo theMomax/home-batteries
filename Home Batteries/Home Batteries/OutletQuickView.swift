@@ -54,6 +54,7 @@ struct OutletQuickView: View {
         .onTapGesture {
             self.toggle()
         }
+    
     }
     
     @ViewBuilder

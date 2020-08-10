@@ -18,6 +18,7 @@
 		A538310C245EE6A600B49F67 /* HomeBatteryAccessoryLiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538310B245EE6A600B49F67 /* HomeBatteryAccessoryLiveView.swift */; };
 		A538ADED24924B7B00CED37C /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538ADEC24924B7B00CED37C /* LocationManager.swift */; };
 		A538ADEF249265BB00CED37C /* HomeKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538ADEE249265BB00CED37C /* HomeKitManager.swift */; };
+		A543497B24D46ECA00EE0A8C /* Customization.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A543497924D46ECA00EE0A8C /* Customization.xcdatamodeld */; };
 		A545C7A3245868FA0096A547 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545C7A2245868FA0096A547 /* AppDelegate.swift */; };
 		A545C7A5245868FA0096A547 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545C7A4245868FA0096A547 /* SceneDelegate.swift */; };
 		A545C7A7245868FA0096A547 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545C7A6245868FA0096A547 /* ContentView.swift */; };
@@ -65,6 +66,7 @@
 		A538310B245EE6A600B49F67 /* HomeBatteryAccessoryLiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBatteryAccessoryLiveView.swift; sourceTree = "<group>"; };
 		A538ADEC24924B7B00CED37C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A538ADEE249265BB00CED37C /* HomeKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKitManager.swift; sourceTree = "<group>"; };
+		A543497A24D46ECA00EE0A8C /* Customization.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Customization.xcdatamodel; sourceTree = "<group>"; };
 		A545C79F245868FA0096A547 /* Home Batteries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Home Batteries.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A545C7A2245868FA0096A547 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A545C7A4245868FA0096A547 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		A545C796245868FA0096A547 = {
 			isa = PBXGroup;
 			children = (
+				A543497924D46ECA00EE0A8C /* Customization.xcdatamodeld */,
 				A545C7A1245868FA0096A547 /* Home Batteries */,
 				A545C7A0245868FA0096A547 /* Products */,
 				A534805024586B10002BF820 /* Frameworks */,
@@ -305,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A543497B24D46ECA00EE0A8C /* Customization.xcdatamodeld in Sources */,
 				A5C998822459F628002890E8 /* GlobalView.swift in Sources */,
 				A52205D5245DD561005C7F1F /* HorizontalBarDiagram.swift in Sources */,
 				A54C9F39247959170044F3DB /* PredicateView.swift in Sources */,
@@ -559,6 +563,19 @@
 			productName = WaterfallGrid;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		A543497924D46ECA00EE0A8C /* Customization.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A543497A24D46ECA00EE0A8C /* Customization.xcdatamodel */,
+			);
+			currentVersion = A543497A24D46ECA00EE0A8C /* Customization.xcdatamodel */;
+			path = Customization.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A545C797245868FA0096A547 /* Project object */;
 }

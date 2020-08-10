@@ -9,6 +9,7 @@
 import WaterfallGrid
 import SwiftUI
 import HomeKit
+import CoreData
 
 struct AccessoriesView: View {
     
@@ -16,10 +17,14 @@ struct AccessoriesView: View {
     
     @Binding var showRoomOnly: Bool
     
+//    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    @FetchRequest(entity: AccessoryCustomization.entity(), sortDescriptors: []) var accessoryCustomizations: FetchedResults<AccessoryCustomization>
+    
     let padding: CGFloat = 20
     
     var body: some View {
-        self.content(accessories: Self.knownAccessories(home: self.home, room: self.showRoomOnly ? self.home.room! : nil))
+        self.content(accessories: Self.knownAccessories(home: self.home, room: self.showRoomOnly ? self.home.room! : nil, customizations: self.accessoryCustomizations))
     }
     
     @ViewBuilder
@@ -30,7 +35,7 @@ struct AccessoriesView: View {
                     Text("No supported accessories here...").foregroundColor(.secondary)
                 }
             } else if accessories.count == 1 {
-                accessories[0].view().frame(width: (geo.size.width - 3*self.padding)/2,height: (geo.size.width - 3*self.padding)/2 ).padding(self.padding)
+                self.customizedAccessoryView(accessories.first!).frame(width: (geo.size.width - 3*self.padding)/2,height: (geo.size.width - 3*self.padding)/2 ).padding(self.padding)
             } else {
                 self.grid(accessories: accessories, geo: geo)
             }
@@ -53,22 +58,59 @@ struct AccessoriesView: View {
         })
     }
     
+    private func customizedAccessoryView(_ accessory: HMAccessory) -> some View {
+        return accessory.view()
+//        return accessory.view().modifier(Favorable(customization: self.accessoryCustomizations.filter({c in c.uniqueIdentifier == accessory.uniqueIdentifier}).first ?? AccessoryCustomization(context: self.managedObjectContext)))
+    }
+    
     private func grid(accessories: [HMAccessory], geo: GeometryProxy) -> some View {
         WaterfallGrid(accessories, id: \.uniqueIdentifier) { a in
-            a.view().frame(height: (geo.size.width - 3*self.padding)/2 )
+            self.customizedAccessoryView(a).frame(height: (geo.size.width - 3*self.padding)/2 )
         }
         .gridStyle(columns: 2, spacing: self.padding, padding: .init(top: self.padding, leading: self.padding, bottom: self.padding, trailing: self.padding), animation: nil)
     }
     
-    private static func knownAccessories(home: Home, room: HMRoom?) -> [HMAccessory] {
+    private static func knownAccessories(home: Home, room: HMRoom?, customizations: FetchedResults<AccessoryCustomization>) -> [HMAccessory] {
         var accessories: [HMAccessory]
         if let room = room {
             accessories = room.accessories
         } else {
-            accessories = home.value.accessories
+            accessories = home.value.accessories.filter({ a in
+                !customizations.contains(where: { c in
+                    a.uniqueIdentifier == c.uniqueIdentifier && !c.favorite
+                })
+            })
         }
         
         return accessories.filter({ a in a.known()})
     }
 }
 
+//struct Favorable: ViewModifier {
+//
+//    var customization: AccessoryCustomization
+//
+//    func body(content: Content) -> some View {
+//        return content.contextMenu {
+//                ToggleFavoriteStatusButton(customization: customization)
+//        }
+//    }
+//}
+//
+//struct ToggleFavoriteStatusButton: View {
+//
+//    var customization: AccessoryCustomization
+//
+//    var body: some View {
+//        Button(action: {
+//            self.customization.favorite.toggle()
+//        }, label: {
+//            HStack {
+//                Text("")
+//                Spacer()
+//                Image(systemName: self.customization.favorite ? "star.slash" : "star")
+//            }
+//        })
+//    }
+//
+//}
