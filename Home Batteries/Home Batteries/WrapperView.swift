@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import HomeKit
+import SwiftUICharts
 
 struct WrapperView<Content> : View where Content : View {
     
@@ -67,9 +68,9 @@ struct AccessoryWrapperView_Previews: PreviewProvider {
                 
                 
                 VStack {
-                    WrapperView() {
-                        Text("1")
-                    }.frame(width: 100)
+                    WrapperView {
+                        LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "Title", legend: "Legendary", dropShadow: false)
+                    }
                     WrapperView(alignment: .topLeading) {
                         Text("2")
                     }

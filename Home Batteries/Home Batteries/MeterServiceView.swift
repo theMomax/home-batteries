@@ -77,31 +77,10 @@ extension ElectricityMeterTypes {
     }
 }
 
-struct ElectricityMeterServiceQuickView: View {
-    
-    @Binding var currentPower: Float?
-    let type: ElectricityMeterTypes
-    
-    @ViewBuilder
-    var body: some View {
-        VStack(spacing: -5) {
-            HStack(spacing: 2) {
-                Spacer()
-                Text(String(format: "%.0f", abs(currentPower ?? 0.0))).font(Font.system(.title)).lineLimit(1).foregroundColor(self.color()).fixedSize()
-                Text("W").font(Font.system(.title)).foregroundColor(.secondary).fixedSize()
-            }
-            if self.type != .other {
-                HStack {
-                    Spacer()
-                    Text(self.type.description(for: currentPower ?? 0.0)).font(.footnote).foregroundColor(.secondary)
-                }
-            }
-        }
-    }
-    
-    func color() -> Color {
-        if let p = self.currentPower {
-            if !self.type.invertedConnotation {
+extension ElectricityMeterTypes {
+    func color(for currentPower: Float?) -> Color {
+        if let p = currentPower {
+            if !self.invertedConnotation {
                 if p < 0 {
                     return .red
                 } else {
@@ -120,6 +99,29 @@ struct ElectricityMeterServiceQuickView: View {
     }
 }
 
+struct ElectricityMeterServiceQuickView: View {
+    
+    @Binding var currentPower: Float?
+    let type: ElectricityMeterTypes
+    
+    @ViewBuilder
+    var body: some View {
+        VStack(spacing: -5) {
+            HStack(spacing: 2) {
+                Spacer()
+                Text(String(format: "%.0f", abs(currentPower ?? 0.0))).font(Font.system(.title)).lineLimit(1).foregroundColor(self.type.color(for: currentPower)).fixedSize()
+                Text("W").font(Font.system(.title)).foregroundColor(.secondary).fixedSize()
+            }
+            if self.type != .other {
+                HStack {
+                    Spacer()
+                    Text(self.type.description(for: currentPower ?? 0.0)).font(.footnote).foregroundColor(.secondary)
+                }
+            }
+        }
+    }
+}
+
 struct ElectricityMeterServiceView: View {
     
     var name: Binding<String?>?
@@ -129,21 +131,23 @@ struct ElectricityMeterServiceView: View {
     var currentPowerL3: Binding<Float?>?
     let type: ElectricityMeterTypes
     
+    @Binding var showLines: Bool
+    
     @ViewBuilder
     var body: some View {
         VStack {
             HStack(spacing: 2) {
-                Text(String(format: "%.0f", currentPower ?? 0.0)).font(Font.system(.title)).lineLimit(1)
-                Text("W").font(Font.system(.title)).foregroundColor(.secondary)
+                if self.name != nil {
+                    Text(self.name!.wrappedValue ?? "?").font(.headline)
+                }
                 
                 Spacer()
                 
-                if self.name != nil {
-                    Text(self.name!.wrappedValue ?? "?")
-                }
+                Text(String(format: "%.0f", abs(currentPower ?? 0.0))).font(.title).lineLimit(1).foregroundColor(self.type.color(for: currentPower)).fixedSize()
+                Text("W").font(Font.system(.title)).foregroundColor(.secondary).fixedSize()
             }
             
-            if self.currentPowerL1 != nil && self.currentPowerL2 != nil && self.currentPowerL3 != nil {
+            if self.showLines && self.currentPowerL1 != nil && self.currentPowerL2 != nil && self.currentPowerL3 != nil {
                 HorizontalBarDiagram([
                     Segment(currentPowerL1!, name: "L1"),
                     Segment(currentPowerL2!, name: "L2"),
@@ -151,6 +155,10 @@ struct ElectricityMeterServiceView: View {
                 ],
                                      positiveColors: self.type.invertedConnotation ? HorizontalBarDiagram.negativeColors : HorizontalBarDiagram.positiveColors,
                                      negativeColors: self.type.invertedConnotation ? HorizontalBarDiagram.positiveColors : HorizontalBarDiagram.negativeColors)
+            }
+        }.onTapGesture {
+            withAnimation {
+                self.showLines.toggle()
             }
         }
     }
@@ -174,7 +182,7 @@ struct ElectricityMeterServiceView_Previews: PreviewProvider {
                                     currentPowerL1: lines ? .constant(12.34) : nil,
                                     currentPowerL2: lines ? .constant(203.34) : nil,
                                     currentPowerL3: lines ? .constant(104.34) : nil,
-                                    type: .other)
+                                    type: .other, showLines: .constant(true))
                                     
                             }
                             HStack {

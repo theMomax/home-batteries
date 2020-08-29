@@ -14,6 +14,10 @@ struct HomeBatteryAccessoryLiveView: View {
     
     @ObservedObject var accessory: Accessory
     
+    init(accessory: Accessory) {
+        self.accessory = accessory
+    }
+    
     @ViewBuilder
     var body: some View {
         if !self.accessory.value.isReachable {
@@ -29,23 +33,11 @@ struct HomeBatteryAccessoryLiveView: View {
                 if self.hasEnergyStorage() {
                     TotalStorageView(self.accessory.value.services.typed().first!).padding(.bottom)
                 }
-                self.metersView()
+                MeterAccessoryLiveView(self.accessory)
             }
         }
     }
-    
-    private func metersView() -> some View {
-        let meters = self.metersWithAllLines() + self.metersWithoutAllLines()
-        
-        return ForEach(0..<meters.count) { index in
-            if index == 0 {
-                MeterView(meters[index])
-            } else {
-                MeterView(meters[index]).padding(.top)
-            }
-        }
-    }
-    
+
     private func hasState() -> Bool {
         let cs: [ControllerService] = self.accessory.value.services.typed()
         return !cs.isEmpty
@@ -55,13 +47,39 @@ struct HomeBatteryAccessoryLiveView: View {
         let es: [EnergyStorageService] = self.accessory.value.services.typed()
         return !es.isEmpty
     }
+}
+
+struct MeterAccessoryLiveView: View {
+    private let meters: [ElectricityMeterService]
     
-    private func metersWithAllLines() -> [ElectricityMeterService] {
-        return self.accessory.value.services.typed().filter({s in s.lines != nil})
+    @State private var showExtendedViewFor: Int? = 0
+    
+    init(_ accessory: Accessory) {
+        self.meters = Self.metersWithAllLines(accessory) + Self.metersWithoutAllLines(accessory)
     }
     
-    private func metersWithoutAllLines() -> [ElectricityMeterService] {
-        return self.accessory.value.services.typed().filter({s in s.lines == nil})
+    @ViewBuilder
+    var body: some View {
+        ForEach(0..<meters.count) { index in
+            MeterView(self.meters[index], extended: Binding(get: {
+                return self.showExtendedViewFor == index
+            }, set: { isExtended in
+                if isExtended {
+                    self.showExtendedViewFor = index
+                } else {
+                    self.showExtendedViewFor = nil
+                }
+            })).padding(.top)
+        }
+    }
+    
+    
+    private static func metersWithAllLines(_ accessory: Accessory) -> [ElectricityMeterService] {
+        return accessory.value.services.typed().filter({s in s.lines != nil})
+    }
+    
+    private static func metersWithoutAllLines(_ accessory: Accessory) -> [ElectricityMeterService] {
+        return accessory.value.services.typed().filter({s in s.lines == nil})
     }
 }
 
@@ -95,8 +113,9 @@ struct MeterView: View {
     @ObservedObject var currentPowerL2: Characteristic<Float>
     @ObservedObject var currentPowerL3: Characteristic<Float>
     @ObservedObject var meterType: Characteristic<UInt8>
+    @Binding var showLines: Bool
        
-    init(_ service: ElectricityMeterService) {
+    init(_ service: ElectricityMeterService, extended showLines: Binding<Bool>) {
         self.service = service
 
         self.currentPower = service.power.observable()
@@ -112,6 +131,8 @@ struct MeterView: View {
         }
         
         self.meterType = service.type?.observable(updating: false) ?? Characteristic<UInt8>()
+        
+        self._showLines = showLines
     }
     
     @ViewBuilder
@@ -121,14 +142,19 @@ struct MeterView: View {
                                     currentPowerL1: self.currentPowerL1.present ? self.$currentPowerL1.value : nil,
                                     currentPowerL2: self.currentPowerL2.present ? self.$currentPowerL2.value : nil,
                                     currentPowerL3: self.currentPowerL3.present ? self.$currentPowerL3.value : nil,
-                                    type: self.meterType.present && self.meterType.value != nil ? ElectricityMeterTypes(rawValue: self.meterType.value!) ?? .other : .other
+                                    type: self.meterType.present && self.meterType.value != nil ? ElectricityMeterTypes(rawValue: self.meterType.value!) ?? .other : .other,
+                                    showLines: self.$showLines
         )
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            self.currentPower.reload()
-            self.currentPowerL1.reload()
-            self.currentPowerL2.reload()
-            self.currentPowerL3.reload()
+            self.reload()
         }
+    }
+    
+    func reload() {
+        self.currentPower.reload()
+        self.currentPowerL1.reload()
+        self.currentPowerL2.reload()
+        self.currentPowerL3.reload()
     }
     
 }
