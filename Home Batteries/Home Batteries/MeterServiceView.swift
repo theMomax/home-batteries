@@ -137,8 +137,19 @@ struct ElectricityMeterServiceView: View {
     var body: some View {
         VStack {
             HStack(spacing: 2) {
-                if self.name != nil {
-                    Text(self.name!.wrappedValue ?? "?").font(.headline)
+                VStack {
+                    if self.name != nil {
+                        HStack {
+                            Text(self.name!.wrappedValue ?? "?").font(.headline)
+                            Spacer()
+                        }
+                    }
+                    if self.type != .other {
+                        HStack {
+                            Text(self.type.description(for: self.currentPower ?? 0)).foregroundColor(.secondary).font(.caption)
+                            Spacer()
+                        }
+                    }
                 }
                 
                 Spacer()
