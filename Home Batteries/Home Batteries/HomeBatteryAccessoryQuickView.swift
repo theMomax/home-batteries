@@ -135,13 +135,17 @@ struct MeterQuickView: View {
                                         type: self.meterType.present && self.meterType.value != nil ? ElectricityMeterTypes(rawValue: self.meterType.value!) ?? .other : .other
             )
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-                self.currentPower.reload()
-                self.meterType.reload()
+                self.reload()
             }
 
         } else {
             EmptyView()
         }
+    }
+    
+    func reload() {
+        self.currentPower.reload()
+        self.meterType.reload()
     }
 }
 
@@ -165,12 +169,16 @@ struct MeterIconView: View {
         if condition(meterType.value == nil ? nil : ElectricityMeterTypes.init(rawValue: meterType.value!)) {
             self.icon().font(.title)
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-                self.meterType.reload()
+                self.reload()
             }
 
         } else {
             EmptyView()
         }
+    }
+    
+    func reload() {
+        self.meterType.reload()
     }
     
     
@@ -219,10 +227,14 @@ struct TotalStorageQuickView: View {
         EnergyStorageServiceQuickView(batteryLevel: self.$batteryLevel.value, chargingState: self.$chargingState.value, statusLowBattery: self.$statusLowBattery.value)
         .frame(height: 25)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            self.batteryLevel.reload()
-            self.chargingState.reload()
-            self.statusLowBattery.reload()
+            self.reload()
         }
+    }
+    
+    func reload() {
+        self.batteryLevel.reload()
+        self.chargingState.reload()
+        self.statusLowBattery.reload()
     }
     
 }
