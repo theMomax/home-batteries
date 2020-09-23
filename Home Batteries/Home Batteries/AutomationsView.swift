@@ -25,7 +25,7 @@ struct AutomationsView: View {
             }.padding(Edge.Set(arrayLiteral: .horizontal, .bottom))
             
             ForEach(self.home.value.triggers, id: \.uniqueIdentifier) { trigger in
-                TriggerOverviewView(trigger: Trigger(trigger, in: self.home.value))
+                TriggerOverviewView(trigger: Trigger(trigger, in: self.home.value)).environmentObject(self.home)
                 .contextMenu {
                     Button(action: {
                         self.home.value.removeTrigger(trigger, completionHandler: { err in
@@ -131,6 +131,8 @@ struct DeteteContextMenuLabelView: View {
 // MARK: TriggerOverviewView
 struct TriggerOverviewView: View {
     
+    @EnvironmentObject var home: Home
+    
     @ObservedObject var trigger: Trigger<HMTrigger>
     
     @ViewBuilder
@@ -138,7 +140,7 @@ struct TriggerOverviewView: View {
         WrapperView(edges: .init()) {
             HStack {
                 if self.trigger.value is HMEventTrigger {
-                    NavigationLink(destination: TriggerDetailView(trigger: Trigger(self.trigger.value as! HMEventTrigger, in: self.trigger.home))) {
+                    NavigationLink(destination: TriggerDetailView(trigger: Trigger(self.trigger.value as! HMEventTrigger, in: self.trigger.home)).environmentObject(self.home)) {
                         Image(systemName: "flowchart.fill").font(.headline).foregroundColor(self.iconColor())
                         
                         Text(self.trigger.value.name).foregroundColor(.primary)

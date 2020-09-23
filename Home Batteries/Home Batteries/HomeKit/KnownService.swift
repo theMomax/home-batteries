@@ -59,7 +59,7 @@ extension KnownService {
 
 extension KnownService {
     static func any(_ service: HMService) -> KnownService? {
-        return ControllerService.instance(service) ?? ElectricityMeterService.instance(service) ?? KoogeekElectricityMeterService.instance(service) ?? EnergyStorageService.instance(service) ?? OutletService.instance(service)
+        return ControllerService.instance(service) ?? ElectricityMeterService.instance(service) ?? KoogeekElectricityMeterService.instance(service) ?? EnergyStorageService.instance(service) ?? OutletService.instance(service) ?? ElectricVehicleChargingStationService.instance(service)
     }
 }
 
@@ -184,6 +184,43 @@ class OutletService: KnownService {
     
     var outletInUse: OutletInUse {
         return self.service.characteristics.typed().first!
+    }
+    
+    required init(_ service: HMService) {
+        self.service = service
+    }
+}
+
+class ElectricVehicleChargingStationService: KnownService {
+    internal static let uuid: String = "00000004-0000-1000-8000-0036AC324978"
+    static let entityType: String = "Charging Station"
+    static let required: [KnownCharacteristic.Type] = [On.self, OutletInUse.self]
+    static let optional: [KnownCharacteristic.Type] = [Name.self]
+    
+    var service: HMService
+    
+    var batteryLevel: BatteryLevel {
+        return self.service.characteristics.typed().first!
+    }
+    
+    var chargingState: ChargingState {
+        return self.service.characteristics.typed().first!
+    }
+    
+    var statusLowBattery: StatusLowBattery {
+        return self.service.characteristics.typed().first!
+    }
+    
+    var active: Active {
+        return self.service.characteristics.typed().first!
+    }
+    
+    var estimatedRange: EstimatedRange? {
+        return self.service.characteristics.typed().first
+    }
+    
+    var currentPower: CurrentPower? {
+        return self.service.characteristics.typed().first
     }
     
     required init(_ service: HMService) {

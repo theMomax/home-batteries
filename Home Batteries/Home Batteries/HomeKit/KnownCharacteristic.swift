@@ -55,7 +55,9 @@ extension KnownCharacteristic {
             StatusLowBattery.instance,
             StatusFault.instance,
             On.instance,
-            OutletInUse.instance
+            OutletInUse.instance,
+            EstimatedRange.instance,
+            Active.instance,
             ].map( { i in i(characteristic)}).reduce(nil, {(a, b) in a ?? b})
     }
 }
@@ -124,6 +126,10 @@ extension KnownCharacteristic {
 extension KnownCharacteristic {
     private static func genericFormat(of value: Any) -> String? {
         switch value {
+        case let f as Float:
+            return String(format: "%.0f", f)
+        case let d as Double:
+            return String(format: "%.0f", d)
         case let c as CustomStringConvertible:
             return c.description
         default:
@@ -284,6 +290,12 @@ class Energy {
 class Percentage {
     static func unit() -> String? {
         return "%"
+    }
+}
+
+class Range {
+    static func unit() -> String? {
+        return "km"
     }
 }
 
@@ -458,6 +470,14 @@ class ChargingState: KnownCharacteristic {
             return nil
         }
     }
+    
+    static let allCases: [UInt8] = [0, 1, 2]
+    
+    static let notCharging: UInt8 = 0
+    
+    static let charging: UInt8 = 1
+    
+    static let notChargeable: UInt8 = 2
 }
 
 class StatusLowBattery: KnownCharacteristic {
@@ -480,6 +500,12 @@ class StatusLowBattery: KnownCharacteristic {
             return nil
         }
     }
+    
+    static let allCases: [UInt8] = [0, 1]
+    
+    static let normal: UInt8 = 0
+    
+    static let low: UInt8 = 1
 }
 
 class On: KnownCharacteristic {
@@ -532,4 +558,43 @@ class OutletInUse: KnownCharacteristic {
             return nil
         }
     }
+}
+
+class EstimatedRange: Range, KnownCharacteristic {
+    static let uuid: String = "00000007-0001-1000-8000-0036AC324978"
+    static let entityType: String = "Estimated Range"
+    
+    var characteristic: HMCharacteristic
+    
+    required init(_ characteristic: HMCharacteristic) {
+        self.characteristic = characteristic
+    }
+    
+}
+
+
+class Active: KnownCharacteristic {
+    static var uuid: String = "000000B0-0000-1000-8000-0026BB765291"
+    static var entityType: String = "Is Active"
+    
+    var characteristic: HMCharacteristic
+    
+    required init(_ characteristic: HMCharacteristic) {
+        self.characteristic = characteristic
+    }
+    
+    static func format(of value: Any) -> String? {
+        switch value {
+        case 0 as UInt8:
+            return "inactive"
+        case 1 as UInt8:
+            return "active"
+        default:
+            return "nil"
+        }
+    }
+    
+    static let inactive: UInt8 = 0
+    
+    static let active: UInt8 = 1
 }

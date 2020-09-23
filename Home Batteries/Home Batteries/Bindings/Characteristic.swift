@@ -104,7 +104,7 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
                 print("error reading value for \(self.characteristic!.characteristicType): \(error)")
             } else {
                 print("red value for characteristic \(self.characteristic!.characteristicType): \(self.characteristic!.value ?? "nil")")
-                self.value = self.characteristic!.value as! T?
+                self.value = self.convert(self.characteristic!.value)
                 Cache.shared.set(self)
             }
         })
@@ -120,10 +120,28 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
     
     func accessory(_ accessory: HMAccessory, service: HMService, didUpdateValueFor characteristic: HMCharacteristic) {
         guard accessory == self.accessory && service == self.service && characteristic == self.characteristic else { return }
-        // print("received update for value for characteristic \(self.characteristic!.characteristicType): \(self.characteristic!.value ?? "nil")")
-        self.value = characteristic.value as! T?
+//        print("received update for value for characteristic \(self.characteristic!.characteristicType): \(self.characteristic!.value ?? "nil")")
+        self.value = self.convert(characteristic.value)
         self.callback(self.value)
         Cache.shared.set(self)
+    }
+    
+    private func convert(_ value: Any?) -> T? {
+        if let v = value {
+            switch v {
+            case let n as NSNumber:
+                switch T.self {
+                case is Float.Type:
+                    return (n.floatValue as! T)
+                default:
+                    return (v as! T)
+                }
+            default:
+                return (v as! T)
+            }
+        } else {
+            return nil
+        }
     }
     
 }

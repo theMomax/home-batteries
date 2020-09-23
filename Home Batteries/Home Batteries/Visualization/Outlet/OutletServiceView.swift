@@ -69,7 +69,7 @@ struct OutletServiceView_Previews: PreviewProvider {
                 }
                 
                 
-                .previewDisplayName("\(colorScheme) -> \(on!)")
+                .previewDisplayName("\(colorScheme) -> \(on)")
             }
             .environment(\.colorScheme, colorScheme)
         }

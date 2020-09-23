@@ -109,9 +109,9 @@ struct NewEventView: View {
                         
                         WrapperView(edges: .bottom) {
                             HStack {
-                                TextField(self.type == .equality ? "value" : self.type == .lessOrEqual ? "upper bound" : "lower bound", text: self.$firstBoundary) {
+                                TextField(self.type == .equality ? "value" : self.type == .lessOrEqual ? "upper bound" : "lower bound", text: self.$firstBoundary, onCommit:  {
                                     UIApplication.shared.endEditing()
-                                }
+                                })
                                 .keyboardType(.numbersAndPunctuation)
                                 Text(CurrentPower.unit(self.characteristic!))
                             }
@@ -122,9 +122,9 @@ struct NewEventView: View {
                             
                             WrapperView(edges: .bottom) {
                                 HStack {
-                                    TextField("upper bound", text: self.$secondBoundary) {
+                                    TextField("upper bound", text: self.$secondBoundary, onCommit:  {
                                         UIApplication.shared.endEditing()
-                                    }
+                                    })
                                     .keyboardType(.numbersAndPunctuation)
                                     Text(CurrentPower.unit(self.characteristic!))
                                 }
