@@ -59,18 +59,8 @@ struct HomeBatteryAccessoryQickView: View {
         .onTapGesture {
             self.detail()
         }
-        .sheet(isPresented: self.$showDetail, content: {
-            VStack {
-                HStack {
-                    Spacer()
-                    CloseButton(action: {
-                        self.showDetail = false
-                    })
-                }.padding()
-                ScrollView {
-                    HomeBatteryAccessoryLiveView(accessory: self.accessory).padding(.init(arrayLiteral: .horizontal, .bottom)).padding(.init(arrayLiteral: .horizontal, .bottom))
-                }
-            }.edgesIgnoringSafeArea(.bottom)
+        .withAccessoryDetail(accessory: self.accessory, isPresented: self.$showDetail, content: {
+            HomeBatteryAccessoryDetailLayoutView(accessory: self.accessory)
         })
     }
     

@@ -15,7 +15,7 @@
 		A52205D5245DD561005C7F1F /* HorizontalBarDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52205D4245DD561005C7F1F /* HorizontalBarDiagram.swift */; };
 		A534805224586B10002BF820 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A534805124586B10002BF820 /* HomeKit.framework */; };
 		A5383106245E281200B49F67 /* BatteryDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5383105245E281200B49F67 /* BatteryDiagram.swift */; };
-		A538310C245EE6A600B49F67 /* HomeBatteryAccessoryLiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538310B245EE6A600B49F67 /* HomeBatteryAccessoryLiveView.swift */; };
+		A538310C245EE6A600B49F67 /* HomeBatteryAccessoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538310B245EE6A600B49F67 /* HomeBatteryAccessoryDetailView.swift */; };
 		A538ADED24924B7B00CED37C /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538ADEC24924B7B00CED37C /* LocationManager.swift */; };
 		A538ADEF249265BB00CED37C /* HomeKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538ADEE249265BB00CED37C /* HomeKitManager.swift */; };
 		A545C7A3245868FA0096A547 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545C7A2245868FA0096A547 /* AppDelegate.swift */; };
@@ -29,6 +29,7 @@
 		A549ADB2245C7E0400976D22 /* MeterServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A549ADB1245C7E0400976D22 /* MeterServiceView.swift */; };
 		A54C9F39247959170044F3DB /* PredicateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54C9F38247959170044F3DB /* PredicateView.swift */; };
 		A550A39C249FA6DF00535E81 /* HomeBatteryAccessoryQuickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A550A39B249FA6DF00535E81 /* HomeBatteryAccessoryQuickView.swift */; };
+		A55ACBB3251E68D000DF46FD /* HomeBatteryAccessoryDetailLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55ACBB2251E68D000DF46FD /* HomeBatteryAccessoryDetailLayoutView.swift */; };
 		A55DCAD7245C65C10013AB11 /* ControllerServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55DCAD6245C65C10013AB11 /* ControllerServiceView.swift */; };
 		A55DCAD9245C6B650013AB11 /* WrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55DCAD8245C6B650013AB11 /* WrapperView.swift */; };
 		A563F8A2245F363A0094BFD7 /* Accessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A563F8A1245F363A0094BFD7 /* Accessory.swift */; };
@@ -52,6 +53,11 @@
 		A5DF855B2517B0610027EA47 /* ElectricVehicleChargingStationServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DF855A2517B0610027EA47 /* ElectricVehicleChargingStationServiceView.swift */; };
 		A5E2238D24A89AB000567529 /* OutletQuickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E2238C24A89AB000567529 /* OutletQuickView.swift */; };
 		A5E2238F24A89E3200567529 /* OutletServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E2238E24A89E3200567529 /* OutletServiceView.swift */; };
+		A5E55393251CADA500BEB455 /* ChargingStationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E55392251CADA500BEB455 /* ChargingStationDetailView.swift */; };
+		A5E55396251CAEE400BEB455 /* AccessoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E55395251CAEE400BEB455 /* AccessoryDetailView.swift */; };
+		A5E55399251CB3DB00BEB455 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E55398251CB3DB00BEB455 /* Buttons.swift */; };
+		A5E5539C251CB3FD00BEB455 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E5539B251CB3FD00BEB455 /* Colors.swift */; };
+		A5E5539F251CB63E00BEB455 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E5539E251CB63E00BEB455 /* Colors.xcassets */; };
 		A5F12AA6248FDCD4000FF456 /* EventViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F12AA5248FDCD4000FF456 /* EventViews.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,7 +71,7 @@
 		A534804F24586B10002BF820 /* Home Batteries.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Home Batteries.entitlements"; sourceTree = "<group>"; };
 		A534805124586B10002BF820 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
 		A5383105245E281200B49F67 /* BatteryDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryDiagram.swift; sourceTree = "<group>"; };
-		A538310B245EE6A600B49F67 /* HomeBatteryAccessoryLiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBatteryAccessoryLiveView.swift; sourceTree = "<group>"; };
+		A538310B245EE6A600B49F67 /* HomeBatteryAccessoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBatteryAccessoryDetailView.swift; sourceTree = "<group>"; };
 		A538ADEC24924B7B00CED37C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A538ADEE249265BB00CED37C /* HomeKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKitManager.swift; sourceTree = "<group>"; };
 		A545C79F245868FA0096A547 /* Home Batteries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Home Batteries.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +87,7 @@
 		A549ADB1245C7E0400976D22 /* MeterServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterServiceView.swift; sourceTree = "<group>"; };
 		A54C9F38247959170044F3DB /* PredicateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateView.swift; sourceTree = "<group>"; };
 		A550A39B249FA6DF00535E81 /* HomeBatteryAccessoryQuickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBatteryAccessoryQuickView.swift; sourceTree = "<group>"; };
+		A55ACBB2251E68D000DF46FD /* HomeBatteryAccessoryDetailLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeBatteryAccessoryDetailLayoutView.swift; path = ../../../../../../../HomeBatteryAccessoryDetailLayoutView.swift; sourceTree = "<group>"; };
 		A55DCAD6245C65C10013AB11 /* ControllerServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerServiceView.swift; sourceTree = "<group>"; };
 		A55DCAD8245C6B650013AB11 /* WrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperView.swift; sourceTree = "<group>"; };
 		A563F8A1245F363A0094BFD7 /* Accessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessory.swift; sourceTree = "<group>"; };
@@ -102,6 +109,11 @@
 		A5DF855A2517B0610027EA47 /* ElectricVehicleChargingStationServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectricVehicleChargingStationServiceView.swift; sourceTree = "<group>"; };
 		A5E2238C24A89AB000567529 /* OutletQuickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutletQuickView.swift; sourceTree = "<group>"; };
 		A5E2238E24A89E3200567529 /* OutletServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutletServiceView.swift; sourceTree = "<group>"; };
+		A5E55392251CADA500BEB455 /* ChargingStationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargingStationDetailView.swift; sourceTree = "<group>"; };
+		A5E55395251CAEE400BEB455 /* AccessoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryDetailView.swift; sourceTree = "<group>"; };
+		A5E55398251CB3DB00BEB455 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		A5E5539B251CB3FD00BEB455 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		A5E5539E251CB63E00BEB455 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		A5F12AA5248FDCD4000FF456 /* EventViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -250,8 +262,9 @@
 				A55DCAD6245C65C10013AB11 /* ControllerServiceView.swift */,
 				A549ADB1245C7E0400976D22 /* MeterServiceView.swift */,
 				A576AEC1245DE4B500EDDFD9 /* StorageServiceView.swift */,
-				A538310B245EE6A600B49F67 /* HomeBatteryAccessoryLiveView.swift */,
+				A538310B245EE6A600B49F67 /* HomeBatteryAccessoryDetailView.swift */,
 				A550A39B249FA6DF00535E81 /* HomeBatteryAccessoryQuickView.swift */,
+				A55ACBB2251E68D000DF46FD /* HomeBatteryAccessoryDetailLayoutView.swift */,
 			);
 			path = "Home Batteries";
 			sourceTree = "<group>";
@@ -261,6 +274,7 @@
 			children = (
 				A5DF85572517AC510027EA47 /* ChargingStationQuickView.swift */,
 				A5DF855A2517B0610027EA47 /* ElectricVehicleChargingStationServiceView.swift */,
+				A5E55392251CADA500BEB455 /* ChargingStationDetailView.swift */,
 			);
 			path = "Charging Station";
 			sourceTree = "<group>";
@@ -268,10 +282,14 @@
 		A5DF85612517B18F0027EA47 /* gerneric */ = {
 			isa = PBXGroup;
 			children = (
+				A5E5539E251CB63E00BEB455 /* Colors.xcassets */,
 				A55DCAD8245C6B650013AB11 /* WrapperView.swift */,
 				A52205D4245DD561005C7F1F /* HorizontalBarDiagram.swift */,
 				A5383105245E281200B49F67 /* BatteryDiagram.swift */,
 				A5BBC4A32461A6F900CC7399 /* ConnectingView.swift */,
+				A5E55395251CAEE400BEB455 /* AccessoryDetailView.swift */,
+				A5E55398251CB3DB00BEB455 /* Buttons.swift */,
+				A5E5539B251CB3FD00BEB455 /* Colors.swift */,
 			);
 			path = gerneric;
 			sourceTree = "<group>";
@@ -343,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A545C7AF245868FC0096A547 /* LaunchScreen.storyboard in Resources */,
+				A5E5539F251CB63E00BEB455 /* Colors.xcassets in Resources */,
 				A545C7AC245868FC0096A547 /* Preview Assets.xcassets in Resources */,
 				A545C7A9245868FC0096A547 /* Assets.xcassets in Resources */,
 			);
@@ -356,13 +375,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5C998822459F628002890E8 /* GlobalView.swift in Sources */,
+				A5E5539C251CB3FD00BEB455 /* Colors.swift in Sources */,
 				A52205D5245DD561005C7F1F /* HorizontalBarDiagram.swift in Sources */,
 				A54C9F39247959170044F3DB /* PredicateView.swift in Sources */,
 				A5B9E36024587731005E5B4F /* HomeManager.swift in Sources */,
 				A5DB7E4A2475B1C100224B82 /* Trigger.swift in Sources */,
 				A5691C5F24617523000999D3 /* HomeStore+AccessoryDelegate.swift in Sources */,
 				A576AEC2245DE4B500EDDFD9 /* StorageServiceView.swift in Sources */,
-				A538310C245EE6A600B49F67 /* HomeBatteryAccessoryLiveView.swift in Sources */,
+				A538310C245EE6A600B49F67 /* HomeBatteryAccessoryDetailView.swift in Sources */,
 				A5E2238F24A89E3200567529 /* OutletServiceView.swift in Sources */,
 				A5DF85582517AC510027EA47 /* ChargingStationQuickView.swift in Sources */,
 				A5498DDC245C139A000A0D9B /* Home.swift in Sources */,
@@ -382,8 +402,12 @@
 				A516DE56247827EA00F17C52 /* KnownService.swift in Sources */,
 				A516DE5824784DA100F17C52 /* CharacteristicEventView.swift in Sources */,
 				A50D66572475342400B292F5 /* AutomationsView.swift in Sources */,
+				A5E55399251CB3DB00BEB455 /* Buttons.swift in Sources */,
+				A5E55393251CADA500BEB455 /* ChargingStationDetailView.swift in Sources */,
 				A585BE24247ED73F00AE75F7 /* CharacteristicPicker.swift in Sources */,
 				A5B60BF924615F620038C92D /* AggregatedValue.swift in Sources */,
+				A55ACBB3251E68D000DF46FD /* HomeBatteryAccessoryDetailLayoutView.swift in Sources */,
+				A5E55396251CAEE400BEB455 /* AccessoryDetailView.swift in Sources */,
 				A549ADB2245C7E0400976D22 /* MeterServiceView.swift in Sources */,
 				A5DF855B2517B0610027EA47 /* ElectricVehicleChargingStationServiceView.swift in Sources */,
 				A5691C5E24617523000999D3 /* HomeStore.swift in Sources */,

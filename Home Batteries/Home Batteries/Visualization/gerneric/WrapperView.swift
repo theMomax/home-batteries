@@ -11,47 +11,55 @@ import SwiftUI
 import HomeKit
 import SwiftUICharts
 
+enum Style {
+    case elevated, inset, outset, invisible
+}
+
 struct WrapperView<Content> : View where Content : View {
     
-    private let context: () -> Content
+    private let content: () -> Content
     private let alignment: Alignment
-    private let boxed: Bool
+    private let style: Style
     private let edges: Edge.Set
     private let padding: CGFloat?
     private let innerPadding: CGFloat?
+    private let innerEdges: Edge.Set
     
     @Environment(\.colorScheme) var colorScheme
     
-    @inlinable init(edges: Edge.Set = .all, padding: CGFloat? = nil, innerPadding: CGFloat? = nil, alignment: Alignment = .center, boxed: Bool = true, @ViewBuilder _ content: @escaping () -> Content) {
-        self.context = content
+    @inlinable init(edges: Edge.Set = .all, padding: CGFloat? = nil, innerEdges: Edge.Set = .all, innerPadding: CGFloat? = nil, alignment: Alignment = .center, style: Style = .elevated, @ViewBuilder _ content: @escaping () -> Content) {
+        self.content = content
         self.alignment = alignment
-        self.boxed = boxed
+        self.style = style
         self.padding = padding
         self.edges = edges
         self.innerPadding = innerPadding
+        self.innerEdges = innerEdges
     }
 
     @ViewBuilder
     var body: some View {
             ZStack(alignment: self.alignment) {
-                if self.boxed {
+                if self.style == Style.elevated {
                     if self.colorScheme != .dark {
                         RoundedRectangle(cornerRadius: 15)
                         .foregroundColor(Color(.systemBackground))
                         .shadow(color: Color.gray.opacity(0.3), radius: 10)
                     } else {
                         RoundedRectangle(cornerRadius: 15)
-                        .foregroundColor(.init(white: 0.1))
+                            .foregroundColor(Color(.secondarySystemBackground))
                     }
-                } else {
+                } else if self.style == Style.invisible {
                     RoundedRectangle(cornerRadius: 15)
                     .opacity(0)
+                } else {
+                    RoundedRectangle(cornerRadius: 15).foregroundColor(self.style == .outset ? Color.outsetBackground : Color.tintedBackground)
                 }
                     
                 if self.innerPadding == nil {
-                    self.context().padding()
+                    self.content().padding(self.innerEdges)
                 } else {
-                    self.context().padding(self.innerPadding!)
+                    self.content().padding(self.innerEdges, self.innerPadding!)
                 }
             }
             .padding(self.edges, self.padding)

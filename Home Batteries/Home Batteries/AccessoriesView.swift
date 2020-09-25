@@ -26,7 +26,7 @@ struct AccessoriesView: View {
     private func content(accessories: [HMAccessory]) -> some View {
         GeometryReader { (geo: GeometryProxy) in
             if accessories.isEmpty {
-                WrapperView(boxed: false) {
+                WrapperView(style: .invisible) {
                     Text("No supported accessories here...").foregroundColor(.secondary)
                 }
             } else if accessories.count == 1 {

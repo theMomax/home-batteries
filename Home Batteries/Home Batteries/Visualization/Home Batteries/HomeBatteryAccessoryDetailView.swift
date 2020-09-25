@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 import HomeKit
 
-struct HomeBatteryAccessoryLiveView: View {
+struct HomeBatteryAccessoryDetailView: View {
     
     @ObservedObject var accessory: Accessory
     
@@ -20,27 +20,12 @@ struct HomeBatteryAccessoryLiveView: View {
     
     @ViewBuilder
     var body: some View {
-        if !self.accessory.value.isReachable {
-            ConnectingToAccessoryView(accessory: self.$accessory.value)
-        } else {
-            VStack {
-                HStack {
-                    Text(self.accessory.value.name)
-                    if self.hasState() {
-                        TotalStateView(self.accessory.value.services.typed().first!)
-                    }
-                }
-                if self.hasEnergyStorage() {
-                    TotalStorageView(self.accessory.value.services.typed().first!).padding(.bottom)
-                }
-                MeterAccessoryLiveView(self.accessory)
+        VStack {
+            if self.hasEnergyStorage() {
+                TotalStorageView(self.accessory.value.services.typed().first!).padding(.bottom)
             }
+            MeterAccessoryLiveView(self.accessory)
         }
-    }
-
-    private func hasState() -> Bool {
-        let cs: [ControllerService] = self.accessory.value.services.typed()
-        return !cs.isEmpty
     }
     
     private func hasEnergyStorage() -> Bool {

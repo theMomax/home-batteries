@@ -15,6 +15,11 @@ struct ChargingStationQuickView: View {
     
     @ObservedObject var accessory: Accessory
     
+    @State private var showDetail: Bool = false
+    
+    private let impact = UIImpactFeedbackGenerator(style: .rigid)
+    
+    
     init(accessory: Accessory) {
         self.accessory = accessory
     }
@@ -41,6 +46,16 @@ struct ChargingStationQuickView: View {
                 }
             }
         }
+        .onTapGesture {
+            self.detail()
+        }
+        .withAccessoryDetail(accessory: self.accessory, isPresented: self.$showDetail, content: {ChargingStationDetailView(accessory: self.accessory)})
     }
+    
+    private func detail() {
+        self.showDetail = true
+        self.impact.impactOccurred()
+    }
+    
 }
 
