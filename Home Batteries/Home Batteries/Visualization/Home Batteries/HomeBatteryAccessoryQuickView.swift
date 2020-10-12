@@ -59,6 +59,10 @@ struct HomeBatteryAccessoryQickView: View {
         .onTapGesture {
             self.detail()
         }
+        .onLongPressGesture {
+            self.detail()
+        }
+        
         .withAccessoryDetail(accessory: self.accessory, isPresented: self.$showDetail, content: {
             HomeBatteryAccessoryDetailLayoutView(accessory: self.accessory)
         })

@@ -29,7 +29,7 @@
 		A549ADB2245C7E0400976D22 /* MeterServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A549ADB1245C7E0400976D22 /* MeterServiceView.swift */; };
 		A54C9F39247959170044F3DB /* PredicateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54C9F38247959170044F3DB /* PredicateView.swift */; };
 		A550A39C249FA6DF00535E81 /* HomeBatteryAccessoryQuickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A550A39B249FA6DF00535E81 /* HomeBatteryAccessoryQuickView.swift */; };
-		A55ACBB3251E68D000DF46FD /* HomeBatteryAccessoryDetailLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55ACBB2251E68D000DF46FD /* HomeBatteryAccessoryDetailLayoutView.swift */; };
+		A55B975D2534CAE50091CA4E /* HomeBatteryAccessoryDetailLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55B975C2534CAE50091CA4E /* HomeBatteryAccessoryDetailLayoutView.swift */; };
 		A55DCAD7245C65C10013AB11 /* ControllerServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55DCAD6245C65C10013AB11 /* ControllerServiceView.swift */; };
 		A55DCAD9245C6B650013AB11 /* WrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55DCAD8245C6B650013AB11 /* WrapperView.swift */; };
 		A563F8A2245F363A0094BFD7 /* Accessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A563F8A1245F363A0094BFD7 /* Accessory.swift */; };
@@ -49,6 +49,7 @@
 		A5C998842459F65B002890E8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C998832459F65B002890E8 /* HomeView.swift */; };
 		A5D0A3A224B6F60200238B01 /* ActionSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D0A3A124B6F60200238B01 /* ActionSetView.swift */; };
 		A5DB7E4A2475B1C100224B82 /* Trigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DB7E492475B1C100224B82 /* Trigger.swift */; };
+		A5DCD78A2520E5BA003117B8 /* OutletDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DCD7892520E5BA003117B8 /* OutletDetailView.swift */; };
 		A5DF85582517AC510027EA47 /* ChargingStationQuickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DF85572517AC510027EA47 /* ChargingStationQuickView.swift */; };
 		A5DF855B2517B0610027EA47 /* ElectricVehicleChargingStationServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DF855A2517B0610027EA47 /* ElectricVehicleChargingStationServiceView.swift */; };
 		A5E2238D24A89AB000567529 /* OutletQuickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E2238C24A89AB000567529 /* OutletQuickView.swift */; };
@@ -87,7 +88,7 @@
 		A549ADB1245C7E0400976D22 /* MeterServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterServiceView.swift; sourceTree = "<group>"; };
 		A54C9F38247959170044F3DB /* PredicateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateView.swift; sourceTree = "<group>"; };
 		A550A39B249FA6DF00535E81 /* HomeBatteryAccessoryQuickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBatteryAccessoryQuickView.swift; sourceTree = "<group>"; };
-		A55ACBB2251E68D000DF46FD /* HomeBatteryAccessoryDetailLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeBatteryAccessoryDetailLayoutView.swift; path = ../../../../../../../HomeBatteryAccessoryDetailLayoutView.swift; sourceTree = "<group>"; };
+		A55B975C2534CAE50091CA4E /* HomeBatteryAccessoryDetailLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBatteryAccessoryDetailLayoutView.swift; sourceTree = "<group>"; };
 		A55DCAD6245C65C10013AB11 /* ControllerServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerServiceView.swift; sourceTree = "<group>"; };
 		A55DCAD8245C6B650013AB11 /* WrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperView.swift; sourceTree = "<group>"; };
 		A563F8A1245F363A0094BFD7 /* Accessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessory.swift; sourceTree = "<group>"; };
@@ -105,6 +106,7 @@
 		A5C998832459F65B002890E8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A5D0A3A124B6F60200238B01 /* ActionSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSetView.swift; sourceTree = "<group>"; };
 		A5DB7E492475B1C100224B82 /* Trigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trigger.swift; sourceTree = "<group>"; };
+		A5DCD7892520E5BA003117B8 /* OutletDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutletDetailView.swift; sourceTree = "<group>"; };
 		A5DF85572517AC510027EA47 /* ChargingStationQuickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargingStationQuickView.swift; sourceTree = "<group>"; };
 		A5DF855A2517B0610027EA47 /* ElectricVehicleChargingStationServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectricVehicleChargingStationServiceView.swift; sourceTree = "<group>"; };
 		A5E2238C24A89AB000567529 /* OutletQuickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutletQuickView.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 			children = (
 				A5E2238C24A89AB000567529 /* OutletQuickView.swift */,
 				A5E2238E24A89E3200567529 /* OutletServiceView.swift */,
+				A5DCD7892520E5BA003117B8 /* OutletDetailView.swift */,
 			);
 			path = Outlet;
 			sourceTree = "<group>";
@@ -264,7 +267,7 @@
 				A576AEC1245DE4B500EDDFD9 /* StorageServiceView.swift */,
 				A538310B245EE6A600B49F67 /* HomeBatteryAccessoryDetailView.swift */,
 				A550A39B249FA6DF00535E81 /* HomeBatteryAccessoryQuickView.swift */,
-				A55ACBB2251E68D000DF46FD /* HomeBatteryAccessoryDetailLayoutView.swift */,
+				A55B975C2534CAE50091CA4E /* HomeBatteryAccessoryDetailLayoutView.swift */,
 			);
 			path = "Home Batteries";
 			sourceTree = "<group>";
@@ -406,7 +409,6 @@
 				A5E55393251CADA500BEB455 /* ChargingStationDetailView.swift in Sources */,
 				A585BE24247ED73F00AE75F7 /* CharacteristicPicker.swift in Sources */,
 				A5B60BF924615F620038C92D /* AggregatedValue.swift in Sources */,
-				A55ACBB3251E68D000DF46FD /* HomeBatteryAccessoryDetailLayoutView.swift in Sources */,
 				A5E55396251CAEE400BEB455 /* AccessoryDetailView.swift in Sources */,
 				A549ADB2245C7E0400976D22 /* MeterServiceView.swift in Sources */,
 				A5DF855B2517B0610027EA47 /* ElectricVehicleChargingStationServiceView.swift in Sources */,
@@ -416,6 +418,8 @@
 				A5691C61246175ED000999D3 /* HomeStore+HomeDelegate.swift in Sources */,
 				A5D0A3A224B6F60200238B01 /* ActionSetView.swift in Sources */,
 				A55DCAD7245C65C10013AB11 /* ControllerServiceView.swift in Sources */,
+				A55B975D2534CAE50091CA4E /* HomeBatteryAccessoryDetailLayoutView.swift in Sources */,
+				A5DCD78A2520E5BA003117B8 /* OutletDetailView.swift in Sources */,
 				A5498DDE245C1DCC000A0D9B /* AccessoriesView.swift in Sources */,
 				A550A39C249FA6DF00535E81 /* HomeBatteryAccessoryQuickView.swift in Sources */,
 				A55DCAD9245C6B650013AB11 /* WrapperView.swift in Sources */,
@@ -487,7 +491,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -542,7 +546,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -562,7 +566,7 @@
 				DEVELOPMENT_TEAM = 997W4U8U6L;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Home Batteries/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -584,7 +588,7 @@
 				DEVELOPMENT_TEAM = 997W4U8U6L;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Home Batteries/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

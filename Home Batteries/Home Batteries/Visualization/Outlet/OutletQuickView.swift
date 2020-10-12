@@ -16,7 +16,11 @@ struct OutletQuickView: View {
     @ObservedObject var accessory: Accessory
     @ObservedObject var on: Characteristic<Bool>
     
-    private let impactMed = UIImpactFeedbackGenerator(style: .rigid)
+    @State private var showDetail: Bool = false
+    
+    @State private var processing: Bool = false
+    
+    private let impact = UIImpactFeedbackGenerator(style: .rigid)
     
     init(accessory: Accessory) {
         self.accessory = accessory
@@ -32,7 +36,7 @@ struct OutletQuickView: View {
                     ConnectingToAccessoryView(accessory: self.$accessory.value)
                 } else {
                     VStack {
-                        OutletServiceView(self.accessory.value.services.typed().first!)
+                        OutletServiceView(self.accessory.value.services.typed().first!, processing: self.$processing)
                         Spacer()
                         HStack(alignment: .center) {
                             Spacer()
@@ -54,6 +58,19 @@ struct OutletQuickView: View {
         .onTapGesture {
             self.toggle()
         }
+        .onLongPressGesture {
+            self.detail()
+        }
+        .withAccessoryDetail(accessory: self.accessory, isPresented: self.$showDetail) {
+            OutletDetailView(accessory: self.accessory)
+        }
+        
+        
+    }
+    
+    private func detail() {
+        self.showDetail = true
+        self.impact.impactOccurred()
     }
     
     @ViewBuilder
@@ -67,13 +84,20 @@ struct OutletQuickView: View {
     }
     
     private func toggle() {
+        guard !self.processing else {
+            return
+        }
         if let o = self.on.value {
             self.on.characteristic!.writeValue(!o, completionHandler: { err in
                 if err == nil {
-                    self.on.value = !o
+                    self.on.value?.toggle()
                 }
+                
+                self.processing = false
             })
-            self.impactMed.impactOccurred()
+            
+            self.impact.impactOccurred()
+            self.processing = true
         }
     }
 }

@@ -157,7 +157,7 @@ struct ListElementView: View {
     
     init(label: Text, content: Text) {
         self.label = label
-        self.content = content
+        self.content = content.foregroundColor(.secondary)
     }
     
     init(label: String, content: String) {
@@ -188,7 +188,7 @@ struct CharacteristicView<T, Content>: View where Content : View {
         
         if let k = characteristic.characteristic?.known() {
             self.name = k.name
-            self.format = { v in  k.format(v) + k.unit()}
+            self.format = { v in  k.format(v) + (k.unit() == "" ? "" : " " + k.unit())}
         } else {
             self.name = characteristic.characteristic?.description ?? "Unknown characteristic"
             if let c = characteristic.characteristic {

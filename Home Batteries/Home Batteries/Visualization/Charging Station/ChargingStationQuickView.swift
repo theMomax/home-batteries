@@ -49,6 +49,9 @@ struct ChargingStationQuickView: View {
         .onTapGesture {
             self.detail()
         }
+        .onLongPressGesture {
+            self.detail()
+        }
         .withAccessoryDetail(accessory: self.accessory, isPresented: self.$showDetail, content: {ChargingStationDetailView(accessory: self.accessory)})
     }
     

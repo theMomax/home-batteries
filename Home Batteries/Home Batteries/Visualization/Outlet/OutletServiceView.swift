@@ -15,16 +15,19 @@ struct OutletServiceView: View {
     
     @ObservedObject var on: Characteristic<Bool>
     @ObservedObject var outletInUse: Characteristic<Bool>
+    
+    @Binding var processing: Bool
        
-    init(_ service: OutletService) {
+    init(_ service: OutletService, processing: Binding<Bool> = .constant(false)) {
         self.service = service
         self.on = service.on.observable()
         self.outletInUse = service.outletInUse.observable()
+        self._processing = processing
     }
     
     @ViewBuilder
     var body: some View {
-        OutletView(on: self.$on.value, outletInUse: self.$outletInUse.value)
+        OutletView(on: self.$on.value, outletInUse: self.$outletInUse.value, processing: self.$processing)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             self.on.reload()
             self.outletInUse.reload()
@@ -36,12 +39,28 @@ struct OutletServiceView: View {
 struct OutletView: View {
     
     @Binding var on: Bool?
+    
     @Binding var outletInUse: Bool?
+    
+    @Binding var processing: Bool
+    
+    init(on: Binding<Bool?>, outletInUse: Binding<Bool?>, processing: Binding<Bool> = .constant(false)) {
+        self._on = on.animation()
+        self._outletInUse = outletInUse
+        self._processing = processing
+    }
     
     var body: some View {
         HStack(alignment: .top) {
-            Image(systemName: "power").font(.title).foregroundColor(self.on != nil && self.on! ? .blue : .secondary)
-            Spacer(minLength: 0)
+            ZStack {
+                ProgressView().opacity(self.processing ? 1 : 0)
+                Image(systemName: "power")
+                    .font(.title)
+                    .foregroundColor(self.on != nil && self.on! ? .blue : .secondary)
+                    .opacity(self.processing ? 0 : 1)
+            }
+            
+            Spacer()
             Text(OutletInUse.format(outletInUse)).lineLimit(1).font(.footnote).foregroundColor(.secondary)
         }
     }

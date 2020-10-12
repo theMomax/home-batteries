@@ -243,7 +243,9 @@ struct LocationEventOverviewView: View {
     init(event: HMLocationEvent) {
         self.event = event
         
-        if CLLocationManager.authorizationStatus() == .notDetermined {
+        let cllm = CLLocationManager()
+        
+        if cllm.authorizationStatus == .notDetermined {
             self.lm.value.requestWhenInUseAuthorization()
         }
     }
