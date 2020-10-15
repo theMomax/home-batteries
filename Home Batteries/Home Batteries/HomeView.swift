@@ -56,7 +56,7 @@ struct HomeTab: View {
                 ZStack {
                     Image(systemName: "house").foregroundColor(.gray).offset(x: 0.0, y: -1.5)
                 }
-            }).secondaryCircleButtonStyle(), trailing: AccessoriesView.addAccessoryButton(home: self.hm.selected!.value))
+            }).secondaryCircleButtonStyle().scaleEffect(0.88), trailing: AccessoriesView.addAccessoryButton(home: self.hm.selected!.value))
                 
             .actionSheet(isPresented: self.$showActionSheet) {
                 ActionSheet(title: Text("Selct Home"), buttons: self.homesToActionSheetButtons() + [.cancel({

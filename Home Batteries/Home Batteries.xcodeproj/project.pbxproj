@@ -38,6 +38,16 @@
 		A5691C5F24617523000999D3 /* HomeStore+AccessoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C5C24617523000999D3 /* HomeStore+AccessoryDelegate.swift */; };
 		A5691C61246175ED000999D3 /* HomeStore+HomeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C60246175ED000999D3 /* HomeStore+HomeDelegate.swift */; };
 		A576AEC2245DE4B500EDDFD9 /* StorageServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A576AEC1245DE4B500EDDFD9 /* StorageServiceView.swift */; };
+		A57B24B525388ED600C6F11B /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A534805124586B10002BF820 /* HomeKit.framework */; };
+		A57B255D2538950A00C6F11B /* AccessorySelection.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = A5F8A0BF25387D0B007E2BE3 /* AccessorySelection.intentdefinition */; };
+		A57B2574253897E000C6F11B /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F8A0A025387CF5007E2BE3 /* IntentHandler.swift */; };
+		A57B2578253897E900C6F11B /* HomeStore+HomeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C60246175ED000999D3 /* HomeStore+HomeDelegate.swift */; };
+		A57B2579253897E900C6F11B /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C5B24617523000999D3 /* HomeStore.swift */; };
+		A57B257A253897E900C6F11B /* HomeStore+AccessoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C5C24617523000999D3 /* HomeStore+AccessoryDelegate.swift */; };
+		A57B257F2538995400C6F11B /* KnownVisualization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B257E2538995400C6F11B /* KnownVisualization.swift */; };
+		A57B25832538996F00C6F11B /* KnownAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58BABF62486833600EFDD52 /* KnownAccessory.swift */; };
+		A57B25872538997200C6F11B /* KnownService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516DE55247827EA00F17C52 /* KnownService.swift */; };
+		A57B258B2538997500C6F11B /* KnownCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516DE52247827D900F17C52 /* KnownCharacteristic.swift */; };
 		A585BE24247ED73F00AE75F7 /* CharacteristicPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A585BE23247ED73F00AE75F7 /* CharacteristicPicker.swift */; };
 		A58BABF72486833600EFDD52 /* KnownAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58BABF62486833600EFDD52 /* KnownAccessory.swift */; };
 		A5A0D7DA24E1DB8D0045D3A4 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = A5A0D7D924E1DB8D0045D3A4 /* SwiftUICharts */; };
@@ -60,7 +70,33 @@
 		A5E5539C251CB3FD00BEB455 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E5539B251CB3FD00BEB455 /* Colors.swift */; };
 		A5E5539F251CB63E00BEB455 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E5539E251CB63E00BEB455 /* Colors.xcassets */; };
 		A5F12AA6248FDCD4000FF456 /* EventViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F12AA5248FDCD4000FF456 /* EventViews.swift */; };
+		A5F8A0B525387CF5007E2BE3 /* AccessorySelection.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A5F8A09E25387CF5007E2BE3 /* AccessorySelection.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A5F8A0EE25388161007E2BE3 /* AccessorySelection.intentdefinition in Resources */ = {isa = PBXBuildFile; fileRef = A5F8A0BF25387D0B007E2BE3 /* AccessorySelection.intentdefinition */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A5F8A0B325387CF5007E2BE3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A545C797245868FA0096A547 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5F8A09D25387CF5007E2BE3;
+			remoteInfo = AccessorySelection;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A54096572538482200E0139C /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A5F8A0B525387CF5007E2BE3 /* AccessorySelection.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A50D66562475342400B292F5 /* AutomationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationsView.swift; sourceTree = "<group>"; };
@@ -75,6 +111,9 @@
 		A538310B245EE6A600B49F67 /* HomeBatteryAccessoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBatteryAccessoryDetailView.swift; sourceTree = "<group>"; };
 		A538ADEC24924B7B00CED37C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A538ADEE249265BB00CED37C /* HomeKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKitManager.swift; sourceTree = "<group>"; };
+		A54096472538481F00E0139C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		A54096492538481F00E0139C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		A540967A2538729000E0139C /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
 		A545C79F245868FA0096A547 /* Home Batteries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Home Batteries.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A545C7A2245868FA0096A547 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A545C7A4245868FA0096A547 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +136,8 @@
 		A5691C5C24617523000999D3 /* HomeStore+AccessoryDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HomeStore+AccessoryDelegate.swift"; sourceTree = "<group>"; };
 		A5691C60246175ED000999D3 /* HomeStore+HomeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HomeStore+HomeDelegate.swift"; sourceTree = "<group>"; };
 		A576AEC1245DE4B500EDDFD9 /* StorageServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceView.swift; sourceTree = "<group>"; };
+		A57B256D2538978400C6F11B /* AccessorySelection.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AccessorySelection.entitlements; sourceTree = "<group>"; };
+		A57B257E2538995400C6F11B /* KnownVisualization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownVisualization.swift; sourceTree = "<group>"; };
 		A585BE23247ED73F00AE75F7 /* CharacteristicPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicPicker.swift; sourceTree = "<group>"; };
 		A58BABF62486833600EFDD52 /* KnownAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownAccessory.swift; sourceTree = "<group>"; };
 		A5B60BF824615F620038C92D /* AggregatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggregatedValue.swift; sourceTree = "<group>"; };
@@ -117,6 +158,10 @@
 		A5E5539B251CB3FD00BEB455 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		A5E5539E251CB63E00BEB455 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		A5F12AA5248FDCD4000FF456 /* EventViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViews.swift; sourceTree = "<group>"; };
+		A5F8A09E25387CF5007E2BE3 /* AccessorySelection.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AccessorySelection.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5F8A0A025387CF5007E2BE3 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		A5F8A0A225387CF5007E2BE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5F8A0BF25387D0B007E2BE3 /* AccessorySelection.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = AccessorySelection.intentdefinition; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +175,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5F8A09B25387CF5007E2BE3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A57B24B525388ED600C6F11B /* HomeKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -139,6 +192,7 @@
 				A516DE52247827D900F17C52 /* KnownCharacteristic.swift */,
 				A516DE55247827EA00F17C52 /* KnownService.swift */,
 				A58BABF62486833600EFDD52 /* KnownAccessory.swift */,
+				A57B257E2538995400C6F11B /* KnownVisualization.swift */,
 			);
 			path = HomeKit;
 			sourceTree = "<group>";
@@ -147,6 +201,9 @@
 			isa = PBXGroup;
 			children = (
 				A534805124586B10002BF820 /* HomeKit.framework */,
+				A54096472538481F00E0139C /* WidgetKit.framework */,
+				A54096492538481F00E0139C /* SwiftUI.framework */,
+				A540967A2538729000E0139C /* IntentsUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -164,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				A545C7A1245868FA0096A547 /* Home Batteries */,
+				A5F8A09F25387CF5007E2BE3 /* AccessorySelection */,
 				A545C7A0245868FA0096A547 /* Products */,
 				A534805024586B10002BF820 /* Frameworks */,
 			);
@@ -173,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				A545C79F245868FA0096A547 /* Home Batteries.app */,
+				A5F8A09E25387CF5007E2BE3 /* AccessorySelection.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -297,6 +356,17 @@
 			path = gerneric;
 			sourceTree = "<group>";
 		};
+		A5F8A09F25387CF5007E2BE3 /* AccessorySelection */ = {
+			isa = PBXGroup;
+			children = (
+				A5F8A0BF25387D0B007E2BE3 /* AccessorySelection.intentdefinition */,
+				A57B256D2538978400C6F11B /* AccessorySelection.entitlements */,
+				A5F8A0A025387CF5007E2BE3 /* IntentHandler.swift */,
+				A5F8A0A225387CF5007E2BE3 /* Info.plist */,
+			);
+			path = AccessorySelection;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -307,10 +377,12 @@
 				A545C79B245868FA0096A547 /* Sources */,
 				A545C79C245868FA0096A547 /* Frameworks */,
 				A545C79D245868FA0096A547 /* Resources */,
+				A54096572538482200E0139C /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A5F8A0B425387CF5007E2BE3 /* PBXTargetDependency */,
 			);
 			name = "Home Batteries";
 			packageProductDependencies = (
@@ -321,18 +393,38 @@
 			productReference = A545C79F245868FA0096A547 /* Home Batteries.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A5F8A09D25387CF5007E2BE3 /* AccessorySelection */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5F8A0B925387CF5007E2BE3 /* Build configuration list for PBXNativeTarget "AccessorySelection" */;
+			buildPhases = (
+				A5F8A09A25387CF5007E2BE3 /* Sources */,
+				A5F8A09B25387CF5007E2BE3 /* Frameworks */,
+				A5F8A09C25387CF5007E2BE3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AccessorySelection;
+			productName = AccessorySelection;
+			productReference = A5F8A09E25387CF5007E2BE3 /* AccessorySelection.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		A545C797245868FA0096A547 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1140;
+				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Max Obermeier";
 				TargetAttributes = {
 					A545C79E245868FA0096A547 = {
 						CreatedOnToolsVersion = 11.4.1;
+					};
+					A5F8A09D25387CF5007E2BE3 = {
+						CreatedOnToolsVersion = 12.0.1;
 					};
 				};
 			};
@@ -354,6 +446,7 @@
 			projectRoot = "";
 			targets = (
 				A545C79E245868FA0096A547 /* Home Batteries */,
+				A5F8A09D25387CF5007E2BE3 /* AccessorySelection */,
 			);
 		};
 /* End PBXProject section */
@@ -363,10 +456,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5F8A0EE25388161007E2BE3 /* AccessorySelection.intentdefinition in Resources */,
 				A545C7AF245868FC0096A547 /* LaunchScreen.storyboard in Resources */,
 				A5E5539F251CB63E00BEB455 /* Colors.xcassets in Resources */,
 				A545C7AC245868FC0096A547 /* Preview Assets.xcassets in Resources */,
 				A545C7A9245868FC0096A547 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5F8A09C25387CF5007E2BE3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +515,7 @@
 				A5DF855B2517B0610027EA47 /* ElectricVehicleChargingStationServiceView.swift in Sources */,
 				A5691C5E24617523000999D3 /* HomeStore.swift in Sources */,
 				A5E2238D24A89AB000567529 /* OutletQuickView.swift in Sources */,
+				A57B257F2538995400C6F11B /* KnownVisualization.swift in Sources */,
 				A5F12AA6248FDCD4000FF456 /* EventViews.swift in Sources */,
 				A5691C61246175ED000999D3 /* HomeStore+HomeDelegate.swift in Sources */,
 				A5D0A3A224B6F60200238B01 /* ActionSetView.swift in Sources */,
@@ -426,7 +528,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5F8A09A25387CF5007E2BE3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A57B25872538997200C6F11B /* KnownService.swift in Sources */,
+				A57B25832538996F00C6F11B /* KnownAccessory.swift in Sources */,
+				A57B258B2538997500C6F11B /* KnownCharacteristic.swift in Sources */,
+				A57B2578253897E900C6F11B /* HomeStore+HomeDelegate.swift in Sources */,
+				A57B2579253897E900C6F11B /* HomeStore.swift in Sources */,
+				A57B257A253897E900C6F11B /* HomeStore+AccessoryDelegate.swift in Sources */,
+				A57B2574253897E000C6F11B /* IntentHandler.swift in Sources */,
+				A57B255D2538950A00C6F11B /* AccessorySelection.intentdefinition in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A5F8A0B425387CF5007E2BE3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5F8A09D25387CF5007E2BE3 /* AccessorySelection */;
+			targetProxy = A5F8A0B325387CF5007E2BE3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A545C7AD245868FC0096A547 /* LaunchScreen.storyboard */ = {
@@ -559,6 +684,7 @@
 		A545C7B4245868FC0096A547 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Home Batteries/Home Batteries.entitlements";
 				CODE_SIGN_STYLE = Automatic;
@@ -581,6 +707,7 @@
 		A545C7B5245868FC0096A547 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Home Batteries/Home Batteries.entitlements";
 				CODE_SIGN_STYLE = Automatic;
@@ -597,6 +724,46 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		A5F8A0BA25387CF5007E2BE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = AccessorySelection/AccessorySelection.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 997W4U8U6L;
+				INFOPLIST_FILE = AccessorySelection/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "themomax.Home-Batteries.AccessorySelection";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A5F8A0BB25387CF5007E2BE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = AccessorySelection/AccessorySelection.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 997W4U8U6L;
+				INFOPLIST_FILE = AccessorySelection/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "themomax.Home-Batteries.AccessorySelection";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -617,6 +784,15 @@
 			buildConfigurations = (
 				A545C7B4245868FC0096A547 /* Debug */,
 				A545C7B5245868FC0096A547 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5F8A0B925387CF5007E2BE3 /* Build configuration list for PBXNativeTarget "AccessorySelection" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5F8A0BA25387CF5007E2BE3 /* Debug */,
+				A5F8A0BB25387CF5007E2BE3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

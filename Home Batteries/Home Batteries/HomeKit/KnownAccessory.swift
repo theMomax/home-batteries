@@ -7,7 +7,6 @@
 //
 
 import HomeKit
-import SwiftUI
 
 extension HMAccessory {
     func known() -> Bool {
@@ -22,18 +21,5 @@ extension Array where Element == HMService {
     
     func typed<T : KnownService>() -> [T] {
         return self.map({s in s.known() as? T}).filter({s in s != nil}).map({s in s!})
-    }
-}
-
-extension HMAccessory {
-    @ViewBuilder
-    func view() -> some View {
-        if self.services.known().contains(where: { s in s is OutletService}) {
-            OutletQuickView(accessory: Accessory(self))
-        } else if self.services.known().contains(where: { s in s is ElectricVehicleChargingStationService}) {
-            ChargingStationQuickView(accessory: Accessory(self))
-        } else {
-            HomeBatteryAccessoryQickView(accessory: Accessory(self))
-        }
     }
 }
