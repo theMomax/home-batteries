@@ -18,6 +18,12 @@
 		A538310C245EE6A600B49F67 /* HomeBatteryAccessoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538310B245EE6A600B49F67 /* HomeBatteryAccessoryDetailView.swift */; };
 		A538ADED24924B7B00CED37C /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538ADEC24924B7B00CED37C /* LocationManager.swift */; };
 		A538ADEF249265BB00CED37C /* HomeKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538ADEE249265BB00CED37C /* HomeKitManager.swift */; };
+		A53A4EA52538C2E800417A68 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54096472538481F00E0139C /* WidgetKit.framework */; };
+		A53A4EA62538C2E800417A68 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54096492538481F00E0139C /* SwiftUI.framework */; };
+		A53A4EA92538C2E800417A68 /* QuickViewWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A4EA82538C2E800417A68 /* QuickViewWidget.swift */; };
+		A53A4EAC2538C2EE00417A68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A53A4EAB2538C2EE00417A68 /* Assets.xcassets */; };
+		A53A4EB22538C2EE00417A68 /* QuickViewWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A53A4EA42538C2E800417A68 /* QuickViewWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A53A4EBC2538C30300417A68 /* AccessorySelection.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = A5F8A0BF25387D0B007E2BE3 /* AccessorySelection.intentdefinition */; };
 		A545C7A3245868FA0096A547 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545C7A2245868FA0096A547 /* AppDelegate.swift */; };
 		A545C7A5245868FA0096A547 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545C7A4245868FA0096A547 /* SceneDelegate.swift */; };
 		A545C7A7245868FA0096A547 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545C7A6245868FA0096A547 /* ContentView.swift */; };
@@ -37,6 +43,17 @@
 		A5691C5E24617523000999D3 /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C5B24617523000999D3 /* HomeStore.swift */; };
 		A5691C5F24617523000999D3 /* HomeStore+AccessoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C5C24617523000999D3 /* HomeStore+AccessoryDelegate.swift */; };
 		A5691C61246175ED000999D3 /* HomeStore+HomeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C60246175ED000999D3 /* HomeStore+HomeDelegate.swift */; };
+		A56AEB98253B30330004C33D /* StorageServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A576AEC1245DE4B500EDDFD9 /* StorageServiceView.swift */; };
+		A56AEB9C253B30610004C33D /* ControllerServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55DCAD6245C65C10013AB11 /* ControllerServiceView.swift */; };
+		A56AEBA4253B31820004C33D /* KnownCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516DE52247827D900F17C52 /* KnownCharacteristic.swift */; };
+		A56AEBA8253B31850004C33D /* KnownService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516DE55247827EA00F17C52 /* KnownService.swift */; };
+		A56AEBAC253B31890004C33D /* KnownAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58BABF62486833600EFDD52 /* KnownAccessory.swift */; };
+		A56AEBB0253B33F40004C33D /* BatteryDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5383105245E281200B49F67 /* BatteryDiagram.swift */; };
+		A56AEBB4253B34080004C33D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E5539E251CB63E00BEB455 /* Colors.xcassets */; };
+		A56AEBBC253B349B0004C33D /* MeterServiceQuickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56AEBBB253B349B0004C33D /* MeterServiceQuickView.swift */; };
+		A56AEBBD253B349B0004C33D /* MeterServiceQuickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56AEBBB253B349B0004C33D /* MeterServiceQuickView.swift */; };
+		A56AEBC7253B353B0004C33D /* WrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55DCAD8245C6B650013AB11 /* WrapperView.swift */; };
+		A56AEBCE253B358C0004C33D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E5539B251CB3FD00BEB455 /* Colors.swift */; };
 		A576AEC2245DE4B500EDDFD9 /* StorageServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A576AEC1245DE4B500EDDFD9 /* StorageServiceView.swift */; };
 		A57B24B525388ED600C6F11B /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A534805124586B10002BF820 /* HomeKit.framework */; };
 		A57B255D2538950A00C6F11B /* AccessorySelection.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = A5F8A0BF25387D0B007E2BE3 /* AccessorySelection.intentdefinition */; };
@@ -75,6 +92,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A53A4EB02538C2EE00417A68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A545C797245868FA0096A547 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A53A4EA32538C2E800417A68;
+			remoteInfo = QuickViewWidgetExtension;
+		};
 		A5F8A0B325387CF5007E2BE3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A545C797245868FA0096A547 /* Project object */;
@@ -92,6 +116,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				A5F8A0B525387CF5007E2BE3 /* AccessorySelection.appex in Embed App Extensions */,
+				A53A4EB22538C2EE00417A68 /* QuickViewWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,6 +136,10 @@
 		A538310B245EE6A600B49F67 /* HomeBatteryAccessoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBatteryAccessoryDetailView.swift; sourceTree = "<group>"; };
 		A538ADEC24924B7B00CED37C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A538ADEE249265BB00CED37C /* HomeKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKitManager.swift; sourceTree = "<group>"; };
+		A53A4EA42538C2E800417A68 /* QuickViewWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = QuickViewWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A53A4EA82538C2E800417A68 /* QuickViewWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickViewWidget.swift; sourceTree = "<group>"; };
+		A53A4EAB2538C2EE00417A68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A53A4EAD2538C2EE00417A68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A54096472538481F00E0139C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		A54096492538481F00E0139C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		A540967A2538729000E0139C /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
@@ -135,6 +164,7 @@
 		A5691C5B24617523000999D3 /* HomeStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeStore.swift; sourceTree = "<group>"; };
 		A5691C5C24617523000999D3 /* HomeStore+AccessoryDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HomeStore+AccessoryDelegate.swift"; sourceTree = "<group>"; };
 		A5691C60246175ED000999D3 /* HomeStore+HomeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HomeStore+HomeDelegate.swift"; sourceTree = "<group>"; };
+		A56AEBBB253B349B0004C33D /* MeterServiceQuickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterServiceQuickView.swift; sourceTree = "<group>"; };
 		A576AEC1245DE4B500EDDFD9 /* StorageServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceView.swift; sourceTree = "<group>"; };
 		A57B256D2538978400C6F11B /* AccessorySelection.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AccessorySelection.entitlements; sourceTree = "<group>"; };
 		A57B257E2538995400C6F11B /* KnownVisualization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownVisualization.swift; sourceTree = "<group>"; };
@@ -165,6 +195,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A53A4EA12538C2E800417A68 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A53A4EA62538C2E800417A68 /* SwiftUI.framework in Frameworks */,
+				A53A4EA52538C2E800417A68 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A545C79C245868FA0096A547 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -217,11 +256,22 @@
 			path = EntitlementManagers;
 			sourceTree = "<group>";
 		};
+		A53A4EA72538C2E800417A68 /* QuickViewWidget */ = {
+			isa = PBXGroup;
+			children = (
+				A53A4EA82538C2E800417A68 /* QuickViewWidget.swift */,
+				A53A4EAB2538C2EE00417A68 /* Assets.xcassets */,
+				A53A4EAD2538C2EE00417A68 /* Info.plist */,
+			);
+			path = QuickViewWidget;
+			sourceTree = "<group>";
+		};
 		A545C796245868FA0096A547 = {
 			isa = PBXGroup;
 			children = (
 				A545C7A1245868FA0096A547 /* Home Batteries */,
 				A5F8A09F25387CF5007E2BE3 /* AccessorySelection */,
+				A53A4EA72538C2E800417A68 /* QuickViewWidget */,
 				A545C7A0245868FA0096A547 /* Products */,
 				A534805024586B10002BF820 /* Frameworks */,
 			);
@@ -232,6 +282,7 @@
 			children = (
 				A545C79F245868FA0096A547 /* Home Batteries.app */,
 				A5F8A09E25387CF5007E2BE3 /* AccessorySelection.appex */,
+				A53A4EA42538C2E800417A68 /* QuickViewWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -327,6 +378,7 @@
 				A538310B245EE6A600B49F67 /* HomeBatteryAccessoryDetailView.swift */,
 				A550A39B249FA6DF00535E81 /* HomeBatteryAccessoryQuickView.swift */,
 				A55B975C2534CAE50091CA4E /* HomeBatteryAccessoryDetailLayoutView.swift */,
+				A56AEBBB253B349B0004C33D /* MeterServiceQuickView.swift */,
 			);
 			path = "Home Batteries";
 			sourceTree = "<group>";
@@ -370,6 +422,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A53A4EA32538C2E800417A68 /* QuickViewWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A53A4EB32538C2EE00417A68 /* Build configuration list for PBXNativeTarget "QuickViewWidgetExtension" */;
+			buildPhases = (
+				A53A4EA02538C2E800417A68 /* Sources */,
+				A53A4EA12538C2E800417A68 /* Frameworks */,
+				A53A4EA22538C2E800417A68 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuickViewWidgetExtension;
+			productName = QuickViewWidgetExtension;
+			productReference = A53A4EA42538C2E800417A68 /* QuickViewWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		A545C79E245868FA0096A547 /* Home Batteries */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A545C7B3245868FC0096A547 /* Build configuration list for PBXNativeTarget "Home Batteries" */;
@@ -383,6 +452,7 @@
 			);
 			dependencies = (
 				A5F8A0B425387CF5007E2BE3 /* PBXTargetDependency */,
+				A53A4EB12538C2EE00417A68 /* PBXTargetDependency */,
 			);
 			name = "Home Batteries";
 			packageProductDependencies = (
@@ -420,6 +490,9 @@
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Max Obermeier";
 				TargetAttributes = {
+					A53A4EA32538C2E800417A68 = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
 					A545C79E245868FA0096A547 = {
 						CreatedOnToolsVersion = 11.4.1;
 					};
@@ -447,11 +520,21 @@
 			targets = (
 				A545C79E245868FA0096A547 /* Home Batteries */,
 				A5F8A09D25387CF5007E2BE3 /* AccessorySelection */,
+				A53A4EA32538C2E800417A68 /* QuickViewWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A53A4EA22538C2E800417A68 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A53A4EAC2538C2EE00417A68 /* Assets.xcassets in Resources */,
+				A56AEBB4253B34080004C33D /* Colors.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A545C79D245868FA0096A547 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -474,6 +557,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A53A4EA02538C2E800417A68 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A56AEBBD253B349B0004C33D /* MeterServiceQuickView.swift in Sources */,
+				A56AEBCE253B358C0004C33D /* Colors.swift in Sources */,
+				A56AEB98253B30330004C33D /* StorageServiceView.swift in Sources */,
+				A53A4EBC2538C30300417A68 /* AccessorySelection.intentdefinition in Sources */,
+				A56AEBA8253B31850004C33D /* KnownService.swift in Sources */,
+				A56AEBB0253B33F40004C33D /* BatteryDiagram.swift in Sources */,
+				A56AEB9C253B30610004C33D /* ControllerServiceView.swift in Sources */,
+				A56AEBAC253B31890004C33D /* KnownAccessory.swift in Sources */,
+				A53A4EA92538C2E800417A68 /* QuickViewWidget.swift in Sources */,
+				A56AEBC7253B353B0004C33D /* WrapperView.swift in Sources */,
+				A56AEBA4253B31820004C33D /* KnownCharacteristic.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A545C79B245868FA0096A547 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -490,6 +591,7 @@
 				A5E2238F24A89E3200567529 /* OutletServiceView.swift in Sources */,
 				A5DF85582517AC510027EA47 /* ChargingStationQuickView.swift in Sources */,
 				A5498DDC245C139A000A0D9B /* Home.swift in Sources */,
+				A56AEBBC253B349B0004C33D /* MeterServiceQuickView.swift in Sources */,
 				A563F8A2245F363A0094BFD7 /* Accessory.swift in Sources */,
 				A5383106245E281200B49F67 /* BatteryDiagram.swift in Sources */,
 				A516DE53247827D900F17C52 /* KnownCharacteristic.swift in Sources */,
@@ -546,6 +648,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A53A4EB12538C2EE00417A68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A53A4EA32538C2E800417A68 /* QuickViewWidgetExtension */;
+			targetProxy = A53A4EB02538C2EE00417A68 /* PBXContainerItemProxy */;
+		};
 		A5F8A0B425387CF5007E2BE3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A5F8A09D25387CF5007E2BE3 /* AccessorySelection */;
@@ -565,6 +672,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A53A4EB42538C2EE00417A68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 997W4U8U6L;
+				INFOPLIST_FILE = QuickViewWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "themomax.Home-Batteries.QuickViewWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A53A4EB52538C2EE00417A68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 997W4U8U6L;
+				INFOPLIST_FILE = QuickViewWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "themomax.Home-Batteries.QuickViewWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		A545C7B1245868FC0096A547 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -770,6 +919,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A53A4EB32538C2EE00417A68 /* Build configuration list for PBXNativeTarget "QuickViewWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A53A4EB42538C2EE00417A68 /* Debug */,
+				A53A4EB52538C2EE00417A68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A545C79A245868FA0096A547 /* Build configuration list for PBXProject "Home Batteries" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

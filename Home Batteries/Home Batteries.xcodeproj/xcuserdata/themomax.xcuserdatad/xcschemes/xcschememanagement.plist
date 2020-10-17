@@ -17,7 +17,7 @@
 		<key>AccessorySelection.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<key>AccessorySelectionUI.xcscheme_^#shared#^_</key>
 		<dict>
@@ -40,6 +40,11 @@
 			<integer>2</integer>
 		</dict>
 		<key>QuickLookWidgetsExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>QuickViewWidgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>

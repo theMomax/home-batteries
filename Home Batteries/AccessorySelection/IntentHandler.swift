@@ -29,17 +29,20 @@ extension IntentHandler: SelectAccessoryIntentHandling {
         let hm = HomeStore.shared.homeManager
         
         let accessories = hm.homes.flatMap({ h in h.accessories.map({a in (a, h)})}).filter({(a, _) in a.known()}).map({ (a: HMAccessory, h: HMHome) -> IAccessory in
-            let accessory = IAccessory(identifier: a.uniqueIdentifier.uuidString, display: a.name)
+            let roomName = a.room?.name ?? "Default-Room"
+            let homeName = h.name
+            
+            let accessory = IAccessory(identifier: a.uniqueIdentifier.uuidString, display: "\(a.name) (\(homeName), \(roomName))")
             accessory.name = a.name
-            accessory.home = IHome(identifier: h.uniqueIdentifier.uuidString, display: h.name)
-            accessory.home?.name = h.name
+            accessory.home = IHome(identifier: h.uniqueIdentifier.uuidString, display: homeName)
+            accessory.home!.name = homeName
             
             if let r = a.room {
-                accessory.room = IRoom(identifier: r.uniqueIdentifier.uuidString, display: r.name)
-                accessory.room?.name = r.name
+                accessory.room = IRoom(identifier: r.uniqueIdentifier.uuidString, display: roomName)
+                accessory.room!.name = roomName
             } else {
-                accessory.room = IRoom(identifier: "0", display: "Default-Room")
-                accessory.room?.name = "Default-Room"
+                accessory.room = IRoom(identifier: "0", display: roomName)
+                accessory.room!.name = roomName
             }
             
             return accessory

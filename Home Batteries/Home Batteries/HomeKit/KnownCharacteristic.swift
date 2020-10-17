@@ -390,10 +390,26 @@ class ElectricityMeterType: KnownCharacteristic {
             return "storage"
         case 4 as UInt8:
             return "grid"
+        case 5 as UInt8:
+            return "excess"
         default:
             return nil
         }
     }
+    
+    static let allCases: [UInt8] = [0, 1, 2, 3, 4, 5]
+    
+    static let other: UInt8 = 0
+    
+    static let production: UInt8 = 1
+    
+    static let consumption: UInt8 = 2
+    
+    static let storage: UInt8 = 3
+    
+    static let grid: UInt8 = 4
+    
+    static let excess: UInt8 = 5
     
 }
 
@@ -417,6 +433,12 @@ class StatusFault: KnownCharacteristic {
             return nil
         }
     }
+    
+    static let allCases: [UInt8] = [0, 1]
+    
+    static let noFault: UInt8 = 0
+    
+    static let generalFault: UInt8 = 1
 }
 
 class Name: KnownCharacteristic {

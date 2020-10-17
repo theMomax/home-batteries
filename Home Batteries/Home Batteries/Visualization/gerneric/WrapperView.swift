@@ -9,7 +9,6 @@
 import Foundation
 import SwiftUI
 import HomeKit
-import SwiftUICharts
 
 enum Style {
     case elevated, inset, outset, invisible
@@ -76,9 +75,6 @@ struct AccessoryWrapperView_Previews: PreviewProvider {
                 
                 
                 VStack {
-                    WrapperView {
-                        LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "Title", legend: "Legendary", dropShadow: false)
-                    }
                     WrapperView(alignment: .topLeading) {
                         Text("2")
                     }
