@@ -47,7 +47,9 @@ The main focus currently lies on providing a good visualization for the services
 
 🔴 iOS 14 Widgets
 
-🔴 Historic Data
+🟠 Historic Data
+* ✅ Historic Energy Data for Koogeek Outlets
+* ❌ Historic Data for Home Batteries
 
 🔴 Siri Support
 
