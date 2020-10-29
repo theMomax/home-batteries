@@ -58,6 +58,18 @@ extension KnownCharacteristic {
             OutletInUse.instance,
             EstimatedRange.instance,
             Active.instance,
+            HourlyEnergyToday.instance,
+            HourlyEnergyYesterday.instance,
+            HourlyEnergy2DaysAgo.instance,
+            HourlyEnergy3DaysAgo.instance,
+            HourlyEnergy4DaysAgo.instance,
+            HourlyEnergy5DaysAgo.instance,
+            HourlyEnergy6DaysAgo.instance,
+            HourlyEnergy7DaysAgo.instance,
+            DailyEnergyThisMonth.instance,
+            DailyEnergyLastMonth.instance,
+            MonthlyEnergyThisYear.instance,
+            MonthlyEnergyLastYear.instance,
             ].map( { i in i(characteristic)}).reduce(nil, {(a, b) in a ?? b})
     }
 }
@@ -83,7 +95,7 @@ extension KnownCharacteristic {
         return accessory.services.filter({ (service: HMService) in service.characteristics.contains(where: { (c: HMCharacteristic) in c.characteristicType == characteristic.characteristicType }) }).count > 1
     }
     
-    fileprivate static func serviceDescription(_ characteristic: HMCharacteristic) -> String {
+    static func serviceDescription(_ characteristic: HMCharacteristic) -> String {
         if characteristic.service == nil  {
             return "unknown origin"
         } else if characteristic.service!.accessory == nil {
@@ -95,7 +107,7 @@ extension KnownCharacteristic {
         }
     }
     
-    fileprivate static func accessoryDescription(_ characteristic: HMCharacteristic, ending final: Bool = false) -> String {
+    static func accessoryDescription(_ characteristic: HMCharacteristic, ending final: Bool = false) -> String {
         if final {
             return characteristic.service!.accessory!.name
         } else {
@@ -272,7 +284,7 @@ extension KnownCharacteristic {
 }
 
 
-// MARK: Implementations
+// MARK: Generic Implementations
 
 
 class Power {
@@ -299,324 +311,29 @@ class Range {
     }
 }
 
-class CurrentPower: Power, KnownCharacteristic {
-    static let uuid: String = "00000001-0001-1000-8000-0036AC324978"
-    static let entityType: String = "Power"
-    
-    var characteristic: HMCharacteristic
-    
-    required init(_ characteristic: HMCharacteristic) {
-        self.characteristic = characteristic
-    }
-    
-}
-
-class KoogeekCurrentPower: CurrentPower {
-    static let secondaryUUID: String = "4AAAF931-0DEC-11E5-B939-0800200C9A66"
-    
-    static func instance(_ characteristic: HMCharacteristic) -> KnownCharacteristic? {
-        if Self.secondaryUUID == characteristic.characteristicType {
-            return Self.init(characteristic)
+class HourlyEnergy: Energy {
+    static func format(of value: Any) -> String? {
+        if let data = value as? Double {
+            return String(format: "%.2f", data)
         }
         return nil
     }
 }
 
-class CurrentPowerL1: Power, KnownCharacteristic {
-    static let uuid: String = "00000002-0001-1000-8000-0036AC324978"
-    static let entityType: String = "Power L1"
-    
-    var characteristic: HMCharacteristic
-    
-    required init(_ characteristic: HMCharacteristic) {
-        self.characteristic = characteristic
-    }
-    
-}
-
-class CurrentPowerL2: Power, KnownCharacteristic {
-    static let uuid: String = "00000003-0001-1000-8000-0036AC324978"
-    static let entityType: String = "Power L2"
-    
-    var characteristic: HMCharacteristic
-    
-    required init(_ characteristic: HMCharacteristic) {
-        self.characteristic = characteristic
-    }
-    
-}
-
-class CurrentPowerL3: Power, KnownCharacteristic {
-    static let uuid: String = "00000004-0001-1000-8000-0036AC324978"
-    static let entityType: String = "Power L3"
-    
-    var characteristic: HMCharacteristic
-    
-    required init(_ characteristic: HMCharacteristic) {
-        self.characteristic = characteristic
-    }
-    
-}
-
-class EnergyCapacity: Energy, KnownCharacteristic {
-    static let uuid: String = "00000005-0001-1000-8000-0036AC324978"
-    static let entityType: String = "Capacity"
-    
-    var characteristic: HMCharacteristic
-    
-    required init(_ characteristic: HMCharacteristic) {
-        self.characteristic = characteristic
-    }
-    
-}
-
-class ElectricityMeterType: KnownCharacteristic {
-    static let uuid: String = "00000006-0001-1000-8000-0036AC324978"
-    static let entityType: String = "Meter Type"
-    
-    var characteristic: HMCharacteristic
-    
-    required init(_ characteristic: HMCharacteristic) {
-        self.characteristic = characteristic
-    }
-    
+class DailyEnergy: Energy {
     static func format(of value: Any) -> String? {
-        switch value {
-        case 1 as UInt8:
-            return "production"
-        case 2 as UInt8:
-            return "consumption"
-        case 3 as UInt8:
-            return "storage"
-        case 4 as UInt8:
-            return "grid"
-        case 5 as UInt8:
-            return "excess"
-        default:
-            return nil
+        if let data = value as? Double {
+            return String(format: "%.1f", data)
         }
+        return nil
     }
-    
-    static let allCases: [UInt8] = [0, 1, 2, 3, 4, 5]
-    
-    static let other: UInt8 = 0
-    
-    static let production: UInt8 = 1
-    
-    static let consumption: UInt8 = 2
-    
-    static let storage: UInt8 = 3
-    
-    static let grid: UInt8 = 4
-    
-    static let excess: UInt8 = 5
-    
 }
 
-class StatusFault: KnownCharacteristic {
-    static let uuid: String = "00000077-0000-1000-8000-0026BB765291"
-    static let entityType: String = "Status Fault"
-    
-    var characteristic: HMCharacteristic
-    
-    required init(_ characteristic: HMCharacteristic) {
-        self.characteristic = characteristic
-    }
-    
+class MonthlyEnergy: Energy {
     static func format(of value: Any) -> String? {
-        switch value {
-        case 0 as UInt8:
-            return "no fault"
-        case 1 as UInt8:
-            return "general fault"
-        default:
-            return nil
+        if let data = value as? Double {
+            return String(format: "%.0f", data)
         }
+        return nil
     }
-    
-    static let allCases: [UInt8] = [0, 1]
-    
-    static let noFault: UInt8 = 0
-    
-    static let generalFault: UInt8 = 1
-}
-
-class Name: KnownCharacteristic {
-    static let uuid: String = "00000023-0000-1000-8000-0026BB765291"
-    static let entityType: String = "Name"
-    
-    var characteristic: HMCharacteristic
-    
-    required init(_ characteristic: HMCharacteristic) {
-        self.characteristic = characteristic
-    }
-    
-    var name: String {
-        get {
-            self.characteristic.value as? String ?? Self.entityType
-        }
-    }
-}
-
-class BatteryLevel: Percentage, KnownCharacteristic {
-    static let uuid: String = "00000068-0000-1000-8000-0026BB765291"
-    static let entityType: String = "Battery Level"
-    
-    var characteristic: HMCharacteristic
-    
-    required init(_ characteristic: HMCharacteristic) {
-        self.characteristic = characteristic
-    }
-    
-}
-
-class ChargingState: KnownCharacteristic {
-    static let uuid: String = "0000008F-0000-1000-8000-0026BB765291"
-    static let entityType: String = "Charging State"
-    
-    var characteristic: HMCharacteristic
-    
-    required init(_ characteristic: HMCharacteristic) {
-        self.characteristic = characteristic
-    }
-    
-    static func format(of value: Any) -> String? {
-        switch value {
-        case 0 as UInt8:
-            return "not charging"
-        case 1 as UInt8:
-            return "charging"
-        case 2 as UInt8:
-            return "not chargeable"
-        default:
-            return nil
-        }
-    }
-    
-    static let allCases: [UInt8] = [0, 1, 2]
-    
-    static let notCharging: UInt8 = 0
-    
-    static let charging: UInt8 = 1
-    
-    static let notChargeable: UInt8 = 2
-}
-
-class StatusLowBattery: KnownCharacteristic {
-    static let uuid: String = "00000079-0000-1000-8000-0026BB765291"
-    static let entityType: String = "Low Battery"
-    
-    var characteristic: HMCharacteristic
-    
-    required init(_ characteristic: HMCharacteristic) {
-        self.characteristic = characteristic
-    }
-    
-    static func format(of value: Any) -> String? {
-        switch value {
-        case 0 as UInt8:
-            return "normal"
-        case 1 as UInt8:
-            return "low"
-        default:
-            return nil
-        }
-    }
-    
-    static let allCases: [UInt8] = [0, 1]
-    
-    static let normal: UInt8 = 0
-    
-    static let low: UInt8 = 1
-}
-
-class On: KnownCharacteristic {
-    static var uuid: String = "00000025-0000-1000-8000-0026BB765291"
-    static var entityType: String = "On"
-    
-    var characteristic: HMCharacteristic
-    
-    required init(_ characteristic: HMCharacteristic) {
-        self.characteristic = characteristic
-    }
-    
-    static func format(of value: Any) -> String? {
-        switch value {
-        case true as Bool:
-            return "on"
-        case false as Bool:
-            return "off"
-        default:
-            return nil
-        }
-    }
-    
-    func updateDescription(_ value: Any?) -> String? {
-        if let on = value as? Bool {
-            return "\(Self.accessoryDescription(self.characteristic, ending: true)) is turned \(self.format(on))"
-        } else {
-            return nil
-        }
-    }
-}
-
-class OutletInUse: KnownCharacteristic {
-    static var uuid: String = "00000026-0000-1000-8000-0026BB765291"
-    static var entityType: String = "Outlet in Use"
-    
-    var characteristic: HMCharacteristic
-    
-    required init(_ characteristic: HMCharacteristic) {
-        self.characteristic = characteristic
-    }
-    
-    static func format(of value: Any) -> String? {
-        switch value {
-        case true as Bool:
-            return "plugged in"
-        case false as Bool:
-            return "not in use"
-        default:
-            return nil
-        }
-    }
-}
-
-class EstimatedRange: Range, KnownCharacteristic {
-    static let uuid: String = "00000007-0001-1000-8000-0036AC324978"
-    static let entityType: String = "Estimated Range"
-    
-    var characteristic: HMCharacteristic
-    
-    required init(_ characteristic: HMCharacteristic) {
-        self.characteristic = characteristic
-    }
-    
-}
-
-
-class Active: KnownCharacteristic {
-    static var uuid: String = "000000B0-0000-1000-8000-0026BB765291"
-    static var entityType: String = "Is Active"
-    
-    var characteristic: HMCharacteristic
-    
-    required init(_ characteristic: HMCharacteristic) {
-        self.characteristic = characteristic
-    }
-    
-    static func format(of value: Any) -> String? {
-        switch value {
-        case 0 as UInt8:
-            return "inactive"
-        case 1 as UInt8:
-            return "active"
-        default:
-            return "nil"
-        }
-    }
-    
-    static let inactive: UInt8 = 0
-    
-    static let active: UInt8 = 1
 }

@@ -25,8 +25,10 @@ extension IntentHandler: SelectAccessoryIntentHandling {
         
     }
     
-    func provideAccessoryOptionsCollection(for intent: SelectAccessoryIntent, with completion: @escaping (INObjectCollection<IAccessory>?, Error?) -> Void) {        
+    func provideAccessoryOptionsCollection(for intent: SelectAccessoryIntent, with completion: @escaping (INObjectCollection<IAccessory>?, Error?) -> Void) {
         let hm = HomeStore.shared.homeManager
+        // take a short nap until the connection to the local HomeKit instance is established (otherwise below code won't create an empty array on first call)
+        sleep(1)
         
         let accessories = hm.homes.flatMap({ h in h.accessories.map({a in (a, h)})}).filter({(a, _) in a.known()}).map({ (a: HMAccessory, h: HMHome) -> IAccessory in
             let roomName = a.room?.name ?? "Default-Room"

@@ -60,4 +60,9 @@ The main focus currently lies on providing a good visualization for the services
 * Home Batteries and their Services as defined at https://github.com/theMomax/homekit-battery-integration#services
 * Electric Vehicles and Charging Stations and their Services as defined at https://github.com/theMomax/homekit-ovms-integration
 * The Outlet Service as defined by Apple
-* Koogeek's Outlet characteristic for the currently active power: 4AAAF931-0DEC-11E5-B939-0800200C9A66
+* Koogeek's Outlet Service 4AAAF930-0DEC-11E5-B939-0800200C9A66:
+
+    * Currently Active Power: 4AAAF931-0DEC-11E5-B939-0800200C9A66
+    * Hourly Data (Today - 7 days before): 4AAAF933-0DEC-11E5-B939-0800200C9A66 - 4AAAF93A-0DEC-11E5-B939-0800200C9A66
+    * Daily Data (this and last month): 4AAAF93B-0DEC-11E5-B939-0800200C9A66 & 4AAAF93C-0DEC-11E5-B939-0800200C9A66
+    * Monthly Data (this and last year): 4AAAF93D-0DEC-11E5-B939-0800200C9A66 & 4AAAF93E-0DEC-11E5-B939-0800200C9A66

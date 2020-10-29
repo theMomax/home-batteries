@@ -126,7 +126,6 @@ class ElectricityMeterService: KnownService {
         self.service = service
     }
     
-    
 }
 
 class KoogeekElectricityMeterService: ElectricityMeterService {
@@ -137,6 +136,30 @@ class KoogeekElectricityMeterService: ElectricityMeterService {
             return Self.init(service)
         }
         return nil
+    }
+    
+    var hourlyToday: HourlyEnergyToday {
+        return self.service.characteristics.typed().first!
+    }
+    
+    var hourlyYesterday: HourlyEnergyYesterday {
+        return self.service.characteristics.typed().first!
+    }
+    
+    var dailyThisMonth: DailyEnergyThisMonth {
+        return self.service.characteristics.typed().first!
+    }
+    
+    var dailyLastMonth: DailyEnergyLastMonth {
+        return self.service.characteristics.typed().first!
+    }
+    
+    var monthlyThisYear: MonthlyEnergyThisYear {
+        return self.service.characteristics.typed().first!
+    }
+    
+    var monthlyLastYear: MonthlyEnergyLastYear {
+        return self.service.characteristics.typed().first!
     }
 }
 

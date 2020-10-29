@@ -24,6 +24,7 @@ struct OutletQuickView: View {
     
     init(accessory: Accessory) {
         self.accessory = accessory
+        
         let primary: OutletService = accessory.value.services.typed().first!
         self.on = primary.on.observable()
     }

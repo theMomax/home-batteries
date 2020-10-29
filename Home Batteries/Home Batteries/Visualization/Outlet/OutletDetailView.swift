@@ -15,14 +15,23 @@ struct OutletDetailView: View {
     
     @ObservedObject var on: Characteristic<Bool>
     @ObservedObject var outletInUse: Characteristic<Bool>
+    
+    @ObservedObject var hourlyEnergyToday: Characteristic<NSData>
        
     init(accessory: Accessory) {
         self.accessory = accessory
         
-        let service: OutletService = accessory.value.services.typed().first!
+        let outlet: OutletService = accessory.value.services.typed().first!
         
-        self.on = service.on.observable()
-        self.outletInUse = service.outletInUse.observable()
+        self.on = outlet.on.observable()
+        self.outletInUse = outlet.outletInUse.observable()
+        
+        if let meter: KoogeekElectricityMeterService = accessory.value.services.typed().first {
+            self.hourlyEnergyToday = meter.hourlyToday.observable(updating: false)
+        } else {
+            self.hourlyEnergyToday = Characteristic<NSData>()
+        }
+        
     }
     
     @ViewBuilder
@@ -31,6 +40,8 @@ struct OutletDetailView: View {
             CharacteristicElementView(self.on)
             
             CharacteristicElementView(self.outletInUse)
+            
+            OutletDiagramView(accessory: self.accessory)
         }
     }
     
