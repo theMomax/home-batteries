@@ -10,14 +10,12 @@ import HomeKit
 import SwiftUI
 
 enum Detail: Int, CustomStringConvertible {
-    case day, month, year // TODO: week
+    case day, month, year
     
     var description: String {
         switch self {
         case .day:
             return "Day"
-//        case .week:
-//            return "Week"
         case .month:
             return "Month"
         case .year:
@@ -25,7 +23,7 @@ enum Detail: Int, CustomStringConvertible {
         }
     }
     
-    static let allCases: [Self] = [.day, .month, .year] // TODO: week
+    static let allCases: [Self] = [.day, .month, .year]
 }
 
 enum Distance: Int {

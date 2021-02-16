@@ -22,8 +22,14 @@
 	<string>1</string>
 	<key>NSExtension</key>
 	<dict>
+		<key>NSLocationUsageDescription</key>
+		<string>&quot;required for usage with HomeKit&quot;</string>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.widgetkit-extension</string>
 	</dict>
+	<key>NSHomeKitUsageDescription</key>
+	<string>This app requires access to your home data to display and edit home battery related accessories and automations.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app requires access to your location services to display location-based automations.</string>
 </dict>
 </plist>
