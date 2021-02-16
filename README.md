@@ -45,7 +45,7 @@ The main focus currently lies on providing a good visualization for the services
 * ❌ Move Accessories to another Room
 * ❌ Manage Favorites
 
-🔴 iOS 14 Widgets
+🔴 iOS 14 Widgets ([currently not compatible with HomeKit](https://stackoverflow.com/questions/64561242/how-do-i-fetch-homekit-values-for-usage-in-ios-14-widgets))
 
 🟠 Historic Data
 * ✅ Historic Energy Data for Koogeek Outlets

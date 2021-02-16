@@ -13,7 +13,6 @@
 		A516DE5824784DA100F17C52 /* CharacteristicEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516DE5724784DA100F17C52 /* CharacteristicEventView.swift */; };
 		A516DE5A24784F4D00F17C52 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516DE5924784F4D00F17C52 /* Event.swift */; };
 		A52205D5245DD561005C7F1F /* HorizontalBarDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52205D4245DD561005C7F1F /* HorizontalBarDiagram.swift */; };
-		A52F3E4C2542D7C30003E6B2 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A534805124586B10002BF820 /* HomeKit.framework */; };
 		A534805224586B10002BF820 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A534805124586B10002BF820 /* HomeKit.framework */; };
 		A5383106245E281200B49F67 /* BatteryDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5383105245E281200B49F67 /* BatteryDiagram.swift */; };
 		A538310C245EE6A600B49F67 /* HomeBatteryAccessoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538310B245EE6A600B49F67 /* HomeBatteryAccessoryDetailView.swift */; };
@@ -22,27 +21,10 @@
 		A538C5B925498F760066C96E /* Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538C5B825498F760066C96E /* Charts.swift */; };
 		A538C5BF25498FDC0066C96E /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = A538C5BE25498FDC0066C96E /* Charts */; };
 		A538C5CD2549B2530066C96E /* OutletDiagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538C5CC2549B2530066C96E /* OutletDiagramView.swift */; };
-		A538C5D12549CE380066C96E /* Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538C5B825498F760066C96E /* Charts.swift */; };
-		A538C5D62549CF3D0066C96E /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = A538C5D52549CF3D0066C96E /* Charts */; };
-		A538C5DA2549D6880066C96E /* OutletDiagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538C5CC2549B2530066C96E /* OutletDiagramView.swift */; };
-		A53A4EA52538C2E800417A68 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54096472538481F00E0139C /* WidgetKit.framework */; };
-		A53A4EA62538C2E800417A68 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54096492538481F00E0139C /* SwiftUI.framework */; };
-		A53A4EA92538C2E800417A68 /* QuickViewWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A4EA82538C2E800417A68 /* QuickViewWidget.swift */; };
-		A53A4EAC2538C2EE00417A68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A53A4EAB2538C2EE00417A68 /* Assets.xcassets */; };
-		A53A4EB22538C2EE00417A68 /* QuickViewWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A53A4EA42538C2E800417A68 /* QuickViewWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		A53A4EBC2538C30300417A68 /* AccessorySelection.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = A5F8A0BF25387D0B007E2BE3 /* AccessorySelection.intentdefinition */; };
 		A53DE53A254B00BF00B14F08 /* Koogeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DE539254B00BF00B14F08 /* Koogeek.swift */; };
-		A53DE53B254B00BF00B14F08 /* Koogeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DE539254B00BF00B14F08 /* Koogeek.swift */; };
-		A53DE53C254B00BF00B14F08 /* Koogeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DE539254B00BF00B14F08 /* Koogeek.swift */; };
 		A53DE541254B01B500B14F08 /* OVMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DE540254B01B500B14F08 /* OVMS.swift */; };
-		A53DE542254B01B500B14F08 /* OVMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DE540254B01B500B14F08 /* OVMS.swift */; };
-		A53DE543254B01B500B14F08 /* OVMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DE540254B01B500B14F08 /* OVMS.swift */; };
 		A53DE548254B020500B14F08 /* Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DE547254B020500B14F08 /* Apple.swift */; };
-		A53DE549254B020500B14F08 /* Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DE547254B020500B14F08 /* Apple.swift */; };
-		A53DE54A254B020500B14F08 /* Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DE547254B020500B14F08 /* Apple.swift */; };
 		A53DE54F254B02DD00B14F08 /* Batteries.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DE54E254B02DD00B14F08 /* Batteries.swift */; };
-		A53DE550254B02DD00B14F08 /* Batteries.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DE54E254B02DD00B14F08 /* Batteries.swift */; };
-		A53DE551254B02DD00B14F08 /* Batteries.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53DE54E254B02DD00B14F08 /* Batteries.swift */; };
 		A545C7A3245868FA0096A547 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545C7A2245868FA0096A547 /* AppDelegate.swift */; };
 		A545C7A5245868FA0096A547 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545C7A4245868FA0096A547 /* SceneDelegate.swift */; };
 		A545C7A7245868FA0096A547 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545C7A6245868FA0096A547 /* ContentView.swift */; };
@@ -62,51 +44,9 @@
 		A5691C5E24617523000999D3 /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C5B24617523000999D3 /* HomeStore.swift */; };
 		A5691C5F24617523000999D3 /* HomeStore+AccessoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C5C24617523000999D3 /* HomeStore+AccessoryDelegate.swift */; };
 		A5691C61246175ED000999D3 /* HomeStore+HomeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C60246175ED000999D3 /* HomeStore+HomeDelegate.swift */; };
-		A56AEB98253B30330004C33D /* StorageServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A576AEC1245DE4B500EDDFD9 /* StorageServiceView.swift */; };
-		A56AEB9C253B30610004C33D /* ControllerServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55DCAD6245C65C10013AB11 /* ControllerServiceView.swift */; };
-		A56AEBA4253B31820004C33D /* KnownCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516DE52247827D900F17C52 /* KnownCharacteristic.swift */; };
-		A56AEBA8253B31850004C33D /* KnownService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516DE55247827EA00F17C52 /* KnownService.swift */; };
-		A56AEBAC253B31890004C33D /* KnownAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58BABF62486833600EFDD52 /* KnownAccessory.swift */; };
-		A56AEBB0253B33F40004C33D /* BatteryDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5383105245E281200B49F67 /* BatteryDiagram.swift */; };
-		A56AEBB4253B34080004C33D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E5539E251CB63E00BEB455 /* Colors.xcassets */; };
 		A56AEBBC253B349B0004C33D /* MeterServiceQuickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56AEBBB253B349B0004C33D /* MeterServiceQuickView.swift */; };
-		A56AEBBD253B349B0004C33D /* MeterServiceQuickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56AEBBB253B349B0004C33D /* MeterServiceQuickView.swift */; };
-		A56AEBC7253B353B0004C33D /* WrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55DCAD8245C6B650013AB11 /* WrapperView.swift */; };
-		A56AEBCE253B358C0004C33D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E5539B251CB3FD00BEB455 /* Colors.swift */; };
-		A57392AF253D8E13004D9720 /* Accessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A563F8A1245F363A0094BFD7 /* Accessory.swift */; };
-		A57392B3253D8E17004D9720 /* Characteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5642F96245F3ECC009D7024 /* Characteristic.swift */; };
-		A57392B7253D8E1C004D9720 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5498DDB245C139A000A0D9B /* Home.swift */; };
-		A57392BB253D8E1F004D9720 /* HomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9E35B24587730005E5B4F /* HomeManager.swift */; };
-		A57392C6253D8E8F004D9720 /* KnownVisualization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B257E2538995400C6F11B /* KnownVisualization.swift */; };
-		A57392CA253D8F14004D9720 /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C5B24617523000999D3 /* HomeStore.swift */; };
-		A57392CE253D8F17004D9720 /* HomeStore+HomeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C60246175ED000999D3 /* HomeStore+HomeDelegate.swift */; };
-		A57392D2253D8F1A004D9720 /* HomeStore+AccessoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C5C24617523000999D3 /* HomeStore+AccessoryDelegate.swift */; };
-		A57392D6253D9024004D9720 /* ChargingStationQuickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DF85572517AC510027EA47 /* ChargingStationQuickView.swift */; };
-		A57392DA253D902C004D9720 /* OutletQuickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E2238C24A89AB000567529 /* OutletQuickView.swift */; };
-		A57392DE253D90F8004D9720 /* OutletDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DCD7892520E5BA003117B8 /* OutletDetailView.swift */; };
-		A57392E2253D90FC004D9720 /* OutletServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E2238E24A89E3200567529 /* OutletServiceView.swift */; };
-		A57392E6253D910E004D9720 /* HomeBatteryAccessoryQuickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A550A39B249FA6DF00535E81 /* HomeBatteryAccessoryQuickView.swift */; };
-		A57392EA253D9111004D9720 /* HomeBatteryAccessoryDetailLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55B975C2534CAE50091CA4E /* HomeBatteryAccessoryDetailLayoutView.swift */; };
-		A57392EE253D9118004D9720 /* HomeBatteryAccessoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538310B245EE6A600B49F67 /* HomeBatteryAccessoryDetailView.swift */; };
-		A57392F2253D911C004D9720 /* MeterServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A549ADB1245C7E0400976D22 /* MeterServiceView.swift */; };
-		A57392F6253D9132004D9720 /* AccessoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E55395251CAEE400BEB455 /* AccessoryDetailView.swift */; };
-		A57392FA253D9136004D9720 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E55398251CB3DB00BEB455 /* Buttons.swift */; };
-		A57392FE253D913B004D9720 /* ConnectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BBC4A32461A6F900CC7399 /* ConnectingView.swift */; };
-		A5739302253D9140004D9720 /* HorizontalBarDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52205D4245DD561005C7F1F /* HorizontalBarDiagram.swift */; };
-		A5739306253D9157004D9720 /* ChargingStationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E55392251CADA500BEB455 /* ChargingStationDetailView.swift */; };
-		A573930A253D9163004D9720 /* ElectricVehicleChargingStationServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DF855A2517B0610027EA47 /* ElectricVehicleChargingStationServiceView.swift */; };
-		A573930E253D916E004D9720 /* HomeKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538ADEE249265BB00CED37C /* HomeKitManager.swift */; };
 		A576AEC2245DE4B500EDDFD9 /* StorageServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A576AEC1245DE4B500EDDFD9 /* StorageServiceView.swift */; };
-		A57B24B525388ED600C6F11B /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A534805124586B10002BF820 /* HomeKit.framework */; };
-		A57B255D2538950A00C6F11B /* AccessorySelection.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = A5F8A0BF25387D0B007E2BE3 /* AccessorySelection.intentdefinition */; };
-		A57B2574253897E000C6F11B /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F8A0A025387CF5007E2BE3 /* IntentHandler.swift */; };
-		A57B2578253897E900C6F11B /* HomeStore+HomeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C60246175ED000999D3 /* HomeStore+HomeDelegate.swift */; };
-		A57B2579253897E900C6F11B /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C5B24617523000999D3 /* HomeStore.swift */; };
-		A57B257A253897E900C6F11B /* HomeStore+AccessoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C5C24617523000999D3 /* HomeStore+AccessoryDelegate.swift */; };
 		A57B257F2538995400C6F11B /* KnownVisualization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B257E2538995400C6F11B /* KnownVisualization.swift */; };
-		A57B25832538996F00C6F11B /* KnownAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58BABF62486833600EFDD52 /* KnownAccessory.swift */; };
-		A57B25872538997200C6F11B /* KnownService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516DE55247827EA00F17C52 /* KnownService.swift */; };
-		A57B258B2538997500C6F11B /* KnownCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516DE52247827D900F17C52 /* KnownCharacteristic.swift */; };
 		A585BE24247ED73F00AE75F7 /* CharacteristicPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A585BE23247ED73F00AE75F7 /* CharacteristicPicker.swift */; };
 		A58BABF72486833600EFDD52 /* KnownAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58BABF62486833600EFDD52 /* KnownAccessory.swift */; };
 		A5B60BF924615F620038C92D /* AggregatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B60BF824615F620038C92D /* AggregatedValue.swift */; };
@@ -128,26 +68,7 @@
 		A5E5539C251CB3FD00BEB455 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E5539B251CB3FD00BEB455 /* Colors.swift */; };
 		A5E5539F251CB63E00BEB455 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E5539E251CB63E00BEB455 /* Colors.xcassets */; };
 		A5F12AA6248FDCD4000FF456 /* EventViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F12AA5248FDCD4000FF456 /* EventViews.swift */; };
-		A5F8A0B525387CF5007E2BE3 /* AccessorySelection.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A5F8A09E25387CF5007E2BE3 /* AccessorySelection.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		A5F8A0EE25388161007E2BE3 /* AccessorySelection.intentdefinition in Resources */ = {isa = PBXBuildFile; fileRef = A5F8A0BF25387D0B007E2BE3 /* AccessorySelection.intentdefinition */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		A53A4EB02538C2EE00417A68 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A545C797245868FA0096A547 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A53A4EA32538C2E800417A68;
-			remoteInfo = QuickViewWidgetExtension;
-		};
-		A5F8A0B325387CF5007E2BE3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A545C797245868FA0096A547 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A5F8A09D25387CF5007E2BE3;
-			remoteInfo = AccessorySelection;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		A54096572538482200E0139C /* Embed App Extensions */ = {
@@ -156,8 +77,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				A5F8A0B525387CF5007E2BE3 /* AccessorySelection.appex in Embed App Extensions */,
-				A53A4EB22538C2EE00417A68 /* QuickViewWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,7 +90,6 @@
 		A516DE5724784DA100F17C52 /* CharacteristicEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicEventView.swift; sourceTree = "<group>"; };
 		A516DE5924784F4D00F17C52 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		A52205D4245DD561005C7F1F /* HorizontalBarDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalBarDiagram.swift; sourceTree = "<group>"; };
-		A52F3E4B2542D7C20003E6B2 /* QuickViewWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuickViewWidgetExtension.entitlements; sourceTree = "<group>"; };
 		A534804F24586B10002BF820 /* Home Batteries.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Home Batteries.entitlements"; sourceTree = "<group>"; };
 		A534805124586B10002BF820 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
 		A5383105245E281200B49F67 /* BatteryDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryDiagram.swift; sourceTree = "<group>"; };
@@ -180,10 +98,6 @@
 		A538ADEE249265BB00CED37C /* HomeKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKitManager.swift; sourceTree = "<group>"; };
 		A538C5B825498F760066C96E /* Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charts.swift; sourceTree = "<group>"; };
 		A538C5CC2549B2530066C96E /* OutletDiagramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutletDiagramView.swift; sourceTree = "<group>"; };
-		A53A4EA42538C2E800417A68 /* QuickViewWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = QuickViewWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		A53A4EA82538C2E800417A68 /* QuickViewWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickViewWidget.swift; sourceTree = "<group>"; };
-		A53A4EAB2538C2EE00417A68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A53A4EAD2538C2EE00417A68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A53DE539254B00BF00B14F08 /* Koogeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Koogeek.swift; sourceTree = "<group>"; };
 		A53DE540254B01B500B14F08 /* OVMS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OVMS.swift; sourceTree = "<group>"; };
 		A53DE547254B020500B14F08 /* Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apple.swift; sourceTree = "<group>"; };
@@ -214,7 +128,6 @@
 		A5691C60246175ED000999D3 /* HomeStore+HomeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HomeStore+HomeDelegate.swift"; sourceTree = "<group>"; };
 		A56AEBBB253B349B0004C33D /* MeterServiceQuickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterServiceQuickView.swift; sourceTree = "<group>"; };
 		A576AEC1245DE4B500EDDFD9 /* StorageServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceView.swift; sourceTree = "<group>"; };
-		A57B256D2538978400C6F11B /* AccessorySelection.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AccessorySelection.entitlements; sourceTree = "<group>"; };
 		A57B257E2538995400C6F11B /* KnownVisualization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownVisualization.swift; sourceTree = "<group>"; };
 		A585BE23247ED73F00AE75F7 /* CharacteristicPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicPicker.swift; sourceTree = "<group>"; };
 		A58BABF62486833600EFDD52 /* KnownAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownAccessory.swift; sourceTree = "<group>"; };
@@ -236,24 +149,9 @@
 		A5E5539B251CB3FD00BEB455 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		A5E5539E251CB63E00BEB455 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		A5F12AA5248FDCD4000FF456 /* EventViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViews.swift; sourceTree = "<group>"; };
-		A5F8A09E25387CF5007E2BE3 /* AccessorySelection.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AccessorySelection.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		A5F8A0A025387CF5007E2BE3 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
-		A5F8A0A225387CF5007E2BE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A5F8A0BF25387D0B007E2BE3 /* AccessorySelection.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = AccessorySelection.intentdefinition; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A53A4EA12538C2E800417A68 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A52F3E4C2542D7C30003E6B2 /* HomeKit.framework in Frameworks */,
-				A53A4EA62538C2E800417A68 /* SwiftUI.framework in Frameworks */,
-				A53A4EA52538C2E800417A68 /* WidgetKit.framework in Frameworks */,
-				A538C5D62549CF3D0066C96E /* Charts in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A545C79C245868FA0096A547 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -261,14 +159,6 @@
 				A5B8BA8824A0AE95003EEE69 /* WaterfallGrid in Frameworks */,
 				A538C5BF25498FDC0066C96E /* Charts in Frameworks */,
 				A534805224586B10002BF820 /* HomeKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A5F8A09B25387CF5007E2BE3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A57B24B525388ED600C6F11B /* HomeKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,16 +197,6 @@
 			path = EntitlementManagers;
 			sourceTree = "<group>";
 		};
-		A53A4EA72538C2E800417A68 /* QuickViewWidget */ = {
-			isa = PBXGroup;
-			children = (
-				A53A4EA82538C2E800417A68 /* QuickViewWidget.swift */,
-				A53A4EAB2538C2EE00417A68 /* Assets.xcassets */,
-				A53A4EAD2538C2EE00417A68 /* Info.plist */,
-			);
-			path = QuickViewWidget;
-			sourceTree = "<group>";
-		};
 		A53DE538254B00AD00B14F08 /* characteristics */ = {
 			isa = PBXGroup;
 			children = (
@@ -331,10 +211,7 @@
 		A545C796245868FA0096A547 = {
 			isa = PBXGroup;
 			children = (
-				A52F3E4B2542D7C20003E6B2 /* QuickViewWidgetExtension.entitlements */,
 				A545C7A1245868FA0096A547 /* Home Batteries */,
-				A5F8A09F25387CF5007E2BE3 /* AccessorySelection */,
-				A53A4EA72538C2E800417A68 /* QuickViewWidget */,
 				A545C7A0245868FA0096A547 /* Products */,
 				A534805024586B10002BF820 /* Frameworks */,
 			);
@@ -344,8 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				A545C79F245868FA0096A547 /* Home Batteries.app */,
-				A5F8A09E25387CF5007E2BE3 /* AccessorySelection.appex */,
-				A53A4EA42538C2E800417A68 /* QuickViewWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -473,40 +348,9 @@
 			path = gerneric;
 			sourceTree = "<group>";
 		};
-		A5F8A09F25387CF5007E2BE3 /* AccessorySelection */ = {
-			isa = PBXGroup;
-			children = (
-				A5F8A0BF25387D0B007E2BE3 /* AccessorySelection.intentdefinition */,
-				A57B256D2538978400C6F11B /* AccessorySelection.entitlements */,
-				A5F8A0A025387CF5007E2BE3 /* IntentHandler.swift */,
-				A5F8A0A225387CF5007E2BE3 /* Info.plist */,
-			);
-			path = AccessorySelection;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A53A4EA32538C2E800417A68 /* QuickViewWidgetExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A53A4EB32538C2EE00417A68 /* Build configuration list for PBXNativeTarget "QuickViewWidgetExtension" */;
-			buildPhases = (
-				A53A4EA02538C2E800417A68 /* Sources */,
-				A53A4EA12538C2E800417A68 /* Frameworks */,
-				A53A4EA22538C2E800417A68 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = QuickViewWidgetExtension;
-			packageProductDependencies = (
-				A538C5D52549CF3D0066C96E /* Charts */,
-			);
-			productName = QuickViewWidgetExtension;
-			productReference = A53A4EA42538C2E800417A68 /* QuickViewWidgetExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		A545C79E245868FA0096A547 /* Home Batteries */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A545C7B3245868FC0096A547 /* Build configuration list for PBXNativeTarget "Home Batteries" */;
@@ -519,8 +363,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				A5F8A0B425387CF5007E2BE3 /* PBXTargetDependency */,
-				A53A4EB12538C2EE00417A68 /* PBXTargetDependency */,
 			);
 			name = "Home Batteries";
 			packageProductDependencies = (
@@ -530,23 +372,6 @@
 			productName = "Home Batteries";
 			productReference = A545C79F245868FA0096A547 /* Home Batteries.app */;
 			productType = "com.apple.product-type.application";
-		};
-		A5F8A09D25387CF5007E2BE3 /* AccessorySelection */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A5F8A0B925387CF5007E2BE3 /* Build configuration list for PBXNativeTarget "AccessorySelection" */;
-			buildPhases = (
-				A5F8A09A25387CF5007E2BE3 /* Sources */,
-				A5F8A09B25387CF5007E2BE3 /* Frameworks */,
-				A5F8A09C25387CF5007E2BE3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = AccessorySelection;
-			productName = AccessorySelection;
-			productReference = A5F8A09E25387CF5007E2BE3 /* AccessorySelection.appex */;
-			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -558,14 +383,8 @@
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Max Obermeier";
 				TargetAttributes = {
-					A53A4EA32538C2E800417A68 = {
-						CreatedOnToolsVersion = 12.0.1;
-					};
 					A545C79E245868FA0096A547 = {
 						CreatedOnToolsVersion = 11.4.1;
-					};
-					A5F8A09D25387CF5007E2BE3 = {
-						CreatedOnToolsVersion = 12.0.1;
 					};
 				};
 			};
@@ -587,27 +406,15 @@
 			projectRoot = "";
 			targets = (
 				A545C79E245868FA0096A547 /* Home Batteries */,
-				A5F8A09D25387CF5007E2BE3 /* AccessorySelection */,
-				A53A4EA32538C2E800417A68 /* QuickViewWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A53A4EA22538C2E800417A68 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A53A4EAC2538C2EE00417A68 /* Assets.xcassets in Resources */,
-				A56AEBB4253B34080004C33D /* Colors.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A545C79D245868FA0096A547 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5F8A0EE25388161007E2BE3 /* AccessorySelection.intentdefinition in Resources */,
 				A545C7AF245868FC0096A547 /* LaunchScreen.storyboard in Resources */,
 				A5E5539F251CB63E00BEB455 /* Colors.xcassets in Resources */,
 				A545C7AC245868FC0096A547 /* Preview Assets.xcassets in Resources */,
@@ -615,63 +422,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A5F8A09C25387CF5007E2BE3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A53A4EA02538C2E800417A68 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A56AEBBD253B349B0004C33D /* MeterServiceQuickView.swift in Sources */,
-				A57392BB253D8E1F004D9720 /* HomeManager.swift in Sources */,
-				A57392F6253D9132004D9720 /* AccessoryDetailView.swift in Sources */,
-				A57392C6253D8E8F004D9720 /* KnownVisualization.swift in Sources */,
-				A5739302253D9140004D9720 /* HorizontalBarDiagram.swift in Sources */,
-				A53DE551254B02DD00B14F08 /* Batteries.swift in Sources */,
-				A56AEBCE253B358C0004C33D /* Colors.swift in Sources */,
-				A56AEB98253B30330004C33D /* StorageServiceView.swift in Sources */,
-				A57392F2253D911C004D9720 /* MeterServiceView.swift in Sources */,
-				A53A4EBC2538C30300417A68 /* AccessorySelection.intentdefinition in Sources */,
-				A56AEBA8253B31850004C33D /* KnownService.swift in Sources */,
-				A56AEBB0253B33F40004C33D /* BatteryDiagram.swift in Sources */,
-				A57392DE253D90F8004D9720 /* OutletDetailView.swift in Sources */,
-				A57392CE253D8F17004D9720 /* HomeStore+HomeDelegate.swift in Sources */,
-				A5739306253D9157004D9720 /* ChargingStationDetailView.swift in Sources */,
-				A57392B7253D8E1C004D9720 /* Home.swift in Sources */,
-				A57392D6253D9024004D9720 /* ChargingStationQuickView.swift in Sources */,
-				A53DE543254B01B500B14F08 /* OVMS.swift in Sources */,
-				A57392AF253D8E13004D9720 /* Accessory.swift in Sources */,
-				A573930E253D916E004D9720 /* HomeKitManager.swift in Sources */,
-				A538C5D12549CE380066C96E /* Charts.swift in Sources */,
-				A56AEB9C253B30610004C33D /* ControllerServiceView.swift in Sources */,
-				A53DE54A254B020500B14F08 /* Apple.swift in Sources */,
-				A56AEBAC253B31890004C33D /* KnownAccessory.swift in Sources */,
-				A57392DA253D902C004D9720 /* OutletQuickView.swift in Sources */,
-				A57392D2253D8F1A004D9720 /* HomeStore+AccessoryDelegate.swift in Sources */,
-				A53A4EA92538C2E800417A68 /* QuickViewWidget.swift in Sources */,
-				A57392B3253D8E17004D9720 /* Characteristic.swift in Sources */,
-				A57392CA253D8F14004D9720 /* HomeStore.swift in Sources */,
-				A56AEBC7253B353B0004C33D /* WrapperView.swift in Sources */,
-				A573930A253D9163004D9720 /* ElectricVehicleChargingStationServiceView.swift in Sources */,
-				A53DE53C254B00BF00B14F08 /* Koogeek.swift in Sources */,
-				A57392E2253D90FC004D9720 /* OutletServiceView.swift in Sources */,
-				A57392EA253D9111004D9720 /* HomeBatteryAccessoryDetailLayoutView.swift in Sources */,
-				A57392FA253D9136004D9720 /* Buttons.swift in Sources */,
-				A57392FE253D913B004D9720 /* ConnectingView.swift in Sources */,
-				A57392EE253D9118004D9720 /* HomeBatteryAccessoryDetailView.swift in Sources */,
-				A57392E6253D910E004D9720 /* HomeBatteryAccessoryQuickView.swift in Sources */,
-				A56AEBA4253B31820004C33D /* KnownCharacteristic.swift in Sources */,
-				A538C5DA2549D6880066C96E /* OutletDiagramView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A545C79B245868FA0096A547 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -733,39 +486,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A5F8A09A25387CF5007E2BE3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A57B25872538997200C6F11B /* KnownService.swift in Sources */,
-				A57B25832538996F00C6F11B /* KnownAccessory.swift in Sources */,
-				A57B258B2538997500C6F11B /* KnownCharacteristic.swift in Sources */,
-				A57B2578253897E900C6F11B /* HomeStore+HomeDelegate.swift in Sources */,
-				A57B2579253897E900C6F11B /* HomeStore.swift in Sources */,
-				A53DE550254B02DD00B14F08 /* Batteries.swift in Sources */,
-				A57B257A253897E900C6F11B /* HomeStore+AccessoryDelegate.swift in Sources */,
-				A53DE542254B01B500B14F08 /* OVMS.swift in Sources */,
-				A53DE53B254B00BF00B14F08 /* Koogeek.swift in Sources */,
-				A53DE549254B020500B14F08 /* Apple.swift in Sources */,
-				A57B2574253897E000C6F11B /* IntentHandler.swift in Sources */,
-				A57B255D2538950A00C6F11B /* AccessorySelection.intentdefinition in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		A53A4EB12538C2EE00417A68 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A53A4EA32538C2E800417A68 /* QuickViewWidgetExtension */;
-			targetProxy = A53A4EB02538C2EE00417A68 /* PBXContainerItemProxy */;
-		};
-		A5F8A0B425387CF5007E2BE3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A5F8A09D25387CF5007E2BE3 /* AccessorySelection */;
-			targetProxy = A5F8A0B325387CF5007E2BE3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A545C7AD245868FC0096A547 /* LaunchScreen.storyboard */ = {
@@ -779,50 +500,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A53A4EB42538C2EE00417A68 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = QuickViewWidgetExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 997W4U8U6L;
-				INFOPLIST_FILE = QuickViewWidget/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "themomax.Home-Batteries.QuickViewWidget";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		A53A4EB52538C2EE00417A68 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = QuickViewWidgetExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 997W4U8U6L;
-				INFOPLIST_FILE = QuickViewWidget/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "themomax.Home-Batteries.QuickViewWidget";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
 		A545C7B1245868FC0096A547 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -985,58 +662,9 @@
 			};
 			name = Release;
 		};
-		A5F8A0BA25387CF5007E2BE3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = AccessorySelection/AccessorySelection.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 997W4U8U6L;
-				INFOPLIST_FILE = AccessorySelection/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "themomax.Home-Batteries.AccessorySelection";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		A5F8A0BB25387CF5007E2BE3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = AccessorySelection/AccessorySelection.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 997W4U8U6L;
-				INFOPLIST_FILE = AccessorySelection/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "themomax.Home-Batteries.AccessorySelection";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A53A4EB32538C2EE00417A68 /* Build configuration list for PBXNativeTarget "QuickViewWidgetExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A53A4EB42538C2EE00417A68 /* Debug */,
-				A53A4EB52538C2EE00417A68 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		A545C79A245868FA0096A547 /* Build configuration list for PBXProject "Home Batteries" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1051,15 +679,6 @@
 			buildConfigurations = (
 				A545C7B4245868FC0096A547 /* Debug */,
 				A545C7B5245868FC0096A547 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A5F8A0B925387CF5007E2BE3 /* Build configuration list for PBXNativeTarget "AccessorySelection" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A5F8A0BA25387CF5007E2BE3 /* Debug */,
-				A5F8A0BB25387CF5007E2BE3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1087,11 +706,6 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		A538C5BE25498FDC0066C96E /* Charts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A538C5BD25498FDC0066C96E /* XCRemoteSwiftPackageReference "swiftui-charts" */;
-			productName = Charts;
-		};
-		A538C5D52549CF3D0066C96E /* Charts */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A538C5BD25498FDC0066C96E /* XCRemoteSwiftPackageReference "swiftui-charts" */;
 			productName = Charts;
