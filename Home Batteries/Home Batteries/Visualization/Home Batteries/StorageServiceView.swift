@@ -15,7 +15,7 @@ struct EnergyStorageServiceView: View {
     @Binding var batteryLevel: UInt8?
     @Binding var chargingState: UInt8?
     @Binding var statusLowBattery: UInt8?
-    var energyCapacity: Binding<Float?>?
+    @OptBinding var energyCapacity: Float?
     
     @ViewBuilder
     var body: some View {
@@ -27,8 +27,8 @@ struct EnergyStorageServiceView: View {
             VStack(alignment: .leading) {
                 Text(String(format: "%d %%", batteryLevel ?? 0)).font(Font.system(.largeTitle))
                 
-                if energyCapacity != nil {
-                    Text(String(format: "of %.1f kWh", energyCapacity!.wrappedValue ?? 0.0)).font(Font.system(.footnote)).foregroundColor(.secondary)
+                if _energyCapacity.present {
+                    Text(String(format: "of %.1f kWh", energyCapacity ?? 0.0)).font(Font.system(.footnote)).foregroundColor(.secondary)
                 }
             }.padding(.horizontal).layoutPriority(1)
             Spacer().layoutPriority(0)

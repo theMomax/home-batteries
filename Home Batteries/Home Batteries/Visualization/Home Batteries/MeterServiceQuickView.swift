@@ -101,22 +101,27 @@ extension ElectricityMeterTypes {
 struct ElectricityMeterServiceQuickView: View {
     
     @Binding var currentPower: Float?
-    let type: ElectricityMeterTypes
+    let type: ElectricityMeterTypes?
     
     @ViewBuilder
     var body: some View {
         VStack(spacing: -5) {
             HStack(spacing: 2) {
                 Spacer()
-                Text(String(format: "%.0f", abs(currentPower ?? 0.0))).font(Font.system(.title)).lineLimit(1).foregroundColor(self.type.color(for: currentPower)).fixedSize()
+                Text(String(format: "%.0f", abs(currentPower ?? 1000)))
+                    .asPlaceholder(nil: currentPower)
+                    .font(Font.system(.title)).lineLimit(1).foregroundColor((self.type ?? .other).color(for: currentPower)).fixedSize()
+                
                 Text("W").font(Font.system(.title)).foregroundColor(.secondary).fixedSize()
             }
-            if self.type != .other {
-                HStack {
-                    Spacer()
-                    Text(self.type.description(for: currentPower ?? 0.0)).font(.footnote).foregroundColor(.secondary)
-                }
+            
+            HStack {
+                Spacer()
+                Text(self.type?.description(for: currentPower ?? 0.0) ?? "unknown")
+                    .asPlaceholder(nil: type)
+                    .font(.footnote).foregroundColor(.secondary)
             }
         }
     }
 }
+

@@ -113,20 +113,20 @@ struct MeterQuickView: View {
     
     let condition: (ElectricityMeterTypes?) -> Bool
     
-    init(_ service: ElectricityMeterService, if condition: @escaping (ElectricityMeterTypes?) -> Bool = { t in t == .excess }) {
+    init(_ service: ElectricityMeterService, if condition: @escaping (ElectricityMeterTypes?) -> Bool = { t in t == .excess }, using defaultType: ElectricityMeterTypes? = nil) {
         self.service = service
         self.condition = condition
         
         self.currentPower = service.power.observable()
-        self.meterType = service.type?.observable(updating: false) ?? Characteristic<UInt8>()
+        self.meterType = service.type?.observable(updating: false) ?? Characteristic<UInt8>(using: defaultType?.rawValue)
     }
     
     @ViewBuilder
     var body: some View {
         if condition(meterType.value == nil ? nil : ElectricityMeterTypes.init(rawValue: meterType.value!)) {
             ElectricityMeterServiceQuickView(
-                                        currentPower: self.$currentPower.value,
-                                        type: self.meterType.present && self.meterType.value != nil ? ElectricityMeterTypes(rawValue: self.meterType.value!) ?? .other : .other
+                currentPower: self.$currentPower.value,
+                type: self.meterType.present && self.meterType.value != nil ? ElectricityMeterTypes(rawValue: self.meterType.value!) : nil
             )
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                 self.reload()

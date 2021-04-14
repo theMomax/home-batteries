@@ -77,10 +77,10 @@ struct OutletQuickView: View {
     @ViewBuilder
     private func metersView(_ meters: [ElectricityMeterService]) -> some View {
         if meters.count == 1 {
-            MeterQuickView(meters[0], if: {_ in true})
+            MeterQuickView(meters[0], if: {_ in true}, using: .consumption)
         }
         ForEach(0..<meters.count) { index in
-            MeterQuickView(meters[index])
+            MeterQuickView(meters[index], using: .consumption)
         }
     }
     

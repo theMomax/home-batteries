@@ -43,14 +43,14 @@ struct AutomationsView: View {
             }
             HStack{EmptyView()}.padding(.bottom)
         }.environmentObject(self.home)
-        
-            
+
+
         .navigationBarItems(trailing: Button(action: {
             self.showAddSheet = true
         }, label: {
             Image(systemName: "plus").foregroundColor(.white)
         }).buttonStyle(CircleButtonStyle(color: .accentColor)))
-            
+
         .sheet(isPresented: self.$showAddSheet) {
             NewTriggerView(done: { _ in
                 self.showAddSheet = false

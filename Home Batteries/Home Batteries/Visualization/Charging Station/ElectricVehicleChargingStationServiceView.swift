@@ -46,7 +46,7 @@ struct ElectricVehicleChargingStationServiceView: View {
 
     @ViewBuilder
     var body: some View {
-        ElectricVehicleChargingStationView(active: self.$active.value, batteryLevel: self.$batteryLevel.value, chargingState: self.$chargingState.value, statusLowBattery: self.$statusLowBattery.value, estimatedRange: self.$estimatedRange.value, currentPower: self.$currentPower.value)
+        ElectricVehicleChargingStationView(active: self.$active.value, batteryLevel: self.$batteryLevel.value, chargingState: self.$chargingState.value, statusLowBattery: self.$statusLowBattery.value, estimatedRange: OptBinding(self.$estimatedRange.value), currentPower: OptBinding(self.$currentPower.value))
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             self.active.reload()
             self.batteryLevel.reload()
@@ -66,8 +66,8 @@ struct ElectricVehicleChargingStationView: View {
     @Binding var chargingState: UInt8?
     @Binding var statusLowBattery: UInt8?
     
-    var estimatedRange: Binding<Float?>?
-    var currentPower: Binding<Float?>?
+    @OptBinding var estimatedRange: Float?
+    @OptBinding var currentPower: Float?
     
     var body: some View {
         if self.active == Active.active {
@@ -103,10 +103,10 @@ struct ElectricVehicleChargingStationView: View {
     
     @ViewBuilder
     var rangeAndSoC: some View {
-        if self.estimatedRange != nil {
+        if self._estimatedRange.present {
             VStack(alignment: .trailing) {
                 HStack(spacing: 2) {
-                    Text(EstimatedRange.format(self.estimatedRange!.wrappedValue ?? 0.0)).lineLimit(1).fixedSize()
+                    Text(EstimatedRange.format(self.estimatedRange ?? 0.0)).lineLimit(1).fixedSize()
                     Text(EstimatedRange.unit()!).foregroundColor(.secondary).fixedSize()
                 }.font(.title)
                 HStack(spacing: 2) {
@@ -143,10 +143,10 @@ struct ElectricVehicleChargingStationServiceView_Previews: PreviewProvider {
             ScrollView {
                 HStack {
                     WrapperView {
-                        ElectricVehicleChargingStationView(active: .constant(active), batteryLevel: .constant(20), chargingState: .constant(chargingState), statusLowBattery: .constant(StatusLowBattery.low))
+                        ElectricVehicleChargingStationView(active: .constant(active), batteryLevel: .constant(20), chargingState: .constant(chargingState), statusLowBattery: .constant(StatusLowBattery.low), estimatedRange: nil, currentPower: nil)
                     }
                     WrapperView {
-                        ElectricVehicleChargingStationView(active: .constant(active), batteryLevel: .constant(60), chargingState: .constant(chargingState), statusLowBattery: .constant(StatusLowBattery.normal), estimatedRange: .constant(200.0 + (100.0/3.0)))
+                        ElectricVehicleChargingStationView(active: .constant(active), batteryLevel: .constant(60), chargingState: .constant(chargingState), statusLowBattery: .constant(StatusLowBattery.normal), estimatedRange: .constant(200.0 + (100.0/3.0)), currentPower: nil)
                     }
                 }
             }

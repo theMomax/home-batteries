@@ -12,11 +12,11 @@ import HomeKit
 
 struct ElectricityMeterServiceView: View {
     
-    var name: Binding<String?>?
+    @OptBinding var name: String?
     @Binding var currentPower: Float?
-    var currentPowerL1: Binding<Float?>?
-    var currentPowerL2: Binding<Float?>?
-    var currentPowerL3: Binding<Float?>?
+    @OptBinding var currentPowerL1: Float?
+    @OptBinding var currentPowerL2: Float?
+    @OptBinding var currentPowerL3: Float?
     let type: ElectricityMeterTypes
     
     @Binding var showLines: Bool
@@ -26,9 +26,14 @@ struct ElectricityMeterServiceView: View {
         VStack {
             HStack(spacing: 2) {
                 VStack {
-                    if self.name != nil {
+                    if self._name.present {
                         HStack {
-                            Text(self.name!.wrappedValue ?? "?").font(.headline)
+                            if self.name != nil {
+                                Text(self.name!).font(.headline)
+                            } else {
+                                Text("Meter Name").font(.headline).redacted(reason: .placeholder)
+                            }
+                            
                             Spacer()
                         }
                     }
@@ -41,16 +46,22 @@ struct ElectricityMeterServiceView: View {
                 }
                 
                 Spacer()
-                
-                Text(String(format: "%.0f", abs(currentPower ?? 0.0))).font(.title).lineLimit(1).foregroundColor(self.type.color(for: currentPower)).fixedSize()
+                Group {
+                    if currentPower != nil {
+                        Text(String(format: "%.0f", abs(currentPower!)))
+                    } else {
+                        Text("1000").redacted(reason: .placeholder)
+                    }
+                }
+                .font(.title).lineLimit(1).foregroundColor(self.type.color(for: currentPower)).fixedSize()
                 Text("W").font(Font.system(.title)).foregroundColor(.secondary).fixedSize()
             }
             
             if self.showLines && self.currentPowerL1 != nil && self.currentPowerL2 != nil && self.currentPowerL3 != nil {
                 HorizontalBarDiagram([
-                    Segment(currentPowerL1!, name: "L1"),
-                    Segment(currentPowerL2!, name: "L2"),
-                    Segment(currentPowerL3!, name: "L3")
+                    Segment($currentPowerL1, name: "L1"),
+                    Segment($currentPowerL2, name: "L2"),
+                    Segment($currentPowerL3, name: "L3")
                 ],
                                      positiveColors: self.type.invertedConnotation ? HorizontalBarDiagram.negativeColors : HorizontalBarDiagram.positiveColors,
                                      negativeColors: self.type.invertedConnotation ? HorizontalBarDiagram.positiveColors : HorizontalBarDiagram.negativeColors)
@@ -67,7 +78,7 @@ struct ElectricityMeterServiceView_Previews: PreviewProvider {
         
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) { colorScheme in
-            ForEach([nil, "Production"], id: \.self) { name in
+            ForEach([nil, Optional<String?>.some("Production"), Optional<String?>.some(nil)], id: \.self) { name in
                 ForEach([false, true], id: \.self) { lines in
                     ZStack {
                         Color(.systemBackground).edgesIgnoringSafeArea(.all)
@@ -76,11 +87,11 @@ struct ElectricityMeterServiceView_Previews: PreviewProvider {
                         ScrollView {
                             WrapperView {
                                 ElectricityMeterServiceView(
-                                    name: name == nil ? nil : .constant(name!),
+                                    name: name == nil ? nil : OptBinding(.constant(name!)),
                                     currentPower: .constant(325.34),
-                                    currentPowerL1: lines ? .constant(12.34) : nil,
-                                    currentPowerL2: lines ? .constant(203.34) : nil,
-                                    currentPowerL3: lines ? .constant(104.34) : nil,
+                                    currentPowerL1: lines ? OptBinding(.constant(12.34)) : nil,
+                                    currentPowerL2: lines ? OptBinding(.constant(203.34)) : nil,
+                                    currentPowerL3: lines ? OptBinding(.constant(104.34)) : nil,
                                     type: .other, showLines: .constant(true))
                                     
                             }
@@ -102,7 +113,7 @@ struct ElectricityMeterServiceView_Previews: PreviewProvider {
                     }
                 }
                 
-                .previewDisplayName("\(colorScheme) -> name: \(name ?? "nil")")
+                .previewDisplayName("\(colorScheme) -> name: \(String(describing: name ?? "nil"))")
             }
             .environment(\.colorScheme, colorScheme)
         }

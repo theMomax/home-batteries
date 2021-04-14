@@ -122,11 +122,11 @@ struct MeterView: View {
     
     @ViewBuilder
     var body: some View {
-        ElectricityMeterServiceView(name: .constant(service.name),
+        ElectricityMeterServiceView(name: OptBinding(.constant(service.name)),
                                     currentPower: self.$currentPower.value,
-                                    currentPowerL1: self.currentPowerL1.present ? self.$currentPowerL1.value : nil,
-                                    currentPowerL2: self.currentPowerL2.present ? self.$currentPowerL2.value : nil,
-                                    currentPowerL3: self.currentPowerL3.present ? self.$currentPowerL3.value : nil,
+                                    currentPowerL1: self.currentPowerL1.present ? OptBinding(self.$currentPowerL1.value) : nil,
+                                    currentPowerL2: self.currentPowerL2.present ? OptBinding(self.$currentPowerL2.value) : nil,
+                                    currentPowerL3: self.currentPowerL3.present ? OptBinding(self.$currentPowerL3.value) : nil,
                                     type: self.meterType.present && self.meterType.value != nil ? ElectricityMeterTypes(rawValue: self.meterType.value!) ?? .other : .other,
                                     showLines: self.$showLines
         )
@@ -167,7 +167,7 @@ struct TotalStorageView: View {
     
     @ViewBuilder
     var body: some View {
-        EnergyStorageServiceView(batteryLevel: self.$batteryLevel.value, chargingState: self.$chargingState.value, statusLowBattery: self.$statusLowBattery.value, energyCapacity: self.energyCapacity.present ? self.$energyCapacity.value : nil)
+        EnergyStorageServiceView(batteryLevel: self.$batteryLevel.value, chargingState: self.$chargingState.value, statusLowBattery: self.$statusLowBattery.value, energyCapacity: self.energyCapacity.present ? OptBinding(self.$energyCapacity.value) : nil)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             self.batteryLevel.reload()
             self.chargingState.reload()

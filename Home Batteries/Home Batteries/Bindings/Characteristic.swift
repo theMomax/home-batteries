@@ -27,29 +27,50 @@ extension KnownCharacteristic {
 /// - Tag: Characteristic
 class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
     
+    enum Source {
+        case characteristic(HMCharacteristic)
+        case `default`(T)
+        case absent
+    }
+    
     private let accessory: HMAccessory?
     
     private let service: HMService?
     
     private let subscribe: Bool?
     
-    let characteristic: HMCharacteristic?
+    private let source: Source
+    
+    var characteristic: HMCharacteristic? {
+        switch self.source {
+        case let .characteristic(c):
+            return c
+        default:
+            return nil
+        }
+    }
+    
+    var present: Bool {
+        switch self.source {
+        case .absent:
+            return false
+        default:
+            return true
+        }
+    }
     
     @Published var value: T?
-    
-    let present: Bool
     
     let callback: (T?) -> ()
     
     /// Initializes this Characteristic based on the given HMCharacteristic and enables notifications for the
     /// underlying value if requested.
     init(_ characteristic: HMCharacteristic, updating subscribe: Bool = false, callback: @escaping (T?) -> () = { _ in}, initialized initialValue: T? = nil) {
-        self.characteristic = characteristic
-        self.service = self.characteristic!.service!
+        self.source = .characteristic(characteristic)
+        self.service = characteristic.service!
         self.accessory = self.service!.accessory!
         self.subscribe = subscribe
         self.value = initialValue
-        self.present = true
         self.callback = callback
         
         super.init()
@@ -61,14 +82,18 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
         self.reload()
     }
     
-    /// Initializes this Characteristic as non-present.
-    override init() {
-        self.characteristic = nil
+    /// Initializes this Characteristic as present and fixed to the given default value.
+    init(using default: T? = nil) {
+        if let d = `default` {
+            self.source = .default(d)
+        } else {
+            self.source = .absent
+        }
+        
         self.service = nil
         self.accessory = nil
         self.subscribe = nil
-        self.value = nil
-        self.present = false
+        self.value = `default`
         self.callback = { _ in}
         
         super.init()
@@ -82,37 +107,37 @@ class Characteristic<T>: NSObject, ObservableObject, HMAccessoryDelegate {
     }
     
     func pause() {
-        if !self.present {
+        guard case let .characteristic(characteristic) = self.source else {
             return
         }
-        if self.characteristic!.isNotificationEnabled {
-            self.characteristic!.enableNotification(false, completionHandler: {err in
-                print("disabled notification for \(self.characteristic!.characteristicType)")
+        if characteristic.isNotificationEnabled {
+            characteristic.enableNotification(false, completionHandler: {err in
+                print("disabled notification for \(characteristic.characteristicType)")
                 if let error = err {
-                    print("error disabling notification for \(self.characteristic!.characteristicType): \(error)")
+                    print("error disabling notification for \(characteristic.characteristicType): \(error)")
                 }
             })
         }
     }
     
     func reload() {
-        if !self.present {
+        guard case let .characteristic(characteristic) = self.source else {
             return
         }
-        self.characteristic!.readValue(completionHandler: {err in
+        characteristic.readValue(completionHandler: {err in
             if let error = err {
-                print("error reading value for \(self.characteristic!.characteristicType): \(error)")
+                print("error reading value for \(characteristic.characteristicType): \(error)")
             } else {
-                print("red value for characteristic \(self.characteristic!.characteristicType): \(self.characteristic!.value ?? "nil")")
-                self.value = self.convert(self.characteristic!.value)
+                print("red value for characteristic \(characteristic.characteristicType): \(characteristic.value ?? "nil")")
+                self.value = self.convert(characteristic.value)
                 Cache.shared.set(self)
             }
         })
-        if self.subscribe! && !self.characteristic!.isNotificationEnabled {
-            self.characteristic!.enableNotification(true, completionHandler: {err in
-                print("enabled notification for \(self.characteristic!.characteristicType)")
+        if self.subscribe! && !characteristic.isNotificationEnabled {
+            characteristic.enableNotification(true, completionHandler: {err in
+                print("enabled notification for \(characteristic.characteristicType)")
                 if let error = err {
-                    print("error enabling notification for \(self.characteristic!.characteristicType): \(error)")
+                    print("error enabling notification for \(characteristic.characteristicType): \(error)")
                 }
             })
         }

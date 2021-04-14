@@ -41,6 +41,7 @@
 		A55DCAD9245C6B650013AB11 /* WrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55DCAD8245C6B650013AB11 /* WrapperView.swift */; };
 		A563F8A2245F363A0094BFD7 /* Accessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A563F8A1245F363A0094BFD7 /* Accessory.swift */; };
 		A5642F97245F3ECC009D7024 /* Characteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5642F96245F3ECC009D7024 /* Characteristic.swift */; };
+		A566543525DBDA4500AF3B2E /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A566543425DBDA4500AF3B2E /* Placeholder.swift */; };
 		A5691C5E24617523000999D3 /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C5B24617523000999D3 /* HomeStore.swift */; };
 		A5691C5F24617523000999D3 /* HomeStore+AccessoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C5C24617523000999D3 /* HomeStore+AccessoryDelegate.swift */; };
 		A5691C61246175ED000999D3 /* HomeStore+HomeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C60246175ED000999D3 /* HomeStore+HomeDelegate.swift */; };
@@ -49,6 +50,7 @@
 		A57B257F2538995400C6F11B /* KnownVisualization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B257E2538995400C6F11B /* KnownVisualization.swift */; };
 		A585BE24247ED73F00AE75F7 /* CharacteristicPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A585BE23247ED73F00AE75F7 /* CharacteristicPicker.swift */; };
 		A58BABF72486833600EFDD52 /* KnownAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58BABF62486833600EFDD52 /* KnownAccessory.swift */; };
+		A5A4621F2619C62E001C1E66 /* OptBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A4621E2619C62E001C1E66 /* OptBinding.swift */; };
 		A5B60BF924615F620038C92D /* AggregatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B60BF824615F620038C92D /* AggregatedValue.swift */; };
 		A5B8BA8824A0AE95003EEE69 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = A5B8BA8724A0AE95003EEE69 /* WaterfallGrid */; };
 		A5B9E36024587731005E5B4F /* HomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9E35B24587730005E5B4F /* HomeManager.swift */; };
@@ -123,6 +125,7 @@
 		A55DCAD8245C6B650013AB11 /* WrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperView.swift; sourceTree = "<group>"; };
 		A563F8A1245F363A0094BFD7 /* Accessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessory.swift; sourceTree = "<group>"; };
 		A5642F96245F3ECC009D7024 /* Characteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characteristic.swift; sourceTree = "<group>"; };
+		A566543425DBDA4500AF3B2E /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
 		A5691C5B24617523000999D3 /* HomeStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeStore.swift; sourceTree = "<group>"; };
 		A5691C5C24617523000999D3 /* HomeStore+AccessoryDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HomeStore+AccessoryDelegate.swift"; sourceTree = "<group>"; };
 		A5691C60246175ED000999D3 /* HomeStore+HomeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HomeStore+HomeDelegate.swift"; sourceTree = "<group>"; };
@@ -131,6 +134,7 @@
 		A57B257E2538995400C6F11B /* KnownVisualization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownVisualization.swift; sourceTree = "<group>"; };
 		A585BE23247ED73F00AE75F7 /* CharacteristicPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicPicker.swift; sourceTree = "<group>"; };
 		A58BABF62486833600EFDD52 /* KnownAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownAccessory.swift; sourceTree = "<group>"; };
+		A5A4621E2619C62E001C1E66 /* OptBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptBinding.swift; sourceTree = "<group>"; };
 		A5B60BF824615F620038C92D /* AggregatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggregatedValue.swift; sourceTree = "<group>"; };
 		A5B9E35B24587730005E5B4F /* HomeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeManager.swift; sourceTree = "<group>"; };
 		A5BBC4A32461A6F900CC7399 /* ConnectingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectingView.swift; sourceTree = "<group>"; };
@@ -228,6 +232,7 @@
 		A545C7A1245868FA0096A547 /* Home Batteries */ = {
 			isa = PBXGroup;
 			children = (
+				A5A4621D2619C61B001C1E66 /* Utils */,
 				A538ADEB24924B6500CED37C /* EntitlementManagers */,
 				A516DE51247827B900F17C52 /* HomeKit */,
 				A5691C59246174F2000999D3 /* Model */,
@@ -270,6 +275,14 @@
 				A5691C5C24617523000999D3 /* HomeStore+AccessoryDelegate.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A5A4621D2619C61B001C1E66 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A5A4621E2619C62E001C1E66 /* OptBinding.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		A5B9E35A24587728005E5B4F /* Bindings */ = {
@@ -344,6 +357,7 @@
 				A5E55398251CB3DB00BEB455 /* Buttons.swift */,
 				A5E5539B251CB3FD00BEB455 /* Colors.swift */,
 				A538C5B825498F760066C96E /* Charts.swift */,
+				A566543425DBDA4500AF3B2E /* Placeholder.swift */,
 			);
 			path = gerneric;
 			sourceTree = "<group>";
@@ -379,7 +393,7 @@
 		A545C797245868FA0096A547 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1200;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Max Obermeier";
 				TargetAttributes = {
@@ -430,6 +444,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5C998822459F628002890E8 /* GlobalView.swift in Sources */,
+				A5A4621F2619C62E001C1E66 /* OptBinding.swift in Sources */,
 				A5E5539C251CB3FD00BEB455 /* Colors.swift in Sources */,
 				A52205D5245DD561005C7F1F /* HorizontalBarDiagram.swift in Sources */,
 				A54C9F39247959170044F3DB /* PredicateView.swift in Sources */,
@@ -470,6 +485,7 @@
 				A549ADB2245C7E0400976D22 /* MeterServiceView.swift in Sources */,
 				A5DF855B2517B0610027EA47 /* ElectricVehicleChargingStationServiceView.swift in Sources */,
 				A5691C5E24617523000999D3 /* HomeStore.swift in Sources */,
+				A566543525DBDA4500AF3B2E /* Placeholder.swift in Sources */,
 				A5E2238D24A89AB000567529 /* OutletQuickView.swift in Sources */,
 				A57B257F2538995400C6F11B /* KnownVisualization.swift in Sources */,
 				A538C5B925498F760066C96E /* Charts.swift in Sources */,
@@ -635,7 +651,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "themomax.Home-Batteries";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -658,7 +674,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "themomax.Home-Batteries";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
