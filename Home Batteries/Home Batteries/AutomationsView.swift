@@ -143,7 +143,9 @@ struct TriggerOverviewView: View {
                     NavigationLink(destination: TriggerDetailView(trigger: Trigger(self.trigger.value as! HMEventTrigger, in: self.trigger.home)).environmentObject(self.home)) {
                         Image(systemName: "flowchart.fill").font(.headline).foregroundColor(self.iconColor())
                         
-                        Text(self.trigger.value.name).foregroundColor(.primary)
+                        Text(self.trigger.value.name)
+                            .foregroundColor(.primary)
+                            .multilineTextAlignment(.leading)
                         Spacer()
                         Image(systemName: "chevron.right").foregroundColor(.secondary).font(Font.system(.footnote))
                     }

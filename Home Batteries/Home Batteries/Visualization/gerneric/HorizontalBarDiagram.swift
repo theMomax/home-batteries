@@ -50,25 +50,35 @@ struct HorizontalBarDiagram: View {
                     }
                 }.frame(height: 8)
             }
-            HStack {
-                ForEach(0..<segments.count, id: \.self) { i in
-                    Group {
-                        if self.segments[i].name != nil {
-                            VStack(alignment: .leading) {
-                                Text(self.segments[i].name!).foregroundColor(self.colorOf(i))
-                                
-                                HStack(spacing: 2) {
-                                    Text(String(format: "%.0f", self.segments[i].value ?? 0.0))
-                                    Text("W").foregroundColor(.secondary)
-                                }
-                            }
-                        }
-                        if i != self.segments.count - 1 {
-                            Spacer()
-                        }
-                    }
+            self.text
+        }
+    }
+    
+    @ViewBuilder
+    private var text: some View {
+        HStack {
+            ForEach(0..<segments.count, id: \.self) { i in
+                Group {
+                    segment(for: i)
                 }
             }
+        }
+    }
+    
+    @ViewBuilder
+    private func segment(for index: Int) -> some View {
+        if self.segments[index].name != nil {
+            VStack(alignment: .leading) {
+                Text(self.segments[index].name!).foregroundColor(self.colorOf(index))
+                
+                HStack(spacing: 2) {
+                    Text(String(format: "%.0f", self.segments[index].value ?? 0.0))
+                    Text("W").foregroundColor(.secondary)
+                }
+            }
+        }
+        if index != self.segments.count - 1 {
+            Spacer()
         }
     }
     

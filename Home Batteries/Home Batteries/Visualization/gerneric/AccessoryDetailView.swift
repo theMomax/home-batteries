@@ -23,13 +23,20 @@ struct AccessoryDetailView<Content>: View where Content: View {
     init(accessory: Accessory, isPresented: Binding<Bool>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping () -> Content) {
         self.accessory = accessory
         self.content = content
-        self._isPresented = isPresented
+        self._isPresented = Binding<Bool>(get: {
+            let value = isPresented.wrappedValue
+            print("isPresented = \(value) (get)")
+            return value
+        }, set: { newValue in
+            print("isPresented = \(newValue) (set)")
+            isPresented.wrappedValue = newValue
+        })
         self.onDismiss = onDismiss
     }
     
     @ViewBuilder
     var body: some View {
-        EmptyView()
+        Color.clear
         .sheet(isPresented: self.$isPresented, content: {
             VStack(spacing: 0) {
                 HStack {

@@ -55,7 +55,7 @@ struct AccessoriesView: View {
     
     private func grid(accessories: [HMAccessory], geo: GeometryProxy) -> some View {
         WaterfallGrid(accessories, id: \.uniqueIdentifier) { a in
-            a.view().frame(height: (geo.size.width - 3*self.padding)/2 )
+            a.view().frame(height: max(0, (geo.size.width - 3*self.padding)/2) )
         }
         .gridStyle(columns: 2, spacing: self.padding, padding: .init(top: self.padding, leading: self.padding, bottom: self.padding, trailing: self.padding), animation: nil)
     }

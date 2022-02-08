@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import HomeKit
+import BatteryView
 
 struct HomeView: View {
     

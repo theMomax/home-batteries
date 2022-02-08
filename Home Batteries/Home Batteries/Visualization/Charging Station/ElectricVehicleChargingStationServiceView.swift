@@ -95,7 +95,7 @@ struct ElectricVehicleChargingStationView: View {
             VStack(spacing: 5) {
                 Spacer()
                 Image(systemName: "car").font(.title)
-                Text("Car not available").font(.caption)
+                Text("Car not reachable").font(.caption)
                 Spacer()
             }.foregroundColor(.secondary)
         }

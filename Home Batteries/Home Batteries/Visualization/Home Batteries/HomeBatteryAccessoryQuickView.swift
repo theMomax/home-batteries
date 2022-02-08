@@ -62,7 +62,6 @@ struct HomeBatteryAccessoryQickView: View {
         .onLongPressGesture {
             self.detail()
         }
-        
         .withAccessoryDetail(accessory: self.accessory, isPresented: self.$showDetail, content: {
             HomeBatteryAccessoryDetailLayoutView(accessory: self.accessory)
         })
@@ -78,7 +77,7 @@ struct HomeBatteryAccessoryQickView: View {
         if meters.count == 1 {
             MeterQuickView(meters[0], if: {_ in true})
         }
-        ForEach(0..<meters.count) { index in
+        ForEach(meters.indices, id: \.self) { index in
             MeterQuickView(meters[index])
         }
     }
@@ -88,7 +87,7 @@ struct HomeBatteryAccessoryQickView: View {
         if meters.count == 1 {
             MeterIconView(meters[0], if: {_ in true})
         }
-        ForEach(0..<meters.count) { index in
+        ForEach(meters.indices, id: \.self) { index in
             MeterIconView(meters[index])
         }
     }

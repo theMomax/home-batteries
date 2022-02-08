@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "BatteryView",
+        "repositoryURL": "https://github.com/themomax/batteryview",
+        "state": {
+          "branch": null,
+          "revision": "149ca94f0a023fb4e1e37c20768b8058cc18fdb9",
+          "version": "0.1.0"
+        }
+      },
+      {
         "package": "Charts",
         "repositoryURL": "https://github.com/swift-extensions/swiftui-charts",
         "state": {

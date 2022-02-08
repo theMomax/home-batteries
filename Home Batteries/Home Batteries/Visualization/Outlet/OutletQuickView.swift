@@ -79,7 +79,7 @@ struct OutletQuickView: View {
         if meters.count == 1 {
             MeterQuickView(meters[0], if: {_ in true}, using: .consumption)
         }
-        ForEach(0..<meters.count) { index in
+        ForEach(meters.indices, id: \.self) { index in
             MeterQuickView(meters[index], using: .consumption)
         }
     }

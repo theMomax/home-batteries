@@ -47,6 +47,7 @@
 		A5691C61246175ED000999D3 /* HomeStore+HomeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5691C60246175ED000999D3 /* HomeStore+HomeDelegate.swift */; };
 		A56AEBBC253B349B0004C33D /* MeterServiceQuickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56AEBBB253B349B0004C33D /* MeterServiceQuickView.swift */; };
 		A576AEC2245DE4B500EDDFD9 /* StorageServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A576AEC1245DE4B500EDDFD9 /* StorageServiceView.swift */; };
+		A5794E0A265170EA0066686A /* BatteryView in Frameworks */ = {isa = PBXBuildFile; productRef = A5794E09265170EA0066686A /* BatteryView */; };
 		A57B257F2538995400C6F11B /* KnownVisualization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B257E2538995400C6F11B /* KnownVisualization.swift */; };
 		A585BE24247ED73F00AE75F7 /* CharacteristicPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A585BE23247ED73F00AE75F7 /* CharacteristicPicker.swift */; };
 		A58BABF72486833600EFDD52 /* KnownAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58BABF62486833600EFDD52 /* KnownAccessory.swift */; };
@@ -161,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5B8BA8824A0AE95003EEE69 /* WaterfallGrid in Frameworks */,
+				A5794E0A265170EA0066686A /* BatteryView in Frameworks */,
 				A538C5BF25498FDC0066C96E /* Charts in Frameworks */,
 				A534805224586B10002BF820 /* HomeKit.framework in Frameworks */,
 			);
@@ -382,6 +384,7 @@
 			packageProductDependencies = (
 				A5B8BA8724A0AE95003EEE69 /* WaterfallGrid */,
 				A538C5BE25498FDC0066C96E /* Charts */,
+				A5794E09265170EA0066686A /* BatteryView */,
 			);
 			productName = "Home Batteries";
 			productReference = A545C79F245868FA0096A547 /* Home Batteries.app */;
@@ -414,6 +417,7 @@
 			packageReferences = (
 				A5B8BA8624A0AE95003EEE69 /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
 				A538C5BD25498FDC0066C96E /* XCRemoteSwiftPackageReference "swiftui-charts" */,
+				A5794E08265170EA0066686A /* XCRemoteSwiftPackageReference "batteryview" */,
 			);
 			productRefGroup = A545C7A0245868FA0096A547 /* Products */;
 			projectDirPath = "";
@@ -648,7 +652,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "themomax.Home-Batteries";
+				PRODUCT_BUNDLE_IDENTIFIER = themomax.HomeBatteries;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -671,7 +675,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "themomax.Home-Batteries";
+				PRODUCT_BUNDLE_IDENTIFIER = themomax.HomeBatteries;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -710,6 +714,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		A5794E08265170EA0066686A /* XCRemoteSwiftPackageReference "batteryview" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/themomax/batteryview";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 		A5B8BA8624A0AE95003EEE69 /* XCRemoteSwiftPackageReference "WaterfallGrid" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/paololeonardi/WaterfallGrid";
@@ -725,6 +737,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A538C5BD25498FDC0066C96E /* XCRemoteSwiftPackageReference "swiftui-charts" */;
 			productName = Charts;
+		};
+		A5794E09265170EA0066686A /* BatteryView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5794E08265170EA0066686A /* XCRemoteSwiftPackageReference "batteryview" */;
+			productName = BatteryView;
 		};
 		A5B8BA8724A0AE95003EEE69 /* WaterfallGrid */ = {
 			isa = XCSwiftPackageProductDependency;

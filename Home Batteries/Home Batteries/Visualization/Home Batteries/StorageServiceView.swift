@@ -20,9 +20,9 @@ struct EnergyStorageServiceView: View {
     @ViewBuilder
     var body: some View {
         HStack {
-            Spacer().layoutPriority(0)
+            Spacer()
             BatteryDiagram(batteryLevel: $batteryLevel, chargingState: $chargingState, statusLowBattery: $statusLowBattery)
-            .layoutPriority(0)
+                .frame(width: 80, height: 40)
             
             VStack(alignment: .leading) {
                 Text(String(format: "%d %%", batteryLevel ?? 0)).font(Font.system(.largeTitle))
@@ -30,8 +30,8 @@ struct EnergyStorageServiceView: View {
                 if _energyCapacity.present {
                     Text(String(format: "of %.1f kWh", energyCapacity ?? 0.0)).font(Font.system(.footnote)).foregroundColor(.secondary)
                 }
-            }.padding(.horizontal).layoutPriority(1)
-            Spacer().layoutPriority(0)
+            }.padding(.horizontal)
+            Spacer()
         }
     }
 }
@@ -44,10 +44,7 @@ struct EnergyStorageServiceQuickView: View {
     
     @ViewBuilder
     var body: some View {
-        HStack {
-            BatteryDiagram(batteryLevel: $batteryLevel, chargingState: $chargingState, statusLowBattery: $statusLowBattery)
-            .layoutPriority(0)
-        }
+        BatteryDiagram(batteryLevel: $batteryLevel, chargingState: $chargingState, statusLowBattery: $statusLowBattery)
     }
 }
 

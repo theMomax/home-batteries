@@ -45,7 +45,7 @@ struct MeterAccessoryLiveView: View {
     
     @ViewBuilder
     var body: some View {
-        ForEach(0..<meters.count) { index in
+        ForEach(meters.indices, id: \.self) { index in
             MeterView(self.meters[index], extended: Binding(get: {
                 return self.showExtendedViewFor == index
             }, set: { isExtended in
